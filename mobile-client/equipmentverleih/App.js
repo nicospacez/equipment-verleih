@@ -8,18 +8,29 @@
 
 import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View} from 'react-native';
-import { TabNavigator } from './navigation/router';
+import { TabNavigator, LoginNavigator } from './navigation/router';
+import { StartupScreen } from './screens/StartupScreen';
+import  LoginService  from './services/AuthService';
+
+import PubSub from 'pubsub-js';
 
 
 
 class App extends Component{
+  token = null;
+
+  constructor(){
+    super();
+  }
+
+   
+ 
+   
+
   render(){
-    if(true){
-      return <TabNavigator />; 
-    }else{
-      return <TabNavigator />; 
-    }
-    
+     
+    return <StartupScreen />;
+      
   }
 }
 

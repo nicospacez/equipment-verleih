@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.0.0",
+    "pubsub-js": "^1.7.0",
     "react": "16.5.0",
     "react-native": "0.57.1",
     "react-native-vector-icons": "^5.0.0",
