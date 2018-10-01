@@ -17,7 +17,7 @@ import javax.persistence.UniqueConstraint;
  * @author nicoz
  */
 
-@Table(name="eqv_kategorie", uniqueConstraints={@UniqueConstraint(columnNames = "kurzbezeichnung")})
+@Table(name="eqv_kategorie")
 @Entity
 public class Kategorie implements Serializable {
 
@@ -26,6 +26,7 @@ public class Kategorie implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long kategorieId;
 
+    //@Column(unique=true, nullable=false)
     private String kurzbezeichnung;
 
     @ManyToOne

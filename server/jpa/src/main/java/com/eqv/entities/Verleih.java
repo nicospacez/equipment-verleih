@@ -8,7 +8,7 @@ import javax.persistence.*;
  *
  * @author nicoz
  */
-@Table(name="eqv_verleih")
+@Table(name = "eqv_verleih")
 @Entity
 public class Verleih implements Serializable {
 
@@ -18,27 +18,50 @@ public class Verleih implements Serializable {
     private Long verleihId;
 
     @Temporal(TemporalType.DATE)
-    private Date startDate, endDate; 
-    
+    private Date startDate, endDate;
+
     @ManyToOne
-    @JoinColumn(name="userId")
+    @JoinColumn(name = "userId")
     private User user;
-    
-    @OneToOne(fetch =FetchType.LAZY)
-    @JoinColumn(name="produktId")
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "produktId")
     private Produkt produkt;
+
+    @ManyToOne
+    @JoinColumn(name = "userId", insertable=false, updatable=false)
+    private User hergeborgtVon;
+
+    @ManyToOne
+    @JoinColumn(name = "userId", insertable=false, updatable=false)
+    private User zurueckgenommenVon;
 
     public Verleih() {
     }
 
-    
     public Verleih(Date startDate, User user, Produkt produkt) {
         this.startDate = startDate;
         this.user = user;
         this.produkt = produkt;
     }
 
+    public User getHergeborgtVon() {
+        return hergeborgtVon;
+    }
+
+    public void setHergeborgtVon(User hergeborgtVon) {
+        this.hergeborgtVon = hergeborgtVon;
+    }
+
+    public User getZurueckgenommenVon() {
+        return zurueckgenommenVon;
+    }
+
+    public void setZurueckgenommenVon(User zurueckgenommenVon) {
+        this.zurueckgenommenVon = zurueckgenommenVon;
+    }
     
+
     public Long getVerleihId() {
         return verleihId;
     }
@@ -78,7 +101,7 @@ public class Verleih implements Serializable {
     public void setProdukt(Produkt produkt) {
         this.produkt = produkt;
     }
-    
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -103,5 +126,5 @@ public class Verleih implements Serializable {
     public String toString() {
         return "com.eqv.entities.Verleih[ id=" + verleihId + " ]";
     }
-    
+
 }
