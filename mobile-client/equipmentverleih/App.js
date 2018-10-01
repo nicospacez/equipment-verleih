@@ -23,18 +23,12 @@ class App extends Component{
     super();
   }
 
-   
- 
-   
-
   render(){
      
     return <StartupScreen />;
       
   }
 }
-
-
 
 const styles = StyleSheet.create({
   container: {

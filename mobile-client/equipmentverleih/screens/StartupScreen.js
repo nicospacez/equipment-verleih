@@ -16,10 +16,14 @@ export class StartupScreen extends Component {
         ls = new LoginService();
         ls.checkLogin();
     }
-    loginSubscriber = function(msg,data){
-        this.setState({isLoggedIn:data.isLoggedIn});
-        PubSub.unsubscribe(this.token);
+    loginSubscriber = function(msg,data){      
         console.log(data);
+        
+        setTimeout(() => {
+            console.log('wow');
+            this.setState({isLoggedIn:data.isLoggedIn});
+            PubSub.unsubscribe(this.token);
+        },2000);
      }.bind(this);
 
      token = PubSub.subscribe('checkLogin',this.loginSubscriber);
@@ -32,14 +36,26 @@ export class StartupScreen extends Component {
         case false:
             return <LoginNavigator />;
         default:
-            return <Text>asdf</Text>
+            return (
+            <View style={styles.splash}>    
+                <Text style={styles.splashtext}>EQUIPMENT VERLEIH</Text>
+            </View>
+        );
       }      
     }
     
-    
-    
-    
-      
-
-    
   }
+  const styles = StyleSheet.create({
+      splash:{
+        flex:1,
+        justifyContent:'center',
+        alignItems:'center',
+        backgroundColor:'#7371fc'
+      },
+      splashtext:{
+        
+        fontSize:40,
+        color:'#011627'
+      }
+    
+});
