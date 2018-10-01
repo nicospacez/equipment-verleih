@@ -1,1 +1,4 @@
 # Ignore files with this ending in this directory
+/server/nbproject/private/
+/server/jpa/target/
+/server/jpa/nbproject/
