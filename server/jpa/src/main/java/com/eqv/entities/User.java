@@ -8,22 +8,32 @@ import javax.persistence.*;
  *
  * @author nicoz
  */
-@Table(name ="eqv_user")
+@Table(name = "eqv_user")
 @Entity
 public class User implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long userId
-;
-    private String vorname, nachname, username, klasse;
+    private Long userId;
+
+    private String vorname, nachname, klasse;
     
+    //@Column(unique=true, nullable=false)
+    private String username;
+
     private int Katalognummer;
 
     private boolean isAdmin;
-    
+
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
     private List<Verleih> equipment;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+    private List<Verleih> hergeborgt;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+    private List<Verleih> zurueckgenommen;
 
     public User() {
     }
@@ -35,6 +45,22 @@ public class User implements Serializable {
         this.klasse = klasse;
         this.Katalognummer = Katalognummer;
         this.isAdmin = isAdmin;
+    }
+
+    public List<Verleih> getHergeborgt() {
+        return hergeborgt;
+    }
+
+    public void setHergeborgt(List<Verleih> hergeborgt) {
+        this.hergeborgt = hergeborgt;
+    }
+
+    public List<Verleih> getZurueckgenommen() {
+        return zurueckgenommen;
+    }
+
+    public void setZurueckgenommen(List<Verleih> zurueckgenommen) {
+        this.zurueckgenommen = zurueckgenommen;
     }
 
     public Long getUserId() {
@@ -61,9 +87,6 @@ public class User implements Serializable {
         this.equipment = equipment;
     }
 
-
- 
-    
     public String getVorname() {
         return vorname;
     }
@@ -78,14 +101,6 @@ public class User implements Serializable {
 
     public void setNachname(String nachname) {
         this.nachname = nachname;
-    }
-
-    public String getSchulid() {
-        return username;
-    }
-
-    public void setSchulid(String schulid) {
-        this.username = schulid;
     }
 
     public String getKlasse() {
@@ -111,9 +126,7 @@ public class User implements Serializable {
     public void setIsAdmin(boolean isAdmin) {
         this.isAdmin = isAdmin;
     }
-    
-    
-    
+
     public String getFirstname() {
         return vorname;
     }
@@ -129,7 +142,6 @@ public class User implements Serializable {
     public void setLastname(String lastname) {
         this.nachname = lastname;
     }
-    
 
     @Override
     public int hashCode() {
@@ -155,5 +167,5 @@ public class User implements Serializable {
     public String toString() {
         return "entities.User[ id=" + userId + " ]";
     }
-    
+
 }
