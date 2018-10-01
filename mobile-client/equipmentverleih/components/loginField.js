@@ -19,19 +19,21 @@ export class LoginField extends Component{
         return(
             <View>
                 <Input
-                placeholder="User Name"
+                placeholder="Username"
                 type='username'
+                name='user'
                 onChangeText={this.onChangeText}
                 value={this.state.username} /> 
 
                 <Input
                 placeholder="Password"
                 type='password'
+                name='lock'
                 onChangeText={this.onChangeText}
                 value={this.state.password}
                 secureTextEntry
                 />
-                <Button  title="Login" />
+                <Button  title="LOGIN" />
             </View>
             
         );

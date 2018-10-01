@@ -7,13 +7,14 @@ export class LoginScreen extends Component {
     render() {
       return (
         <View style={styles.container}>  
+        <Image source={require('../images/loginwp.jpg')} style={{width: '100%', height: '100%',position:'absolute'}} />
         <Text style={styles.logo}>LOGO</Text>
           <View style={styles.logincontainer}>
           
             <LoginField />
             <Text style={styles.logintext}>Melde dich an um das Verleihsystem der HTL Leonding verwenden zu können. </Text>
           </View>
-          <Image source={require('../images/loginwp.jpg')} style={{width: '100%', height: '100%',position:'absolute'}} />
+   
         </View>
       );
     }
@@ -27,9 +28,10 @@ export class LoginScreen extends Component {
       backgroundColor:colors.lightgrey
     },
     logincontainer:{
-      height:'50%',
+      padding:20,
       width:'80%',
-      justifyContent:'center'
+      justifyContent:'center',
+      backgroundColor:'rgba(255,255,255,0)'
     },
     logintext:{
       fontSize:15,

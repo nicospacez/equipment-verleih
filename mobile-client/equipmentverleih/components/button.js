@@ -26,15 +26,19 @@ export default ({ title, onPress, isLoading }) => (
 
 const styles = StyleSheet.create({
   button: {
-    marginTop: 25,
+    marginTop: 10,
     flexDirection: 'row',
-    marginLeft:5
+    marginLeft:0,
+    backgroundColor:colors.lightblue,
+    justifyContent:'center',
+    borderRadius:100
   },
   buttonText: {
-    color: colors.lightblue,
+    color: 'white',
     fontFamily: fonts.light,
-    fontSize: 30,
-    letterSpacing: 0.5
+    fontSize: 20,
+    letterSpacing: 0.5,
+    padding:10
   },
   activityIndicator: {
     transform: [{scale: 0.70}],
