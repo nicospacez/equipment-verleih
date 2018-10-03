@@ -53,4 +53,10 @@ export const TabNavigator = createBottomTabNavigator({
     LoginScreen:{
       screen:LoginScreen
     }
-  });
+  },
+{
+  headerMode:'none',
+  navigationOptions:{
+    headerVisible:false
+  }
+});

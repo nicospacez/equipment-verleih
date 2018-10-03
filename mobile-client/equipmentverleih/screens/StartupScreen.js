@@ -23,7 +23,7 @@ export class StartupScreen extends Component {
             console.log('wow');
             this.setState({isLoggedIn:data.isLoggedIn});
             PubSub.unsubscribe(this.token);
-        },2000);
+        },0);
      }.bind(this);
 
      token = PubSub.subscribe('checkLogin',this.loginSubscriber);
