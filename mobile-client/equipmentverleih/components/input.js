@@ -24,18 +24,18 @@ const styles = StyleSheet.create({
   input: {
     marginLeft:20,
     marginBottom: 0,
-    fontSize: 16,
+    fontSize: 19,
     padding:10,
     fontFamily: fonts.hairline
   },
   container:{
     flexDirection:'row',
     alignItems:'center',
-    borderWidth:1.5,
+    borderWidth:3,
     borderColor:colors.lightblue,
     marginBottom:20,
-    borderRadius:100,
-    backgroundColor:'rgba(255,255,255,0.8)'
+    borderRadius:0,
+    backgroundColor:'rgba(255,255,255,1)'
   },
   icon:{
     marginLeft:20

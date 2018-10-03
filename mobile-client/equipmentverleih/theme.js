@@ -1,9 +1,9 @@
 const colors = {
-    lightgrey: '#eef0f2',
-    lightblue: '#7371fc',
-    darkblue: '#011627',
-    green:'#33cc66',
-    red:'#e07a5f'
+    lightgrey: '#f5f6fa',
+    lightblue: '#0097e6',
+    darkblue: '#273c75',
+    green:'#4cd137',
+    red:'#e84118'
   }
   const fonts = {
     hairline: 'Lato-Hairline',
