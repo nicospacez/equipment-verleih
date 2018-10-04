@@ -12,7 +12,7 @@ export class LoginScreen extends Component {
         
        
          
-              <Text style={styles.logo}>LOGO</Text>
+              <Image source={require('../images/logo.png')} style={styles.logo} />
                 <View style={styles.logincontainer}>
                 
                   <LoginField />
