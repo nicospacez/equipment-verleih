@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View, Button, Alert} from 'react-native';
+import {Platform, StyleSheet, Text, View, Button, Alert, Image} from 'react-native';
 
 import { TabNavigator, LoginNavigator } from '../navigation/router';
 
 import  LoginService  from '../services/AuthService';
+import { colors } from '../theme';
 
 export class StartupScreen extends Component {
 
@@ -23,7 +24,7 @@ export class StartupScreen extends Component {
             console.log('wow');
             this.setState({isLoggedIn:data.isLoggedIn});
             PubSub.unsubscribe(this.token);
-        },0);
+        },2000);
      }.bind(this);
 
      token = PubSub.subscribe('checkLogin',this.loginSubscriber);
@@ -38,7 +39,7 @@ export class StartupScreen extends Component {
         default:
             return (
             <View style={styles.splash}>    
-                <Text style={styles.splashtext}>EQUIPMENT VERLEIH</Text>
+                <Image style={styles.image} source={require('../images/logo_text.png')} />
             </View>
         );
       }      
@@ -50,12 +51,12 @@ export class StartupScreen extends Component {
         flex:1,
         justifyContent:'center',
         alignItems:'center',
-        backgroundColor:'#7371fc'
+        backgroundColor: colors.grey2
       },
-      splashtext:{
+      image:{
         
-        fontSize:40,
-        color:'#011627'
+        width:'60%',
+        resizeMode:'contain'
       }
     
 });
