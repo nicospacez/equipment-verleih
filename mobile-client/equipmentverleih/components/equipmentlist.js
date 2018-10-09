@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, ScrollView, StyleSheet, Image } from 'react-native';
+import { View, Text, ScrollView, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { colors, fonts } from '../theme';
 
 
@@ -18,10 +18,12 @@ export class EquipmentList extends Component {
 
                     {this.props.data.texts.map((data) => {
                         return (
+                            <TouchableOpacity>
                             <View style={styles.singleBox}>
                                 <Image style={styles.img} source={require('../images/logo.png')} />
                                 <Text style={styles.text}>{data.text}</Text>
                             </View>
+                            </TouchableOpacity>
                         )
                     })}
 
@@ -40,13 +42,14 @@ const styles = StyleSheet.create({
         width: 130,
         height: 50,
         fontSize: 20,
-        textAlign: 'center'
+        textAlign: 'center',
+        
     },
     title: {
         fontFamily: fonts.bold,
         fontSize: 20,
         marginBottom: 10,
-        color: colors.lightgrey
+        color: colors.primary
     },
     img: {
         height: 130,
@@ -54,7 +57,13 @@ const styles = StyleSheet.create({
     },
     singleBox: {
         marginRight: 15,
-        backgroundColor: colors.lightgrey
+        borderWidth:2,
+        borderColor:colors.primary,
+        borderRadius:5,
+        marginBottom:20,
+        alignItems:'center'
+        
+      
     },
     bigbox: {
         marginBottom: 20,

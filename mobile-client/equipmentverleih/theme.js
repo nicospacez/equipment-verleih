@@ -1,9 +1,13 @@
 const colors = {
-    lightgrey: '#f5f6fa',
-    lightblue: '#0097e6',
-    darkblue: '#273c75',
-    green:'#4cd137',
-    red:'#e84118'
+    primary: '#43425d',
+    secondary: '#3c3b54',
+    grey1: '#f0f0f7',
+    grey2: '#f5f6fa',
+    white: '#fff',
+    green:'#2ecc71',
+    red:'#f37164',
+    yellow: '#f1c40f',
+    font:'#b0b2bf'
   }
   const fonts = {
     hairline: 'Lato-Hairline',

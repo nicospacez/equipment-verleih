@@ -7,16 +7,16 @@ export class EquipmentScreen extends Component {
 
   data = {
 
-      title: "asdf",
+      title: "Kamera",
       texts:[
         {
-          text:"blablabla"
+          text:"Lumix GH4"
         },
         {
-          text:"sick"
+          text:"Nikon D3100"
         },
         {
-          text:"sick"
+          text:"Canon EOS 5D Mark III"
         },
         {
           text:"sick"
@@ -51,6 +51,6 @@ const styles = StyleSheet.create({
   },
   container: {
     padding: 10,
-    backgroundColor: colors.darkblue
+    backgroundColor: colors.lightgrey
   },
 });
