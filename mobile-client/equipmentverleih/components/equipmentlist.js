@@ -5,21 +5,23 @@ import { colors, fonts } from '../theme';
 
 export class EquipmentList extends Component {
 
-
+     constructor(props){
+        super(props);
+     }
 
     render() {
-        console.log(this.props.data);
-
+        
+        console.log(this.props.onPress);
 
         return (
             <View style={styles.bigbox}>
                 <Text style={styles.title}>{this.props.data.title}</Text>
                 <ScrollView horizontal={true}>
 
-                    {this.props.data.texts.map((data) => {
+                    {this.props.data.texts.map((data, index) => {
                         return (
-                            <TouchableOpacity>
-                            <View style={styles.singleBox}>
+                            <TouchableOpacity key={index} onPress={this.props.onClick} >
+                            <View style={styles.singleBox} >
                                 <Image style={styles.img} source={require('../images/logo.png')} />
                                 <Text style={styles.text}>{data.text}</Text>
                             </View>
@@ -43,6 +45,7 @@ const styles = StyleSheet.create({
         height: 50,
         fontSize: 20,
         textAlign: 'center',
+        color:colors.grey1
         
     },
     title: {
@@ -59,9 +62,11 @@ const styles = StyleSheet.create({
         marginRight: 15,
         borderWidth:2,
         borderColor:colors.primary,
-        borderRadius:5,
+        borderRadius:2,
         marginBottom:20,
-        alignItems:'center'
+        alignItems:'center',
+        color:colors.white,
+        backgroundColor:colors.primary
         
       
     },

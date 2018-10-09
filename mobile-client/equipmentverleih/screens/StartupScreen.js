@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View, Button, Alert, Image} from 'react-native';
 
-import { TabNavigator, LoginNavigator } from '../navigation/router';
+import { TabNav, LoginNavigator } from '../navigation/router';
 
 import  LoginService  from '../services/AuthService';
 import { colors } from '../theme';
@@ -24,7 +24,7 @@ export class StartupScreen extends Component {
             console.log('wow');
             this.setState({isLoggedIn:data.isLoggedIn});
             PubSub.unsubscribe(this.token);
-        },2000);
+        },0);
      }.bind(this);
 
      token = PubSub.subscribe('checkLogin',this.loginSubscriber);
@@ -33,7 +33,7 @@ export class StartupScreen extends Component {
         
       switch(this.state.isLoggedIn){
         case true:
-            return <TabNavigator />;
+            return <TabNav />;
         case false:
             return <LoginNavigator />;
         default:

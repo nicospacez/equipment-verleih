@@ -8,9 +8,42 @@ import { HomeScreen } from '../screens/HomeScreen';
 import { ProfileScreen } from '../screens/ProfileScreen';
 import { EquipmentScreen } from '../screens/EquipmentScreen';
 import { WarenkorbScreen } from '../screens/WarenkorbScreen';
+import { DetailScreen } from '../screens/DetailScreen';
 import { LoginScreen } from '../screens/LoginScreen';
 
-export const TabNavigator = createBottomTabNavigator({
+
+
+export const DetailNavigator = createStackNavigator({
+  EquipmentScreen:{
+    screen:EquipmentScreen
+  },
+    DetailScreen:{
+      screen:DetailScreen
+    }
+
+  },
+  {
+    navigationOptions:{
+      initialRouteName:'EquipmentScreen'
+    },
+    headerMode:'none'
+ }
+);
+
+
+  export const LoginNavigator = createStackNavigator({
+    LoginScreen:{
+      screen:LoginScreen
+    }
+  },
+{
+  headerMode:'none',
+  navigationOptions:{
+    headerVisible:false
+  }
+});
+
+export const TabNav = createBottomTabNavigator({
     HomeScreen:{
       screen:HomeScreen,
       navigationOptions:{
@@ -30,7 +63,7 @@ export const TabNavigator = createBottomTabNavigator({
       }
     },
     EquipmentScreen:{
-      screen:EquipmentScreen,
+      screen: DetailNavigator,
       navigationOptions:{
         tabBarLabel:"Equipment",
         tabBarIcon:({ tintColor }) => (
@@ -49,14 +82,8 @@ export const TabNavigator = createBottomTabNavigator({
     }
   });
 
-  export const LoginNavigator = createStackNavigator({
-    LoginScreen:{
-      screen:LoginScreen
-    }
-  },
-{
-  headerMode:'none',
-  navigationOptions:{
-    headerVisible:false
-  }
-});
+  
+
+
+ 
+
