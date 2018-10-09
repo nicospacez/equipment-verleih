@@ -14,7 +14,10 @@ equipment-verleih
 
 ## Einleitung
 
-Wir entwickeln den Equipmentverleih für den Medientechnikzweig.
+Zurzeit wird die Ausgabe Equipments im Medientechnikzweig noch händisch durchgeführt.
+Unser Projekt soll hier Abhilfe verschaffen. Mithilfe einer App soll es Schülern
+möglich sein Equipment reservieren zu können. Lehrer protokollieren mit der App die
+Ausgabe des Equipments und haben alles im Überblick.
 
 # Programmierteile
 
