@@ -58,10 +58,13 @@ des Projektes das Issue ist (z.B MobileClient).
     hat einen Hashtag mit einer Nummer (z.B. #25). Der Befehl sieht dann z.B. so aus:
     ```bat
     git commit -m "wip #25 eine Beschreibung zur erledigten Arbeit" 
-        oder 
-    git commit -m "fixed #25 eine Beschreibung zur erledigten Arbeit" 
-        falls du mit dem Issue fertig bist.
     ```
+        oder 
+    ```bat
+    git commit -m "fixed #25 eine Beschreibung zur erledigten Arbeit" 
+    ```
+        falls du mit dem Issue fertig bist.
+    
     
 + Als letztes lädst du deinen Commit hoch mit 
     ```bat
@@ -72,11 +75,11 @@ des Projektes das Issue ist (z.B MobileClient).
     runter mit
     ```bat
     git pull
-    ```
+    ``` 
 
 ## Merge Request
 
-    Um deinen persönlichen Branch in den *master* Branch zu mergen musst du unter 
-    Merge Request im Seitenmenü einen neuen erstellen. Überprüfe nochmal deine Änderungen 
-    bevor du diesen mergst.
+Um deinen persönlichen Branch in den *master* Branch zu mergen musst du unter 
+Merge Request im Seitenmenü einen neuen erstellen. Überprüfe nochmal deine Änderungen 
+bevor du diesen mergst.
 
