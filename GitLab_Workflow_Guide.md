@@ -1,2 +1,0 @@
-#GITLAB WORKFLOW GUIDE
-GitLab Guide
