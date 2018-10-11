@@ -19,9 +19,10 @@ public class User implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long userId;
 
-    private String vorname, nachname, klasse;
-    
-    //@Column(unique=true, nullable=false)
+    private String vorname;
+    private String nachname;
+    private String klasse;
+    private String password;
     private String username;
 
     private int Katalognummer;
@@ -43,13 +44,14 @@ public class User implements Serializable {
     public User() {
     }
 
-    public User(String vorname, String nachname, String username, String klasse, int Katalognummer, boolean isAdmin) {
+    public User(String vorname, String nachname, String username, String klasse, int Katalognummer, boolean isAdmin, String password) {
         this.vorname = vorname;
         this.nachname = nachname;
         this.username = username;
         this.klasse = klasse;
         this.Katalognummer = Katalognummer;
         this.isAdmin = isAdmin;
+        this.password = password;
     }
 
     public List<Verleih> getHergeborgt() {
@@ -131,8 +133,17 @@ public class User implements Serializable {
     public void setIsAdmin(boolean isAdmin) {
         this.isAdmin = isAdmin;
     }
+  
+    public String getPassword() {
+		return password;
+	}
 
-    @Override
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+
+	@Override
     public int hashCode() {
         int hash = 0;
         hash += (userId != null ? userId.hashCode() : 0);
@@ -152,9 +163,13 @@ public class User implements Serializable {
         return true;
     }
 
-    @Override
-    public String toString() {
-        return "entities.User[ id=" + userId + " ]";
-    }
+	@Override
+	public String toString() {
+		return "User [userId=" + userId + ", vorname=" + vorname + ", nachname=" + nachname + ", klasse=" + klasse
+				+ ", password=" + password + ", username=" + username + ", Katalognummer=" + Katalognummer
+				+ ", isAdmin=" + isAdmin + "]";
+	}
+
+    
 
 }
