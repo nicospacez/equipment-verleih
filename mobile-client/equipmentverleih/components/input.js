@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
     flexDirection:'row',
     alignItems:'center',
     borderWidth:3,
-    borderColor:colors.lightblue,
+    borderColor:colors.primary,
     marginBottom:20,
     borderRadius:0,
     backgroundColor:'rgba(255,255,255,1)'

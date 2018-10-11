@@ -7,38 +7,38 @@ import { DetailScreen } from './DetailScreen';
 
 export class EquipmentScreen extends Component {
 
-  constructor(){
+  constructor() {
     super();
-    
+
 
     this.launchDetailScreen = this.launchDetailScreen.bind(this);
   }
 
   data = {
 
-      title: "Kamera",
-      texts:[
-        {
-          text:"Lumix GH4"
-        },
-        {
-          text:"Nikon D3100"
-        },
-        {
-          text:"Canon EOS 5D Mark III"
-        },
-        {
-          text:"sick"
-        },
-        {
-          text:"sick"
-        }
-      ]
-    
+    title: "Kamera",
+    texts: [
+      {
+        text: "Lumix GH4"
+      },
+      {
+        text: "Nikon D3100"
+      },
+      {
+        text: "Canon EOS 5D Mark III"
+      },
+      {
+        text: "sick"
+      },
+      {
+        text: "sick"
+      }
+    ]
+
 
   }
 
-  launchDetailScreen(){
+  launchDetailScreen() {
     this.props.navigation.navigate('DetailScreen');
   }
 
@@ -46,15 +46,15 @@ export class EquipmentScreen extends Component {
 
   render() {
 
-          return (
-            <ScrollView style={styles.container}>
-              <EquipmentList data={this.data} style={styles.equipmentList} onClick={this.launchDetailScreen}/>
-            </ScrollView> 
-      );
-    }    
-
-  
+    return (
+      <ScrollView style={styles.container}>
+        <EquipmentList data={this.data} style={styles.equipmentList} onClick={this.launchDetailScreen} />
+      </ScrollView>
+    );
   }
+
+
+}
 
 
 

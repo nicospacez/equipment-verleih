@@ -1,62 +1,62 @@
-import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View, Button, Alert, Image} from 'react-native';
+import React, { Component } from 'react';
+import { Platform, StyleSheet, Text, View, Button, Alert, Image } from 'react-native';
 
 import { TabNav, LoginNavigator } from '../navigation/router';
 
-import  LoginService  from '../services/AuthService';
+import LoginService from '../services/AuthService';
 import { colors } from '../theme';
 
 export class StartupScreen extends Component {
 
-    constructor(){
+    constructor() {
         super();
         this.state = {
-            isLoggedIn:null
+            isLoggedIn: null
         };
 
         ls = new LoginService();
         ls.checkLogin();
     }
-    loginSubscriber = function(msg,data){      
+    loginSubscriber = function (msg, data) {
         console.log(data);
-        
+
         setTimeout(() => {
             console.log('wow');
-            this.setState({isLoggedIn:data.isLoggedIn});
+            this.setState({ isLoggedIn: data.isLoggedIn });
             PubSub.unsubscribe(this.token);
-        },0);
-     }.bind(this);
+        }, 0);
+    }.bind(this);
 
-     token = PubSub.subscribe('checkLogin',this.loginSubscriber);
+    token = PubSub.subscribe('checkLogin', this.loginSubscriber);
 
     render() {
-        
-      switch(this.state.isLoggedIn){
-        case true:
-            return <TabNav />;
-        case false:
-            return <LoginNavigator />;
-        default:
-            return (
-            <View style={styles.splash}>    
-                <Image style={styles.image} source={require('../images/logo_text.png')} />
-            </View>
-        );
-      }      
+
+        switch (this.state.isLoggedIn) {
+            case true:
+                return <TabNav />;
+            case false:
+                return <LoginNavigator />;
+            default:
+                return (
+                    <View style={styles.splash}>
+                        <Image style={styles.image} source={require('../images/logo_text.png')} />
+                    </View>
+                );
+        }
     }
-    
-  }
-  const styles = StyleSheet.create({
-      splash:{
-        flex:1,
-        justifyContent:'center',
-        alignItems:'center',
+
+}
+const styles = StyleSheet.create({
+    splash: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
         backgroundColor: colors.grey2
-      },
-      image:{
-        
-        width:'60%',
-        resizeMode:'contain'
-      }
-    
+    },
+    image: {
+
+        width: '60%',
+        resizeMode: 'contain'
+    }
+
 });
