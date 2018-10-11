@@ -23,22 +23,15 @@ public class UserEndpoint {
 
 	
 	@GET
-	@Path("/test")
 	public Response findAll() {
-		log.debug("findAllTest...");
-		return Response.ok(dao.findAll()).build();
-	}
-	
-	@GET
-	@Path("/findAll")
-	public Response findAll2() {
 		log.debug("findAll...");
 		return Response.ok(dao.findAll()).build();
 	}
 	
     @POST
-    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Consumes(MediaType.APPLICATION_JSON)
     public void create(User entity) {
+    	log.debug("creating user: "+entity.toString());
         repo.create(entity);
     }
 	
