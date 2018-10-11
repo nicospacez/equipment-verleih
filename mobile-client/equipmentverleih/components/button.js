@@ -29,14 +29,14 @@ const styles = StyleSheet.create({
     marginTop: 0,
     flexDirection: 'row',
     marginLeft:0,
-    backgroundColor:colors.darkblue,
+    backgroundColor:colors.primary,
     justifyContent:'center',
     borderRadius:0,
     padding:10,
     marginBottom:20
   },
   buttonText: {
-    color: 'white',
+    color: colors.white,
     fontFamily: fonts.bold,
     fontSize: 19,
     letterSpacing: 2

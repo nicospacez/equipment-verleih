@@ -12,7 +12,7 @@ export class LoginScreen extends Component {
         
        
          
-              <Image source={require('../images/logo.png')} style={styles.logo} />
+              <Image source={require('../images/logo_text.png')} style={styles.logo} />
                 <View style={styles.logincontainer}>
                 
                   <LoginField />
@@ -48,8 +48,8 @@ export class LoginScreen extends Component {
       color:'white'
     },
     logo:{
-      marginBottom:20,
-      fontSize:80
+      height:'50%',
+      resizeMode:'contain'
     },
     bgImage:{
       position:'absolute',
