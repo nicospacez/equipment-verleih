@@ -12,6 +12,8 @@ import { DetailScreen } from '../screens/DetailScreen';
 import { LoginScreen } from '../screens/LoginScreen';
 import { ListScreen } from '../screens/ListScreen';
 import { colors } from '../theme';
+import { StartupScreen } from '../screens/StartupScreen';
+
 
 
 
@@ -57,17 +59,7 @@ export const HomeNavigator = createStackNavigator({
 );
 
 
-export const LoginNavigator = createStackNavigator({
-  LoginScreen: {
-    screen: LoginScreen
-  }
-},
-  {
-    headerMode: 'none',
-    navigationOptions: {
-      headerVisible: false
-    }
-  });
+
 
 export const TabNav = createBottomTabNavigator({
   HomeScreen: {
@@ -118,7 +110,25 @@ export const TabNav = createBottomTabNavigator({
 );
 
 
+export const LoginNavigator = createStackNavigator({
+  StartupScreen: {
+    screen: StartupScreen
+  },
+  LoginScreen:{
+    screen:LoginScreen
+  },
+  TabNav:{
+    screen:TabNav
+  }
 
+},
+  {
+    headerMode: 'none',
+    navigationOptions: {
+      headerVisible: false,
+      initialRouteName: 'StartupScreen'
+    }
+  });
 
 
 
