@@ -31,11 +31,11 @@ const styles = StyleSheet.create({
   container:{
     flexDirection:'row',
     alignItems:'center',
-    borderWidth:3,
-    borderColor:colors.primary,
+    borderWidth:0,
+    borderBottomWidth:1,
+    borderColor:colors.grey1,
     marginBottom:20,
-    borderRadius:0,
-    backgroundColor:'rgba(255,255,255,1)'
+    borderRadius:0
   },
   icon:{
     marginLeft:20

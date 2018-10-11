@@ -33,7 +33,7 @@ export class LoginField extends Component{
                 value={this.state.password}
                 secureTextEntry
                 />
-                <Button  title="LOGIN" />
+                <Button  title="Login" />
             </View>
             
         );

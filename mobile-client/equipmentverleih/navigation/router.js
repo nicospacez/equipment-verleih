@@ -10,6 +10,7 @@ import { EquipmentScreen } from '../screens/EquipmentScreen';
 import { WarenkorbScreen } from '../screens/WarenkorbScreen';
 import { DetailScreen } from '../screens/DetailScreen';
 import { LoginScreen } from '../screens/LoginScreen';
+import { ListScreen } from '../screens/ListScreen';
 import { colors } from '../theme';
 
 
@@ -35,6 +36,26 @@ export const DetailNavigator = createStackNavigator({
   }
 );
 
+export const HomeNavigator = createStackNavigator({
+  HomeScreen: {
+    screen: HomeScreen
+  },
+  ListScreen: {
+    screen:ListScreen
+  }
+},
+  {
+    navigationOptions: {
+      title: 'Home',
+      initialRouteName: 'HomeScreen',
+      headerStyle: {
+        backgroundColor: colors.white,
+      },
+      headerTintColor: colors.primary
+    }
+  }
+);
+
 
 export const LoginNavigator = createStackNavigator({
   LoginScreen: {
@@ -50,7 +71,7 @@ export const LoginNavigator = createStackNavigator({
 
 export const TabNav = createBottomTabNavigator({
   HomeScreen: {
-    screen: HomeScreen,
+    screen: HomeNavigator,
     navigationOptions: {
       tabBarLabel: 'Home',
       tabBarIcon: ({ tintColor }) => (
@@ -87,10 +108,10 @@ export const TabNav = createBottomTabNavigator({
   }
 }, {
     tabBarOptions: {
-      activeTintColor: colors.grey1,
+      activeTintColor: colors.primary,
       inactiveTintColor: colors.font,
       style: {
-        backgroundColor: colors.primary
+        backgroundColor: colors.white
       }
     }
   }

@@ -31,15 +31,14 @@ const styles = StyleSheet.create({
     marginLeft:0,
     backgroundColor:colors.primary,
     justifyContent:'center',
-    borderRadius:0,
-    padding:10,
+    borderRadius:5,
+    padding:12,
     marginBottom:20
   },
   buttonText: {
-    color: colors.white,
+    color: colors.grey1,
     fontFamily: fonts.bold,
-    fontSize: 19,
-    letterSpacing: 2
+    fontSize: 22
   },
   activityIndicator: {
     transform: [{scale: 0.70}],

@@ -10,9 +10,10 @@ export class LoginScreen extends Component {
         
         <View style={styles.container}>  
         
-       
+          <View style={styles.topBox}>
          
               <Image source={require('../images/logo_text.png')} style={styles.logo} />
+          </View>
                 <View style={styles.logincontainer}>
                 
                   <LoginField />
@@ -32,15 +33,20 @@ export class LoginScreen extends Component {
       flex: 1,
       width:'100%',
       height:'100%',
-      justifyContent: 'center',
       alignItems: 'center',
-      backgroundColor:colors.lightblue
+      backgroundColor:colors.white
+    },
+    topBox:{
+      backgroundColor:colors.secondary,
+      height:'40%',
+      width:'100%',
+      justifyContent:'center',
+      alignItems:'center'
     },
     logincontainer:{
       padding:20,
-      width:'80%',
-      justifyContent:'center',
-      backgroundColor:'rgba(255,255,255,0)'
+      width:'100%',
+      justifyContent:'center'
     },
     logintext:{
       textAlign:'center',
@@ -48,7 +54,7 @@ export class LoginScreen extends Component {
       color:'white'
     },
     logo:{
-      height:'50%',
+      height:'70%',
       resizeMode:'contain'
     },
     bgImage:{
