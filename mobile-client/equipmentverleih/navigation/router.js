@@ -10,7 +10,10 @@ import { EquipmentScreen } from '../screens/EquipmentScreen';
 import { WarenkorbScreen } from '../screens/WarenkorbScreen';
 import { DetailScreen } from '../screens/DetailScreen';
 import { LoginScreen } from '../screens/LoginScreen';
+import { ListScreen } from '../screens/ListScreen';
 import { colors } from '../theme';
+import { StartupScreen } from '../screens/StartupScreen';
+
 
 
 
@@ -35,22 +38,32 @@ export const DetailNavigator = createStackNavigator({
   }
 );
 
-
-export const LoginNavigator = createStackNavigator({
-  LoginScreen: {
-    screen: LoginScreen
+export const HomeNavigator = createStackNavigator({
+  HomeScreen: {
+    screen: HomeScreen
+  },
+  ListScreen: {
+    screen:ListScreen
   }
 },
   {
-    headerMode: 'none',
     navigationOptions: {
-      headerVisible: false
+      title: 'Home',
+      initialRouteName: 'HomeScreen',
+      headerStyle: {
+        backgroundColor: colors.white,
+      },
+      headerTintColor: colors.primary
     }
-  });
+  }
+);
+
+
+
 
 export const TabNav = createBottomTabNavigator({
   HomeScreen: {
-    screen: HomeScreen,
+    screen: HomeNavigator,
     navigationOptions: {
       tabBarLabel: 'Home',
       tabBarIcon: ({ tintColor }) => (
@@ -87,17 +100,35 @@ export const TabNav = createBottomTabNavigator({
   }
 }, {
     tabBarOptions: {
-      activeTintColor: colors.grey1,
+      activeTintColor: colors.primary,
       inactiveTintColor: colors.font,
       style: {
-        backgroundColor: colors.primary
+        backgroundColor: colors.white
       }
     }
   }
 );
 
 
+export const LoginNavigator = createStackNavigator({
+  StartupScreen: {
+    screen: StartupScreen
+  },
+  LoginScreen:{
+    screen:LoginScreen
+  },
+  TabNav:{
+    screen:TabNav
+  }
 
+},
+  {
+    headerMode: 'none',
+    navigationOptions: {
+      headerVisible: false,
+      initialRouteName: 'StartupScreen'
+    }
+  });
 
 
 

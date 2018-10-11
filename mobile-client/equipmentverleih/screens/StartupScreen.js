@@ -8,42 +8,45 @@ import { colors } from '../theme';
 
 export class StartupScreen extends Component {
 
+    nav = null;
     constructor() {
-        super();
-        this.state = {
-            isLoggedIn: null
-        };
-
-        ls = new LoginService();
-        ls.checkLogin();
+      super();
+     
+      ls = new LoginService();
+      ls.checkLogin();
     }
+   
+  
     loginSubscriber = function (msg, data) {
-        console.log(data);
-
-        setTimeout(() => {
-            console.log('wow');
-            this.setState({ isLoggedIn: data.isLoggedIn });
-            PubSub.unsubscribe(this.token);
-        }, 0);
+      console.log(data);
+  
+      setTimeout(() => {
+        
+        if(data.isLoggedIn){
+            this.props.navigation.navigate("TabNav");
+        }else{
+            this.props.navigation.navigate("LoginScreen");
+        }
+  
+        PubSub.unsubscribe(this.token);
+      }, 1000);
     }.bind(this);
-
+  
     token = PubSub.subscribe('checkLogin', this.loginSubscriber);
+    
+
+    
 
     render() {
 
-        switch (this.state.isLoggedIn) {
-            case true:
-                return <TabNav />;
-            case false:
-                return <LoginNavigator />;
-            default:
-                return (
-                    <View style={styles.splash}>
-                        <Image style={styles.image} source={require('../images/logo_text.png')} />
-                    </View>
-                );
-        }
+        return (
+            <View style={styles.splash}>
+                <Image style={styles.image} source={require('../images/logo_text.png')} />
+            </View>
+        );
+
     }
+
 
 }
 const styles = StyleSheet.create({
