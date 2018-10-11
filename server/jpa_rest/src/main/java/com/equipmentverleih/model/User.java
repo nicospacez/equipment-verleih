@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.List;
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  *
  * @author nicoz
@@ -27,12 +29,15 @@ public class User implements Serializable {
     private boolean isAdmin;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+    @JsonIgnore
     private List<Verleih> equipment;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+    @JsonIgnore
     private List<Verleih> hergeborgt;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+    @JsonIgnore
     private List<Verleih> zurueckgenommen;
 
     public User() {
@@ -125,22 +130,6 @@ public class User implements Serializable {
 
     public void setIsAdmin(boolean isAdmin) {
         this.isAdmin = isAdmin;
-    }
-
-    public String getFirstname() {
-        return vorname;
-    }
-
-    public void setFirstname(String firstname) {
-        this.vorname = firstname;
-    }
-
-    public String getLastname() {
-        return nachname;
-    }
-
-    public void setLastname(String lastname) {
-        this.nachname = lastname;
     }
 
     @Override
