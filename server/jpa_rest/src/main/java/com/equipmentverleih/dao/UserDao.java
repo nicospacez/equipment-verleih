@@ -14,7 +14,9 @@ public class UserDao {
 	@PersistenceContext 
 	EntityManager em;
 	
+	//select u from User u left join u.equipment e
 	public List<User> findAll() {
 		return em.createQuery("select u from User u", User.class).getResultList();
+		
 	}
 }

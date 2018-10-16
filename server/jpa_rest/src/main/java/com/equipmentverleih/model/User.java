@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.List;
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  *
  * @author nicoz
@@ -17,9 +19,10 @@ public class User implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long userId;
 
-    private String vorname, nachname, klasse;
-    
-    //@Column(unique=true, nullable=false)
+    private String vorname;
+    private String nachname;
+    private String klasse;
+    private String password;
     private String username;
 
     private int Katalognummer;
@@ -27,24 +30,28 @@ public class User implements Serializable {
     private boolean isAdmin;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+    @JsonIgnore
     private List<Verleih> equipment;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+    @JsonIgnore
     private List<Verleih> hergeborgt;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+    @JsonIgnore
     private List<Verleih> zurueckgenommen;
 
     public User() {
     }
 
-    public User(String vorname, String nachname, String username, String klasse, int Katalognummer, boolean isAdmin) {
+    public User(String vorname, String nachname, String username, String klasse, int Katalognummer, boolean isAdmin, String password) {
         this.vorname = vorname;
         this.nachname = nachname;
         this.username = username;
         this.klasse = klasse;
         this.Katalognummer = Katalognummer;
         this.isAdmin = isAdmin;
+        this.password = password;
     }
 
     public List<Verleih> getHergeborgt() {
@@ -126,24 +133,17 @@ public class User implements Serializable {
     public void setIsAdmin(boolean isAdmin) {
         this.isAdmin = isAdmin;
     }
+  
+    public String getPassword() {
+		return password;
+	}
 
-    public String getFirstname() {
-        return vorname;
-    }
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
-    public void setFirstname(String firstname) {
-        this.vorname = firstname;
-    }
 
-    public String getLastname() {
-        return nachname;
-    }
-
-    public void setLastname(String lastname) {
-        this.nachname = lastname;
-    }
-
-    @Override
+	@Override
     public int hashCode() {
         int hash = 0;
         hash += (userId != null ? userId.hashCode() : 0);
@@ -163,9 +163,13 @@ public class User implements Serializable {
         return true;
     }
 
-    @Override
-    public String toString() {
-        return "entities.User[ id=" + userId + " ]";
-    }
+	@Override
+	public String toString() {
+		return "User [userId=" + userId + ", vorname=" + vorname + ", nachname=" + nachname + ", klasse=" + klasse
+				+ ", password=" + password + ", username=" + username + ", Katalognummer=" + Katalognummer
+				+ ", isAdmin=" + isAdmin + "]";
+	}
+
+    
 
 }

@@ -1,0 +1,23 @@
+#left {
+  position: fixed; /* or absolute */
+  top: 0%;
+  left: 0%;
+  background-color: #3c3b54;
+  width: 50%;
+  height: 100%;
+  background-image: url("../../assets/Logo_text.png");
+  background-repeat: no-repeat;
+  background-position: center; 
+}
+#right{
+    position: fixed; /* or absolute */
+    top: 0%;
+    left: 50%;
+    width: 50%;
+    height: 100%;
+    text-align: center;
+    padding: 5%;
+}
+body{
+    color: #3c3b54;
+}
