@@ -6,7 +6,7 @@ build_server:
       - master
   script:
     - cd server/jpa_rest
-    - mvn install
+    - mvn package
 
 test_server:
   image: maven:latest
