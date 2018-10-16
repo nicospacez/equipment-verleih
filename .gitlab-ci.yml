@@ -1,0 +1,22 @@
+build_server:
+  image: maven:latest
+  stage: build
+  only:
+    refs:
+      - master
+  script:
+    - cd server/jpa_rest
+    - mvn install
+
+test_server:
+  image: maven:latest
+  stage: test
+  only:
+    refs:
+      - master
+  script:
+    - cd server/jpa_rest
+    - mvn test
+
+variables:
+  GIT_SSL_NO_VERIFY: "1"
