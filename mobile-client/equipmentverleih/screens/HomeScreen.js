@@ -2,12 +2,18 @@ import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, View, Button, Alert, TouchableOpacity } from 'react-native';
 import { colors, fonts } from '../theme';
 import { ListView } from '../components/listView';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 
 
 
 
 export class HomeScreen extends Component {
+  static navigationOptions = ({navigation}) => ({
+    headerRight: (
+      <Icon name="md-person" size={24} style={{ marginRight:15 }} onPress={() => navigation.navigate('ProfileScreen')} />
+    )
+  })
 
   constructor() {
     super();

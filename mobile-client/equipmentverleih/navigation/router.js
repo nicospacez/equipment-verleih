@@ -31,9 +31,9 @@ export const DetailNavigator = createStackNavigator({
       title: 'Equipment',
       initialRouteName: 'EquipmentScreen',
       headerStyle: {
-        backgroundColor: colors.primary,
+        backgroundColor: colors.white,
       },
-      headerTintColor: colors.grey1
+      headerTintColor: colors.primary
     }
   }
 );
@@ -44,6 +44,9 @@ export const HomeNavigator = createStackNavigator({
   },
   ListScreen: {
     screen:ListScreen
+  },
+  ProfileScreen:{
+    screen: ProfileScreen
   }
 },
   {
@@ -68,15 +71,6 @@ export const TabNav = createBottomTabNavigator({
       tabBarLabel: 'Home',
       tabBarIcon: ({ tintColor }) => (
         <Icon name="md-home" size={24} color={tintColor} />
-      )
-    }
-  },
-  ProfileScreen: {
-    screen: ProfileScreen,
-    navigationOptions: {
-      tabBarLabel: "Profil",
-      tabBarIcon: ({ tintColor }) => (
-        <Icon name="md-person" size={24} color={tintColor} />
       )
     }
   },

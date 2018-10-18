@@ -22,7 +22,7 @@ export class ListView extends Component {
                 <View style={styles.headerrow}>
                     {this.props.data.head.map((value, i) => {
                         return (
-                            <Text style={styles.text}>{value}</Text>
+                            <Text style={styles.text} key={i}>{value}</Text>
                         )
                     })}
                 </View>
@@ -30,7 +30,7 @@ export class ListView extends Component {
                 {this.props.data.body.slice(0,this.props.limit).map((value, i) => {
                     if(i%2 == 0){
                         return (
-                            <View style={styles.row}>
+                            <View style={styles.row} key={i}>
                                 <Text style={styles.text}>{value.name}</Text>
                                 <Text style={styles.text}>{value.kuerzel}</Text>
                                 <Text style={styles.text}>{value.status}</Text>
@@ -39,7 +39,7 @@ export class ListView extends Component {
                         )
                     }else{
                         return (
-                            <View style={styles.row2}>
+                            <View style={styles.row2} key={i}>
                                 <Text style={styles.text}>{value.name}</Text>
                                 <Text style={styles.text}>{value.kuerzel}</Text>
                                 <Text style={styles.text}>{value.status}</Text>

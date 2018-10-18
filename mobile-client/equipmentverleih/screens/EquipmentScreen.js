@@ -49,6 +49,7 @@ export class EquipmentScreen extends Component {
     return (
       <ScrollView style={styles.container}>
         <EquipmentList data={this.data} style={styles.equipmentList} onClick={this.launchDetailScreen} />
+        <EquipmentList data={this.data} style={styles.equipmentList} onClick={this.launchDetailScreen} />
       </ScrollView>
     );
   }
@@ -61,6 +62,8 @@ export class EquipmentScreen extends Component {
 const styles = StyleSheet.create({
   equipmentList: {
     marginTop: 20,
+    flex:1,
+    backgroundColor:colors.grey1
 
   },
   container: {

@@ -29,7 +29,7 @@ export class StartupScreen extends Component {
         }
   
         PubSub.unsubscribe(this.token);
-      }, 1000);
+      }, 0);
     }.bind(this);
   
     token = PubSub.subscribe('checkLogin', this.loginSubscriber);
