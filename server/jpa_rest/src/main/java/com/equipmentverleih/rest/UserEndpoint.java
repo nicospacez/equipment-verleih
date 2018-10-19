@@ -24,7 +24,7 @@ public class UserEndpoint {
 	
 	@GET
 	public Response findAll() {
-		log.debug("findAll...");
+		log.debug("findAllUsers...");
 		return Response.ok(dao.findAll()).build();
 	}
 	

@@ -11,6 +11,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  *
  * @author nicoz
@@ -31,9 +33,11 @@ public class Kategorie implements Serializable {
     @ManyToOne
     private Kategorie kategorie;
     
+    @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy ="kategorie")
     private List<Kategorie> kategorien;
     
+    @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "kategorie")
     private List<Produkt> produkte;
 
