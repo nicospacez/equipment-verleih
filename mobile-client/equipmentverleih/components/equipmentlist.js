@@ -43,34 +43,38 @@ const styles = StyleSheet.create({
     text: {
         width: 130,
         height: 50,
-        fontSize: 20,
+        fontSize: 15,
         textAlign: 'center',
-        color: colors.grey1
+        color: colors.lightblue,
+        marginTop:10
 
     },
     title: {
         fontFamily: fonts.bold,
-        fontSize: 20,
-        marginBottom: 10,
-        color: colors.primary
+        fontSize: 18,
+        marginBottom: 5,
+        color: colors.lightblue,
+        width:'100%'
     },
     img: {
-        height: 130,
-        width: 130
+        height: 100,
+        width: 100
     },
     singleBox: {
-        marginRight: 15,
-        borderWidth: 2,
-        borderColor: colors.primary,
-        borderRadius: 2,
-        marginBottom: 20,
+        marginRight: 5,
+        marginBottom: 0,
         alignItems: 'center',
         color: colors.white,
-        backgroundColor: colors.primary
+        backgroundColor: colors.white,
+        elevation:2
 
 
     },
     bigbox: {
-        marginBottom: 20,
+        marginTop:20,
+        flex:1,
+        marginBottom: 10,
+        elevation:2,
+        padding:0
     }
 });
