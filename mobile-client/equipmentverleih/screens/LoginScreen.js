@@ -23,10 +23,8 @@ export class LoginScreen extends Component {
         </View>
         
       );
+      }
     }
-  }
-
-
 
   const styles = StyleSheet.create({
     container: {

@@ -16,7 +16,8 @@ export class StartupScreen extends Component {
       ls.checkLogin();
     }
    
-  
+    
+
     loginSubscriber = function (msg, data) {
       console.log(data);
   
@@ -27,7 +28,6 @@ export class StartupScreen extends Component {
         }else{
             this.props.navigation.navigate("LoginScreen");
         }
-  
         PubSub.unsubscribe(this.token);
       }, 0);
     }.bind(this);

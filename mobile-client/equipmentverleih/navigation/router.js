@@ -61,6 +61,23 @@ export const HomeNavigator = createStackNavigator({
   }
 );
 
+export const WarenkorbNavigator = createStackNavigator({
+  WarenkorbScreen: {
+    screen: WarenkorbScreen
+  }
+},
+  {
+    navigationOptions: {
+      title: 'Warenkorb',
+      initialRouteName: 'WarenkorbScreen',
+      headerStyle: {
+        backgroundColor: colors.white,
+      },
+      headerTintColor: colors.primary
+    }
+  }
+);
+
 
 
 
@@ -84,7 +101,7 @@ export const TabNav = createBottomTabNavigator({
     }
   },
   WarenkorbScreen: {
-    screen: WarenkorbScreen,
+    screen: WarenkorbNavigator,
     navigationOptions: {
       tabBarLabel: "Warenkorb",
       tabBarIcon: ({ tintColor }) => (
