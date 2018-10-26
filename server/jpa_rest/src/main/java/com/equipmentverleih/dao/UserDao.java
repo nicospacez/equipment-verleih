@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import com.equipmentverleih.model.User;
+import com.equipmentverleih.dto.UserDto;
 
 @Named
 public class UserDao {
