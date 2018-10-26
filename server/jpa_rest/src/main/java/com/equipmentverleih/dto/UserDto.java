@@ -5,13 +5,16 @@ import com.equipmentverleih.model.User;
 public class UserDto implements Transferable<User>{
 
 	Long userId;
+	
 	String username;
 	String klasse;
 	String vorname;
 	String nachname;
-	int katalognummer;
-	boolean isAdmin;
 	String password;
+	
+	int katalognummer;
+	
+	boolean isAdmin;
 	
 	
 	

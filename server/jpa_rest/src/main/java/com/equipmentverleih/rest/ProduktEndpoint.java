@@ -13,6 +13,7 @@ import javax.ws.rs.core.Response;
 import org.apache.log4j.Logger;
 
 import com.equipmentverleih.dao.ProduktDao;
+import com.equipmentverleih.dto.ProduktDto;
 import com.equipmentverleih.model.Produkt;
 import com.equipmentverleih.repository.ProduktRepository;
 
