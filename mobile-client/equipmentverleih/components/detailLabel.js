@@ -13,9 +13,9 @@ export class DetailLabel extends Component {
     render() {
 
         return (
-            <View>
-                <Text style={styles.textbox}>{this.props.text}</Text>
-                <Text style={styles.titlebox}>{this.props.title}</Text>
+            <View style={styles.label}>
+                <Text style={styles.title}>{this.props.title}</Text>
+                <Text style={styles.text}>{this.props.text}</Text>
             </View>
         );
 
@@ -25,13 +25,20 @@ export class DetailLabel extends Component {
 }
 
 const styles = StyleSheet.create({
-    textbox:{
-        borderBottomWidth:2,
-        borderBottomColor:colors.lightblue,
+    label: {
         padding:10,
-        fontSize:20
+        borderBottomWidth: 3,
+        borderColor: colors.grey1,
+        flexDirection: 'row'
     },
-    titlebox:{
-        color:colors.lightblue
+    text: {
+        
+     alignSelf:'stretch',
+     textAlign:'right',
+     width:'50%'
+    },
+    title: {
+        width:'50%',
+        color: colors.black
     }
 })

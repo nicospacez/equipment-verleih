@@ -36,6 +36,36 @@ export const getCartList = () => {
             name: "Lumix GH4",
             kuerzel: "hubert",
             status: "25.01.2018"
+          },
+          {
+            name: "Lumix GH4",
+            kuerzel: "Nico",
+            status: "25.01.2018"
+          },
+          {
+            name: "Lumix GH4",
+            kuerzel: "Aistleitner",
+            status: "25.01.2018"
+          },
+          {
+            name: "Lumix GH4",
+            kuerzel: "Pascal",
+            status: "25.01.2018"
+          },
+          {
+            name: "Lumix GH4",
+            kuerzel: "Jonas",
+            status: "25.01.2018"
+          },
+          {
+            name: "Lumix GH4",
+            kuerzel: "Mösner",
+            status: "25.01.2018"
+          },
+          {
+            name: "Lumix GH4",
+            kuerzel: "hubert",
+            status: "25.01.2018"
           }
         ]
       }

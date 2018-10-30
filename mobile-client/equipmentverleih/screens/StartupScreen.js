@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, View, Button, Alert, Image } from 'react-native';
 
-import { TabNav, LoginNavigator } from '../navigation/router';
+import { TabNav, LoginNavigator, AdminNav } from '../navigation/router';
 
 import LoginService from '../services/AuthService';
 import { colors } from '../theme';
@@ -24,7 +24,14 @@ export class StartupScreen extends Component {
       setTimeout(() => {
         
         if(data.isLoggedIn){
-            this.props.navigation.navigate("TabNav");
+            if(data.isAdmin){
+                console.log("admin navigator");
+                this.props.navigation.navigate("AdminNav");
+            }else{
+                console.log("normal navigator")
+                this.props.navigation.navigate("TabNav");
+            }
+            
         }else{
             this.props.navigation.navigate("LoginScreen");
         }

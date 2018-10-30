@@ -13,6 +13,7 @@ import { LoginScreen } from '../screens/LoginScreen';
 import { ListScreen } from '../screens/ListScreen';
 import { colors } from '../theme';
 import { StartupScreen } from '../screens/StartupScreen';
+import { AdminScreen } from '../screens/AdminScreen';
 
 
 
@@ -31,9 +32,9 @@ export const DetailNavigator = createStackNavigator({
       title: 'Equipment',
       initialRouteName: 'EquipmentScreen',
       headerStyle: {
-        backgroundColor: colors.white,
+        backgroundColor: colors.headerbarbg,
       },
-      headerTintColor: colors.primary
+      headerTintColor: colors.headerbartext
     }
   }
 );
@@ -54,9 +55,9 @@ export const HomeNavigator = createStackNavigator({
       title: 'Home',
       initialRouteName: 'HomeScreen',
       headerStyle: {
-        backgroundColor: colors.white,
+        backgroundColor: colors.headerbarbg,
       },
-      headerTintColor: colors.primary
+      headerTintColor: colors.headerbartext
     }
   }
 );
@@ -71,9 +72,26 @@ export const WarenkorbNavigator = createStackNavigator({
       title: 'Warenkorb',
       initialRouteName: 'WarenkorbScreen',
       headerStyle: {
-        backgroundColor: colors.white,
+        backgroundColor: colors.headerbarbg,
       },
-      headerTintColor: colors.primary
+      headerTintColor: colors.headerbartext
+    }
+  }
+);
+
+export const AdminNavigator = createStackNavigator({
+  AdminScreen: {
+    screen: AdminScreen
+  }
+},
+  {
+    navigationOptions: {
+      title: 'Adminbereich',
+      initialRouteName: 'AdminScreen',
+      headerStyle: {
+        backgroundColor: colors.headerbarbg,
+      },
+      headerTintColor: colors.headerbartext
     }
   }
 );
@@ -121,6 +139,56 @@ export const TabNav = createBottomTabNavigator({
 );
 
 
+//BOTTOM NAVIGATION FOR ADMINS
+export const AdminNav = createBottomTabNavigator({
+  HomeScreen: {
+    screen: HomeNavigator,
+    navigationOptions: {
+      tabBarLabel: 'Home',
+      tabBarIcon: ({ tintColor }) => (
+        <Icon name="md-home" size={24} color={tintColor} />
+      )
+    }
+  },
+  EquipmentScreen: {
+    screen: DetailNavigator,
+    navigationOptions: {
+      tabBarLabel: "Equipment",
+      tabBarIcon: ({ tintColor }) => (
+        <Icon name="md-camera" size={24} color={tintColor} />
+      )
+    }
+  },
+  WarenkorbScreen: {
+    screen: WarenkorbNavigator,
+    navigationOptions: {
+      tabBarLabel: "Warenkorb",
+      tabBarIcon: ({ tintColor }) => (
+        <Icon name="md-cart" size={24} color={tintColor} />
+      )
+    }
+  },
+  AdminScreen: {
+    screen: AdminNavigator,
+    navigationOptions: {
+      tabBarLabel: "Admin",
+      tabBarIcon: ({ tintColor }) => (
+        <Icon name="md-settings" size={24} color={tintColor} />
+      )
+    }
+  }
+}, {
+    tabBarOptions: {
+      activeTintColor: colors.primary,
+      inactiveTintColor: colors.font,
+      style: {
+        backgroundColor: colors.white
+      }
+    }
+  }
+);
+
+
 export const LoginNavigator = createStackNavigator({
   StartupScreen: {
     screen: StartupScreen
@@ -130,6 +198,9 @@ export const LoginNavigator = createStackNavigator({
   },
   TabNav:{
     screen:TabNav
+  }, 
+  AdminNav:{
+    screen:AdminNav
   }
 
 },
