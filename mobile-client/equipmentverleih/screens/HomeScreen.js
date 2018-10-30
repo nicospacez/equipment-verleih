@@ -11,7 +11,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 export class HomeScreen extends Component {
   static navigationOptions = ({navigation}) => ({
     headerRight: (
-      <Icon name="md-person" size={24} style={{ marginRight:15 }} onPress={() => navigation.navigate('ProfileScreen')} />
+      <Icon color={colors.headerbartext} name="md-person" size={24} style={{ marginRight:15 }} onPress={() => navigation.navigate('ProfileScreen')} />
     )
   })
 

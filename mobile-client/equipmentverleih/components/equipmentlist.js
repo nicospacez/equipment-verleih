@@ -16,7 +16,7 @@ export class EquipmentList extends Component {
         return (
             <View style={styles.bigbox}>
                 <Text style={styles.title}>{this.props.data.title}</Text>
-                <ScrollView horizontal={true}>
+                <ScrollView horizontal={true} style={styles.sview}>
 
                     {this.props.data.texts.map((data, index) => {
                         return (
@@ -46,15 +46,17 @@ const styles = StyleSheet.create({
         fontSize: 15,
         textAlign: 'center',
         color: colors.lightblue,
-        marginTop:10
-
+        marginTop: 10
+    },
+    sview: {
+        padding: 20
     },
     title: {
         fontFamily: fonts.bold,
         fontSize: 18,
         marginBottom: 5,
-        color: colors.lightblue,
-        width:'100%'
+        color: colors.primary,
+        width: '100%'
     },
     img: {
         height: 100,
@@ -65,16 +67,16 @@ const styles = StyleSheet.create({
         marginBottom: 0,
         alignItems: 'center',
         color: colors.white,
-        backgroundColor: colors.white,
-        elevation:2
+        backgroundColor: colors.grey1,
+        elevation: 2
 
 
     },
     bigbox: {
-        marginTop:20,
-        flex:1,
+        marginTop: 0,
+        flex: 1,
         marginBottom: 10,
-        elevation:2,
-        padding:0
+        elevation: 2,
+        padding: 0
     }
 });
