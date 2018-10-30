@@ -8,7 +8,7 @@ export default class LoginService{
     }
     
     checkLogin(){
-        PubSub.publish('checkLogin',{isLoggedIn:false, isAdmin:true});
+        PubSub.publish('checkLogin',{isLoggedIn:true, isAdmin:true});
     }
 
 }

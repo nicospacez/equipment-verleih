@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { Platform, StyleSheet, Text, View, Button, Alert, TouchableOpacity, Image, ScrollView } from 'react-native';
+import { Platform, StyleSheet, Text, View, Alert, TouchableOpacity, Image, ScrollView } from 'react-native';
 import { colors } from '../theme';
-import { DetailLabel }  from '../components/detailLabel';
+import { DetailLabel } from '../components/detailLabel';
+import Button from '../components/button';
 
 
 
@@ -19,11 +20,12 @@ export class DetailScreen extends Component {
 
     return (
       <ScrollView>
-      <View style={styles.imgbox}>
-      <Image style={styles.img}source={require('../images/logo_text.png')} />
-    </View>
+        <View style={styles.imgbox}>
+          <Image style={styles.img} source={require('../images/logo_text.png')} />
+        </View>
+        <Button  title="Ausborgen" textcolor={colors.grey1} bgcolor={colors.green}/>
         <View style={styles.bodybox}>
-        
+          
           <DetailLabel title={"asdf"} text={"lol"} />
           <DetailLabel title={"asdf"} text={"lol"} />
           <DetailLabel title={"asdf"} text={"lol"} />
@@ -39,14 +41,14 @@ const styles = StyleSheet.create({
   scrollView: {
     padding: 15
   },
-  img:{
-    height:200,
-    resizeMode:'contain',
-    
+  img: {
+    height: 200,
+    resizeMode: 'contain',
+
   },
-  imgbox:{
-    width:'100%',
-    alignItems:'center'
+  imgbox: {
+    width: '100%',
+    alignItems: 'center'
   },
   headbox: {
     flex: 1,
@@ -54,11 +56,11 @@ const styles = StyleSheet.create({
     backgroundColor: colors.green
   },
   bodybox: {
-    
-    flex:1,
-    margin:10,
+
+    flex: 1,
+    margin: 10,
     backgroundColor: colors.white,
-    elevation:2,
-    padding:10
+    elevation: 2,
+    padding: 10
   }
 });
