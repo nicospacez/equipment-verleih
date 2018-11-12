@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import { View, TextInput } from 'react-native';
 import Input from './input';
 import Button from './button';
+import { colors } from '../theme';
 
 
 export class LoginField extends Component{
@@ -33,7 +34,7 @@ export class LoginField extends Component{
                 value={this.state.password}
                 secureTextEntry
                 />
-                <Button  title="Login" />
+                <Button  title="Login" textcolor={colors.grey1} bgcolor={colors.primary}/>
             </View>
             
         );

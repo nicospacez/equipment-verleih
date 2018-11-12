@@ -9,10 +9,10 @@ import {
 
 import { fonts, colors } from '../theme'
 
-export default ({ title, onPress, isLoading }) => (
+export default ({ title, onPress, isLoading, bgcolor, textcolor }) => (
   <TouchableOpacity onPress={onPress}>
-    <View style={styles.button}>
-      <Text style={[styles.buttonText]}>{title}</Text>
+    <View style={[styles.button,{backgroundColor:bgcolor}]}>
+      <Text style={[styles.buttonText, {color:textcolor}]}>{title}</Text>
       {
         isLoading && (
           <View style={styles.activityIndicator}>
@@ -29,14 +29,12 @@ const styles = StyleSheet.create({
     marginTop: 0,
     flexDirection: 'row',
     marginLeft:0,
-    backgroundColor:colors.primary,
     justifyContent:'center',
     borderRadius:5,
     padding:12,
     marginBottom:20
   },
   buttonText: {
-    color: colors.grey1,
     fontFamily: fonts.bold,
     fontSize: 22
   },
