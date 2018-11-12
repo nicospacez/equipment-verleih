@@ -3,6 +3,7 @@ import { Platform, StyleSheet, Text, View, Alert, TouchableOpacity, Image, Scrol
 import { colors } from '../theme';
 import { DetailLabel } from '../components/detailLabel';
 import Button from '../components/button';
+import LoginService from '../services/AuthService';
 
 
 
@@ -10,9 +11,25 @@ import Button from '../components/button';
 export class DetailScreen extends Component {
 
   static navigationOptions = {
-    title: 'Details'
-
+    title: 'Details',
   };
+
+  state = {
+    admin:false
+  }
+
+  constructor(props){
+    super(props)
+    
+  }
+  componentDidMount(){
+    ls = new LoginService();
+    if(ls.isAdmin()){
+      this.setState({
+        admin:true
+      });
+    }
+  }
 
   render() {
 
@@ -23,7 +40,8 @@ export class DetailScreen extends Component {
         <View style={styles.imgbox}>
           <Image style={styles.img} source={require('../images/logo_text.png')} />
         </View>
-        <Button  title="Ausborgen" textcolor={colors.grey1} bgcolor={colors.green}/>
+        {this.state.admin && (<Button  title="Ausborgen" textcolor={colors.grey1} bgcolor={colors.green}/>)}
+        
         <View style={styles.bodybox}>
           
           <DetailLabel title={"asdf"} text={"lol"} />

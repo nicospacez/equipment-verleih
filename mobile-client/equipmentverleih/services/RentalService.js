@@ -75,3 +75,106 @@ export const getCartList = () => {
     //        .then((res) => res.json());
     return cartlist;
 }
+
+export const getWarenkorbList = () => {
+
+  data = {
+    body: [
+      {
+        bild: "asdf",
+        name: "asdf"
+      },
+      {
+        bild: "asdf",
+        name: "asdf"
+      },
+      {
+        bild: "asdf",
+        name: "asdf"
+      }
+    ]
+  }
+  return data;
+
+}
+
+export const getGeliehenList = () => {
+  data = {
+    head: ["Name", "Kürzel", "Status"],
+    body: [
+      {
+        name: "Lumix GH4",
+        kuerzel: "K01",
+        status: "25.01.2018"
+      },
+      {
+        name: "Lumix GH4",
+        kuerzel: "K01",
+        status: "25.01.2018"
+      },
+      {
+        name: "Lumix GH4",
+        kuerzel: "K01",
+        status: "25.01.2018"
+      },
+      {
+        name: "Lumix GH4",
+        kuerzel: "K01",
+        status: "25.01.2018"
+      },
+      {
+        name: "Lumix GH4",
+        kuerzel: "K01",
+        status: "25.01.2018"
+      },
+      {
+        name: "Lumix GH4",
+        kuerzel: "K01",
+        status: "25.01.2018"
+      }
+    ]
+  }
+  return data;
+
+}
+
+export const getReserviertList = () => {
+
+  data = {
+    head: ["Name", "Kürzel", "Status"],
+    body: [
+      {
+        name: "Lumix GH4",
+        kuerzel: "K01",
+        status: "25.01.2018"
+      },
+      {
+        name: "Lumix GH4",
+        kuerzel: "K01",
+        status: "25.01.2018"
+      },
+      {
+        name: "Lumix GH4",
+        kuerzel: "K01",
+        status: "25.01.2018"
+      },
+      {
+        name: "Lumix GH4",
+        kuerzel: "K01",
+        status: "25.01.2018"
+      },
+      {
+        name: "Lumix GH4",
+        kuerzel: "K01",
+        status: "25.01.2018"
+      },
+      {
+        name: "Lumix GH4",
+        kuerzel: "K01",
+        status: "25.01.2018"
+      }
+    ]
+  }
+  return data;
+
+}
