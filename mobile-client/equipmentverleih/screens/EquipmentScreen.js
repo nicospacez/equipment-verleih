@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, View, Button, Alert, ScrollView } from 'react-native';
 import { EquipmentList } from '../components/equipmentlist';
-import { colors } from '../theme';
+import { colors, gstyles } from '../theme';
 import { DetailNavigator } from '../navigation/router';
 import { DetailScreen } from './DetailScreen';
 
@@ -48,10 +48,10 @@ export class EquipmentScreen extends Component {
 
     return (
       <ScrollView style={styles.container}>
-        <View style={styles.box}>
+        <View style={gstyles.box}>
           <EquipmentList data={this.data} style={styles.equipmentList} onClick={this.launchDetailScreen} />
         </View>
-        <View style={styles.box}>
+        <View style={gstyles.box}>
           <EquipmentList data={this.data} style={styles.equipmentList} onClick={this.launchDetailScreen} />
         </View>
          </ScrollView>
@@ -78,7 +78,6 @@ const styles = StyleSheet.create({
     elevation:2
   },
   container: {
-    padding: 10,
     backgroundColor: colors.lightgrey
   },
 });

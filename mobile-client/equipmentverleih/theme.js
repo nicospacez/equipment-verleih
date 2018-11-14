@@ -20,7 +20,22 @@ const colors = {
     base: 'Lato-Regular',
     bold: 'Lato-Bold'
   }
+
+  const gstyles = {
+    box:{
+      backgroundColor:colors.white,
+      margin:10,
+      padding:10,
+      elevation:2
+    },
+    title:{
+      color:colors.primary,
+      fontSize:17,
+      margin:5
+    }
+  }
   export {
     colors,
-    fonts
+    fonts,
+    gstyles
   }

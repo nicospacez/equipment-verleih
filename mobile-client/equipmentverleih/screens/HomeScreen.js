@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, View, Button, Alert, TouchableOpacity, ActivityIndicator } from 'react-native';
-import { colors, fonts } from '../theme';
+import { colors, fonts, gstyles } from '../theme';
 import { ListView } from '../components/listView';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {getGeliehenList, getReserviertList} from '../services/RentalService';
@@ -40,8 +40,11 @@ export class HomeScreen extends Component {
   }
 
 
-  pushListScreen() {
-    this.props.navigation.push("ListScreen", { data: this.data });
+  pushGeliehenListScreen() {
+    this.props.navigation.push("ListScreen", { data: this.state.geliehenData });
+  }
+  pushReserviertListScreen() {
+    this.props.navigation.push("ListScreen", { data: this.state.reserviertData });
   }
 
   renderGeliehen() {
@@ -50,9 +53,9 @@ export class HomeScreen extends Component {
     }
     return (
       <View>
-        <Text style={styles.title}>Geliehen</Text>
+        <Text style={gstyles.title}>Geliehen</Text>
         <ListView data={this.state.geliehenData} limit={3} style={styles.listview} />
-        <TouchableOpacity onPress={() => this.pushListScreen()}><Text style={styles.mehranzeigen}>Mehr anzeigen</Text></TouchableOpacity>
+        <TouchableOpacity onPress={() => this.pushGeliehenListScreen()}><Text style={styles.mehranzeigen}>Mehr anzeigen</Text></TouchableOpacity>
       </View>
     );
   }
@@ -62,9 +65,9 @@ export class HomeScreen extends Component {
     }
     return (
       <View>
-        <Text style={styles.title}>Reserviert</Text>
+        <Text style={gstyles.title}>Reserviert</Text>
         <ListView data={this.state.reserviertData} limit={3} style={styles.listview} />
-        <TouchableOpacity onPress={() => this.pushListScreen()}><Text style={styles.mehranzeigen}>Mehr anzeigen</Text></TouchableOpacity>
+        <TouchableOpacity onPress={() => this.pushReserviertListScreen()}><Text style={styles.mehranzeigen}>Mehr anzeigen</Text></TouchableOpacity>
       </View>
     );
   }
@@ -74,10 +77,10 @@ export class HomeScreen extends Component {
 
       <View style={styles.container}>
 
-        <View style={styles.listbox}>
+        <View style={gstyles.box}>
           {this.renderGeliehen()}
         </View>
-        <View style={styles.listbox}>
+        <View style={gstyles.box}>
           {this.renderReserviert()}
         </View>
       </View>
@@ -88,7 +91,7 @@ export class HomeScreen extends Component {
 const styles = StyleSheet.create({
 
   container: {
-    padding: 10,
+    
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: colors.grey1,

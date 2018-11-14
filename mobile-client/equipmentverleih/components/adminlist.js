@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, TextInput, Text, StyleSheet, ScrollView } from 'react-native';
+import { View, TextInput, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 import { colors } from '../theme';
 
 
@@ -11,14 +11,19 @@ export class AdminList extends Component {
 
     }
 
+    pushDetailScreen(i){
+        nav = this.props.nav;
+        nav.navigate("DetailScreen", {navdata: this.props.data.body[i]});
+        console.log(i);
+    }
+    
+
 
     render() {
 
 
         return (
             <View>
-
-
                 <View style={styles.headerrow}>
                     {this.props.data.head.map((value, i) => {
                         return (
@@ -30,41 +35,32 @@ export class AdminList extends Component {
                     {this.props.data.body.slice(0, this.props.limit).map((value, i) => {
                         if (i % 2 == 0) {
                             return (
-
-                                <View style={styles.row} key={i}>
-                                    <Text style={styles.text}>{value.name}</Text>
-                                    <Text style={styles.text}>{value.kuerzel}</Text>
-                                    <Text style={styles.text}>{value.status}</Text>
-                                    <View style={styles.accent}></View>
-                                </View>
-
+                                <TouchableOpacity onPress={()=>this.pushDetailScreen(i)} key={i}>
+                                    <View style={styles.row} >
+                                        <Text style={styles.text}>{value.name}</Text>
+                                        <Text style={styles.text}>{value.kuerzel}</Text>
+                                        <Text style={styles.text}>{value.status}</Text>
+                                        <View style={styles.accent}></View>
+                                    </View>
+                                </TouchableOpacity>
                             )
                         } else {
                             return (
-                                <View style={styles.row2} key={i}>
-                                    <Text style={styles.text}>{value.name}</Text>
-                                    <Text style={styles.text}>{value.kuerzel}</Text>
-                                    <Text style={styles.text}>{value.status}</Text>
-                                    <View style={styles.accent}></View>
-                                </View>
+                                <TouchableOpacity onPress={()=>this.pushDetailScreen(i)} key={i}>
+                                    <View style={styles.row2} >
+                                        <Text style={styles.text}>{value.name}</Text>
+                                        <Text style={styles.text}>{value.kuerzel}</Text>
+                                        <Text style={styles.text}>{value.status}</Text>
+                                        <View style={styles.accent}></View>
+                                    </View>
+                                </TouchableOpacity>
                             )
                         }
-
                     })}
                 </ScrollView>
-
-
-
-
-
             </View>
         );
-
-
     }
-
-
-
 }
 
 const styles = StyleSheet.create({
