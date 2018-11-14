@@ -6,22 +6,20 @@ import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import com.equipmentverleih.model.User;
-import com.equipmentverleih.dto.UserDto;
+import com.equipmentverleih.model.Verleih;
 
 /**
  * @author nicoz
  *
  */
 @Named
-public class UserDao {
+public class VerleihDao {
 
 	@PersistenceContext 
 	EntityManager em;
-	
-	//select u from User u left join u.equipment e
-	public List<User> findAll() {
-		return em.createQuery("select u from User u", User.class).getResultList();
+
+	public List<Verleih> findAll() {
+		return em.createQuery("select v from Verleih v", Verleih.class).getResultList();
 		
 	}
 }

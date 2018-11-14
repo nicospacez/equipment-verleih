@@ -11,6 +11,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.equipmentverleih.dto.ProduktDto;
+
 /**
  *
  * @author nicoz
@@ -40,7 +42,7 @@ public class Produkt implements Serializable {
     public Produkt() {
     }
 
-    public Produkt(String kurzbezeichnung, String inventurnummer, String seriennummer, String marke, String bezeichnung, String langbezeichnung, byte[] foto) {
+    public Produkt(String kurzbezeichnung, String inventurnummer, String seriennummer, String marke, String bezeichnung, String langbezeichnung) {
         this.kurzbezeichnung = kurzbezeichnung;
         this.inventurnummer = inventurnummer;
         this.seriennummer = seriennummer;
@@ -155,5 +157,10 @@ public class Produkt implements Serializable {
     public String toString() {
         return "com.eqv.entities.Produkt[ id=" + produktId + " ]";
     }
+
+	public ProduktDto toDto() {
+		// TODO Auto-generated method stub
+		return new ProduktDto(produktId, bezeichnung, inventurnummer, kurzbezeichnung, langbezeichnung, marke, seriennummer, kategorie.toDto());
+	}
 
 }

@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 import javax.persistence.*;
 
+import com.equipmentverleih.dto.UserDto;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
@@ -25,7 +26,7 @@ public class User implements Serializable {
     private String password;
     private String username;
 
-    private int Katalognummer;
+    private int katalognummer;
 
     private boolean isAdmin;
 
@@ -49,7 +50,7 @@ public class User implements Serializable {
         this.nachname = nachname;
         this.username = username;
         this.klasse = klasse;
-        this.Katalognummer = Katalognummer;
+        this.katalognummer = Katalognummer;
         this.isAdmin = isAdmin;
         this.password = password;
     }
@@ -119,11 +120,11 @@ public class User implements Serializable {
     }
 
     public int getKatalognummer() {
-        return Katalognummer;
+        return katalognummer;
     }
 
-    public void setKatalognummer(int Katalognummer) {
-        this.Katalognummer = Katalognummer;
+    public void setKatalognummer(int katalognummer) {
+        this.katalognummer = katalognummer;
     }
 
     public boolean isIsAdmin() {
@@ -166,10 +167,13 @@ public class User implements Serializable {
 	@Override
 	public String toString() {
 		return "User [userId=" + userId + ", vorname=" + vorname + ", nachname=" + nachname + ", klasse=" + klasse
-				+ ", password=" + password + ", username=" + username + ", Katalognummer=" + Katalognummer
+				+ ", password=" + password + ", username=" + username + ", Katalognummer=" + katalognummer
 				+ ", isAdmin=" + isAdmin + "]";
 	}
 
+	public UserDto toDto() {
+		return new UserDto(this.userId, this.username, this.klasse, this.vorname, this.nachname, this.katalognummer, this.isAdmin);
+	}
     
 
 }

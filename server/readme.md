@@ -1,3 +1,10 @@
+REST CALLS
+===
+| method | url | params | return |
+|--------|-----|---------|----------|
+| POST | /app/user/login |it140022, password |User|
+| POST | /app/
+
 JEE Docker Application Stack
 ===
 
@@ -74,4 +81,3 @@ Compile and Deploy applications
 
 see the [example project](./jpa_rest_demo/readme.md) for an example how to compile an deploy a JEE - Application 
 to the jee-docker stack.
- 
