@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, View, Button, Alert, ActivityIndicator } from 'react-native';
 import { getWarenkorbList } from '../services/RentalService';
-import { colors } from '../theme';
+import { colors, gstyles } from '../theme';
 import { WarenkorbList } from '../components/warenkorblist';
 
 
@@ -34,7 +34,7 @@ export class WarenkorbScreen extends Component {
     }
     return (
       <View>
-        <View style={styles.container}>
+        <View style={gstyles.box}>
           <WarenkorbList data={this.state.data} limit={3000} />
           </View>
         </View >

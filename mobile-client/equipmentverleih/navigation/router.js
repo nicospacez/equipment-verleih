@@ -14,6 +14,7 @@ import { ListScreen } from '../screens/ListScreen';
 import { colors } from '../theme';
 import { StartupScreen } from '../screens/StartupScreen';
 import { AdminScreen } from '../screens/AdminScreen';
+import { AusleihScreen } from '../screens/AusleihScreen';
 
 
 
@@ -82,7 +83,14 @@ export const WarenkorbNavigator = createStackNavigator({
 export const AdminNavigator = createStackNavigator({
   AdminScreen: {
     screen: AdminScreen
+  },
+  DetailScreen: {
+    screen: DetailScreen
+  }, 
+  AusleihScreen:{
+    screen:AusleihScreen
   }
+  
 },
   {
     navigationOptions: {

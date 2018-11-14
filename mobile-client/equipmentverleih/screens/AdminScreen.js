@@ -70,7 +70,6 @@ export class AdminScreen extends Component {
   }
 
 
-
   render() {
     if (!this.state.data) {
       return <ActivityIndicator size="large" color="#0000ff" />
@@ -105,7 +104,7 @@ export class AdminScreen extends Component {
         <View style={styles.box2}>
           <ScrollView style={styles.sview} >
 
-            <AdminList data={this.state.data} limit={50000} />
+            <AdminList nav={this.props.navigation} data={this.state.data} limit={50000} />
 
           </ScrollView>
         </View>
