@@ -2,6 +2,10 @@ package com.equipmentverleih.dto;
 
 import com.equipmentverleih.model.User;
 
+/**
+ * @author nicoz
+ *
+ */
 public class UserDto implements Transferable<User>{
 
 	Long userId;

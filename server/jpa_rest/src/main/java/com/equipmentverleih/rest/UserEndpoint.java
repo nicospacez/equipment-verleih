@@ -23,6 +23,11 @@ import com.equipmentverleih.model.User;
 import com.equipmentverleih.repository.UserRepository;
 import com.equipmentverleih.response.UserResponse;
 
+/**
+ * @author nicoz
+ *
+ */
+
 @Path("/user")
 @Produces({ MediaType.APPLICATION_JSON })
 @Consumes({ MediaType.APPLICATION_JSON })
@@ -67,10 +72,10 @@ public class UserEndpoint {
 			response.setError(ErrorNumber.ID_NOT_FOUND);
 		}
 
-		if(response.getUserDto() != null) {
+		if (response.getUserDto() != null) {
 			response.setState(SuccessState.SUCCESS);
 		}
-		
+
 		return response;
 	}
 

@@ -8,6 +8,10 @@ import javax.persistence.PersistenceContext;
 
 import com.equipmentverleih.model.Kategorie;
 
+/**
+ * @author nicoz
+ *
+ */
 @Named
 public class KategorieDao {
 
@@ -17,5 +21,9 @@ public class KategorieDao {
 	public List<Kategorie> findAll() {
 		return em.createQuery("select k from Kategorie k", Kategorie.class).getResultList();
 		
+	}
+	
+	public List<Kategorie> findById(Long id){
+		return em.createQuery("select k from Kategorie k where k.kategorieId = "+id, Kategorie.class).getResultList();
 	}
 }

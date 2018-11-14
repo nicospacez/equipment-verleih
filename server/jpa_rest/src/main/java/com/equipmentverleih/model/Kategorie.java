@@ -9,8 +9,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.equipmentverleih.dto.KategorieDto;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
@@ -44,10 +46,9 @@ public class Kategorie implements Serializable {
     public Kategorie() {
     }
 
-    public Kategorie(String kurzbezeichnung, Kategorie kategorie, List<Kategorie> kategorien) {
+    public Kategorie(String kurzbezeichnung, Kategorie kategorie) {
         this.kurzbezeichnung = kurzbezeichnung;
         this.kategorie = kategorie;
-        this.kategorien = kategorien;
     }
 
     public Long getKategorieId() {
@@ -117,5 +118,10 @@ public class Kategorie implements Serializable {
     public String toString() {
         return "com.eqv.entities.Kategorie[ id=" + kategorieId + " ]";
     }
+
+	public KategorieDto toDto() {
+		// TODO Auto-generated method stub
+		return new KategorieDto(kategorieId, kurzbezeichnung, kategorie);
+	}
 
 }

@@ -6,6 +6,10 @@ import org.apache.log4j.Logger;
 
 import javax.enterprise.inject.Produces;
 
+/**
+ * @author nicoz
+ *
+ */
 public class LogFactory {
 	@Produces
 	Logger createLogger(InjectionPoint injectionPoint) {

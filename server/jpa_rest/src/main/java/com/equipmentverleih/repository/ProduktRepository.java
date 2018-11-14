@@ -4,6 +4,10 @@ import javax.ejb.Stateless;
 
 import com.equipmentverleih.model.Produkt;
 
+/**
+ * @author nicoz
+ *
+ */
 @Stateless
 public class ProduktRepository extends AbstractRepository<Produkt>{
 

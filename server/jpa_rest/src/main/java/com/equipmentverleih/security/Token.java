@@ -2,6 +2,10 @@ package com.equipmentverleih.security;
 
 import java.time.LocalDateTime;
 
+/**
+ * @author nicoz
+ *
+ */
 public class Token {
 	long id;
 

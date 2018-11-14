@@ -1,5 +1,9 @@
 package com.equipmentverleih.enums;
 
+/**
+ * @author nicoz
+ *
+ */
 public enum ErrorNumber {
     NO_ERROR,
     EMAIL_ALREADY_IN_USE,

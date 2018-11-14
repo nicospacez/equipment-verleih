@@ -2,6 +2,10 @@ package com.equipmentverleih.response;
 
 import com.equipmentverleih.dto.UserDto;
 
+/**
+ * @author nicoz
+ *
+ */
 public class UserResponse extends DefaultResponse{
 	UserDto userDto;
 

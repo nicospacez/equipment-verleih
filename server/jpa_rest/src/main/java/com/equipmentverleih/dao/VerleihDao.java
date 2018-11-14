@@ -8,6 +8,10 @@ import javax.persistence.PersistenceContext;
 
 import com.equipmentverleih.model.Verleih;
 
+/**
+ * @author nicoz
+ *
+ */
 @Named
 public class VerleihDao {
 

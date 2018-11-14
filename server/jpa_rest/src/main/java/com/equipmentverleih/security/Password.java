@@ -8,6 +8,10 @@ import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 import org.apache.commons.codec.binary.Base64;
 
+/**
+ * @author nicoz
+ *
+ */
 public class Password {
 
 	private static final int iterations = 2000;

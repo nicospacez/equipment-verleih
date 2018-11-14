@@ -128,11 +128,14 @@ public class Verleih implements Serializable {
 
 	@Override
 	public String toString() {
-		return "com.eqv.entities.Verleih[ id=" + verleihId + " ]";
+		return "Verleih [verleihId=" + verleihId + ", startDate=" + startDate + ", endDate=" + endDate + ", user="
+				+ user + ", produkt=" + produkt + ", hergeborgtVon=" + hergeborgtVon + ", zurueckgenommenVon="
+				+ zurueckgenommenVon + "]";
 	}
-	
+
 	public VerleihDto toDto() {
-		return new VerleihDto(this.verleihId, this.endDate, this.startDate, this.user, this.hergeborgtVon, this.zurueckgenommenVon, this.produkt);
+		return new VerleihDto(this.verleihId, this.endDate, this.startDate, this.user.toDto(), this.hergeborgtVon.toDto(),
+				this.zurueckgenommenVon.toDto(), this.produkt.toDto());
 	}
 
 }

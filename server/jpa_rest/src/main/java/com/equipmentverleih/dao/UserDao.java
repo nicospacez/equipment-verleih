@@ -9,6 +9,10 @@ import javax.persistence.PersistenceContext;
 import com.equipmentverleih.model.User;
 import com.equipmentverleih.dto.UserDto;
 
+/**
+ * @author nicoz
+ *
+ */
 @Named
 public class UserDao {
 

@@ -19,6 +19,11 @@ import com.equipmentverleih.dto.VerleihDto;
 import com.equipmentverleih.model.Verleih;
 import com.equipmentverleih.repository.VerleihRepository;
 
+/**
+ * @author nicoz
+ *
+ */
+
 @Path("/verleih")
 @Produces({MediaType.APPLICATION_JSON})
 @Consumes({MediaType.APPLICATION_JSON})
@@ -41,6 +46,7 @@ public class VerleihEndpoint {
 
 		return verleihDtoList;
 	}
+	
 	
     @POST
     @Consumes(MediaType.APPLICATION_JSON)

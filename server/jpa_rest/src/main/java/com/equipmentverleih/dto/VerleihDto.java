@@ -6,6 +6,10 @@ import com.equipmentverleih.model.Produkt;
 import com.equipmentverleih.model.User;
 import com.equipmentverleih.model.Verleih;
 
+/**
+ * @author nicoz
+ *
+ */
 public class VerleihDto implements Transferable<Verleih> {
 
 	Long verleihId;
@@ -13,15 +17,15 @@ public class VerleihDto implements Transferable<Verleih> {
 	Date endDate;
 	Date startDate;
 	
-	User user;
-	User hergeborgtVon;
-	User zurueckgenommenVon;
+	UserDto user;
+	UserDto hergeborgtVon;
+	UserDto zurueckgenommenVon;
 	
-	Produkt produkt;
+	ProduktDto produkt;
 
 	
-	public VerleihDto(Long verleihId, Date endDate, Date startDate, User user, User hergeborgtVon,
-			User zurueckgenommenVon, Produkt produkt) {
+	public VerleihDto(Long verleihId, Date endDate, Date startDate, UserDto user, UserDto hergeborgtVon,
+			UserDto zurueckgenommenVon, ProduktDto produkt) {
 		super();
 		this.verleihId = verleihId;
 		this.endDate = endDate;
@@ -35,7 +39,7 @@ public class VerleihDto implements Transferable<Verleih> {
 	@Override
 	public Verleih toEntity() {
 		// TODO Auto-generated method stub
-		return new Verleih(startDate, endDate, user, produkt, hergeborgtVon, zurueckgenommenVon);
+		return new Verleih(startDate, endDate, user.toEntity(), produkt.toEntity(), hergeborgtVon.toEntity(), zurueckgenommenVon.toEntity());
 	}
 
 	@Override
@@ -68,37 +72,41 @@ public class VerleihDto implements Transferable<Verleih> {
 		this.startDate = startDate;
 	}
 
-	public User getUser() {
+	public UserDto getUser() {
 		return user;
 	}
 
-	public void setUser(User user) {
+	public void setUser(UserDto user) {
 		this.user = user;
 	}
 
-	public User getHergeborgtVon() {
+	public UserDto getHergeborgtVon() {
 		return hergeborgtVon;
 	}
 
-	public void setHergeborgtVon(User hergeborgtVon) {
+	public void setHergeborgtVon(UserDto hergeborgtVon) {
 		this.hergeborgtVon = hergeborgtVon;
 	}
 
-	public User getZurueckgenommenVon() {
+	public UserDto getZurueckgenommenVon() {
 		return zurueckgenommenVon;
 	}
 
-	public void setZurueckgenommenVon(User zurueckgenommenVon) {
+	public void setZurueckgenommenVon(UserDto zurueckgenommenVon) {
 		this.zurueckgenommenVon = zurueckgenommenVon;
 	}
 
-	public Produkt getProdukt() {
+	public ProduktDto getProdukt() {
 		return produkt;
 	}
 
-	public void setProdukt(Produkt produkt) {
+	public void setProdukt(ProduktDto produkt) {
 		this.produkt = produkt;
 	}
+
+
+
+
 
 
 }
