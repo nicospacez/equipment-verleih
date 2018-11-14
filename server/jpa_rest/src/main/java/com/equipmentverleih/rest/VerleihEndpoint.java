@@ -9,6 +9,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
@@ -16,8 +17,12 @@ import org.apache.log4j.Logger;
 
 import com.equipmentverleih.dao.VerleihDao;
 import com.equipmentverleih.dto.VerleihDto;
+import com.equipmentverleih.enums.ErrorNumber;
+import com.equipmentverleih.enums.SuccessState;
 import com.equipmentverleih.model.Verleih;
 import com.equipmentverleih.repository.VerleihRepository;
+import com.equipmentverleih.response.UserResponse;
+import com.equipmentverleih.response.VerleihResponse;
 
 /**
  * @author nicoz
@@ -47,6 +52,43 @@ public class VerleihEndpoint {
 		return verleihDtoList;
 	}
 	
+	@GET
+	@Path("/id/{id}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public VerleihResponse find(@PathParam("id") Long id) {
+
+		VerleihResponse response = new VerleihResponse();
+		try {
+			response.setVerleihDto(repo.find(id).toDto());
+		} catch (Exception e) {
+			response.setError(ErrorNumber.ID_NOT_FOUND);
+		}
+
+		if (response.getVerleihDto() != null) {
+			response.setState(SuccessState.SUCCESS);
+		}
+
+		return response;
+	}
+	
+	@GET
+	@Path("/findByProduktId/{id}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public VerleihResponse findByProductId(@PathParam("id") int id) {
+
+		VerleihResponse response = new VerleihResponse();
+		try {
+			response.setVerleihDto(dao.findByProduktId(id).toDto());
+		} catch (Exception e) {
+			response.setError(ErrorNumber.ID_NOT_FOUND);
+		}
+
+		if (response.getVerleihDto() != null) {
+			response.setState(SuccessState.SUCCESS);
+		}
+
+		return response;
+	}
 	
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
