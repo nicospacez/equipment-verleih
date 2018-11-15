@@ -25,7 +25,7 @@ REST CALLS
 |---|--------|-----|---------|----------|
 | list all Produkte | GET | /produkt ||ProduktList|
 | list page of Produkte (1,2,3,..) | GET | /produkt/range/{pageCount}||ProduktList|
-| create Produkt | POST | /produkt | | Produkt|
+| create Produkt | POST | /produkt | produkt(Json) | Produkt|
 
 ## Verleih:
 
@@ -34,7 +34,7 @@ REST CALLS
 | list all Verleih | GET | /verleih ||VerleihList|
 | find Verleih by id | GET | /verleih/id/{id} | | Verleih|
 | find Verleih by produktId | GET | /verleih/findByProduktId/{produktId} | | Verleih|
-| create Verleih | POST | /verleih | | Verleih|
+| create Verleih | POST | /verleih | verleih (Json) | Verleih|
 
 
 JEE Docker Application Stack
