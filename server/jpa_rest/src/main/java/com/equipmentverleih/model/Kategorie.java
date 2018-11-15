@@ -26,7 +26,7 @@ public class Kategorie implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long kategorieId;
 
     //@Column(unique=true, nullable=false)
