@@ -1,9 +1,41 @@
 REST CALLS
 ===
-| method | url | params | return |
-|--------|-----|---------|----------|
-| POST | /app/user/login |it140022, password |User|
-| POST | /app/
+
+## User:
+
+
+|description| method | url | params | return |
+|---|--------|-----|---------|----------|
+| find user by userid | GET | /user/id/{id} ||User|
+| list all user | GET | /user ||UserList|
+| login user| POST | /user/login |it140022, password |User|
+| creates user | POST | /user | user (Json) | User|
+
+## Kategorie:
+
+|description| method | url | params | return |
+|---|--------|-----|---------|----------|
+| list all Kategorien | GET | /kategorie ||KategorieList|
+| find kategorie by id | GET | /kategorie/id/{id} | | Kategorie|
+| create kategorie | POST | /kategorie | kategorie (Json) | Kategorie|
+
+## Produkt:
+
+|description| method | url | params | return |
+|---|--------|-----|---------|----------|
+| list all Produkte | GET | /produkt ||ProduktList|
+| list page of Produkte (1,2,3,..) | GET | /produkt/range/{pageCount}||ProduktList|
+| create Produkt | POST | /produkt | | Produkt|
+
+## Verleih:
+
+|description| method | url | params | return |
+|---|--------|-----|---------|----------|
+| list all Verleih | GET | /verleih ||VerleihList|
+| find Verleih by id | GET | /verleih/id/{id} | | Verleih|
+| find Verleih by produktId | GET | /verleih/findByProduktId/{produktId} | | Verleih|
+| create Verleih | POST | /verleih | | Verleih|
+
 
 JEE Docker Application Stack
 ===
