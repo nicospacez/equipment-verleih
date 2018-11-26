@@ -31,7 +31,7 @@ public class Verleih implements Serializable {
 	private Produkt produkt;
 
 	@ManyToOne
-	private User hergeborgtVon;
+	private User hergeborgtVon;	
 
 	@ManyToOne
 	private User zurueckgenommenVon;

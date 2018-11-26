@@ -1,6 +1,8 @@
 package com.equipmentverleih.model;
 
 import java.io.Serializable;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -8,10 +10,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.equipmentverleih.dto.ProduktDto;
+import com.equipmentverleih.enums.ProduktStatus;
 
 /**
  *
@@ -42,13 +46,15 @@ public class Produkt implements Serializable {
     public Produkt() {
     }
 
-    public Produkt(String kurzbezeichnung, String inventurnummer, String seriennummer, String marke, String bezeichnung, String langbezeichnung) {
+    public Produkt(String kurzbezeichnung, String inventurnummer, String seriennummer, String marke, String bezeichnung, String langbezeichnung, Kategorie kategorie, Verleih verleih) {
         this.kurzbezeichnung = kurzbezeichnung;
         this.inventurnummer = inventurnummer;
         this.seriennummer = seriennummer;
         this.marke = marke;
         this.bezeichnung = bezeichnung;
         this.langbezeichnung = langbezeichnung;
+        this.kategorie = kategorie;
+        this.verleih = verleih;
         this.foto = foto;
     }
 
@@ -160,7 +166,12 @@ public class Produkt implements Serializable {
 
 	public ProduktDto toDto() {
 		// TODO Auto-generated method stub
-		return new ProduktDto(produktId, bezeichnung, inventurnummer, kurzbezeichnung, langbezeichnung, marke, seriennummer, kategorie.toDto());
+		ProduktStatus status = ProduktStatus.FREI;
+		if(this.verleih != null) {
+			status = ProduktStatus.VERLIEHEN;
+		}
+		
+		return new ProduktDto(produktId, bezeichnung, inventurnummer, kurzbezeichnung, langbezeichnung, marke, seriennummer, kategorie.toDto(), status);
 	}
 
 }

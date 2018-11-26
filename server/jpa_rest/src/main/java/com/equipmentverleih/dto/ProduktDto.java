@@ -1,5 +1,6 @@
 package com.equipmentverleih.dto;
 
+import com.equipmentverleih.enums.ProduktStatus;
 import com.equipmentverleih.model.Produkt;
 
 /**
@@ -20,10 +21,10 @@ public class ProduktDto implements Transferable<Produkt>{
 	KategorieDto kategorie;
 	VerleihDto verleih;
 	
-	
+	ProduktStatus status;
 	
 	public ProduktDto(Long produktId, String bezeichnung, String inventurnummer, String kurzbezeichnung,
-			String langbezeichnung, String marke, String seriennummer, KategorieDto kategorie) {
+			String langbezeichnung, String marke, String seriennummer, KategorieDto kategorie, ProduktStatus status) {
 		super();
 		this.produktId = produktId;
 		this.bezeichnung = bezeichnung;
@@ -34,12 +35,13 @@ public class ProduktDto implements Transferable<Produkt>{
 		this.seriennummer = seriennummer;
 		this.kategorie = kategorie;
 		this.verleih = verleih;
+		this.status = status;
 	}
 
 	@Override
 	public Produkt toEntity() {
 		// TODO Auto-generated method stub
-		return new Produkt(kurzbezeichnung, inventurnummer, seriennummer, marke, bezeichnung, langbezeichnung);
+		return new Produkt(kurzbezeichnung, inventurnummer, seriennummer, marke, bezeichnung, langbezeichnung, kategorie.toEntity(), verleih.toEntity());
 	}
 
 	@Override
@@ -124,6 +126,15 @@ public class ProduktDto implements Transferable<Produkt>{
 	public void setVerleih(VerleihDto verleih) {
 		this.verleih = verleih;
 	}
+
+	public ProduktStatus getStatus() {
+		return status;
+	}
+
+	public void setStatus(ProduktStatus status) {
+		this.status = status;
+	}
+	
 	
 	
 
