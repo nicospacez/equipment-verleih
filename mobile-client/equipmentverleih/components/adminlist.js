@@ -11,50 +11,48 @@ export class AdminList extends Component {
 
     }
 
-    pushDetailScreen(i){
+    pushDetailScreen(i) {
         nav = this.props.nav;
-        nav.navigate("DetailScreen", {navdata: this.props.data.body[i]});
+        nav.navigate("DetailScreen", { navdata: this.props.data[i] });
         console.log(i);
     }
-    
+
 
 
     render() {
-
+        
 
         return (
             <View>
                 <View style={styles.headerrow}>
-                    {this.props.data.head.map((value, i) => {
-                        return (
-                            <Text style={styles.text} key={i}>{value}</Text>
-                        )
-                    })}
+                    <Text style={styles.text} >Gerätename</Text>
+                    <Text style={styles.text} >Kategorie</Text>
+                    <Text style={styles.text} >Kürzel</Text>
                 </View>
                 <ScrollView horizontal={false}>
-                    {this.props.data.body.slice(0, this.props.limit).map((value, i) => {
+                    {this.props.data.map((value, i) => {
                         if (i % 2 == 0) {
                             return (
-                                <TouchableOpacity onPress={()=>this.pushDetailScreen(i)} key={i}>
+                                <TouchableOpacity onPress={() => this.pushDetailScreen(i)} key={i}>
                                     <View style={styles.row} >
-                                        <Text style={styles.text}>{value.name}</Text>
-                                        <Text style={styles.text}>{value.kuerzel}</Text>
-                                        <Text style={styles.text}>{value.status}</Text>
+                                        <Text style={styles.text}>{value.marke}{value.bezeichnung}</Text>
+                                        <Text style={styles.text}>{value.kategorie.kurzbezeichnung}</Text>
+                                        <Text style={styles.text}>{value.kurzbezeichnung}</Text>
                                         <View style={styles.accent}></View>
                                     </View>
                                 </TouchableOpacity>
-                            )
+                            );
                         } else {
                             return (
-                                <TouchableOpacity onPress={()=>this.pushDetailScreen(i)} key={i}>
+                                <TouchableOpacity onPress={() => this.pushDetailScreen(i)} key={i}>
                                     <View style={styles.row2} >
-                                        <Text style={styles.text}>{value.name}</Text>
-                                        <Text style={styles.text}>{value.kuerzel}</Text>
-                                        <Text style={styles.text}>{value.status}</Text>
+                                        <Text style={styles.text}>{value.marke}{value.bezeichnung}</Text>
+                                        <Text style={styles.text}>{value.kategorie.kurzbezeichnung}</Text>
+                                        <Text style={styles.text}>{value.kurzbezeichnung}</Text>
                                         <View style={styles.accent}></View>
                                     </View>
                                 </TouchableOpacity>
-                            )
+                            );
                         }
                     })}
                 </ScrollView>

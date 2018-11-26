@@ -12,7 +12,8 @@ const colors = {
     yellow: '#f1c40f',
     font:'#b0b2bf',
     headerbartext:"#fff",
-    headerbarbg:"#373e6c"
+    headerbarbg:"#373e6c",
+    grey:"#757575"
   }
   const fonts = {
     hairline: 'Lato-Hairline',

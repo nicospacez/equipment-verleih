@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, View } from 'react-native';
 
-import { createBottomTabNavigator, createStackNavigator } from 'react-navigation';
+import { createBottomTabNavigator, createStackNavigator, DrawerNavigator } from 'react-navigation';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { HomeScreen } from '../screens/HomeScreen';
 import { ProfileScreen } from '../screens/ProfileScreen';
@@ -15,6 +15,9 @@ import { colors } from '../theme';
 import { StartupScreen } from '../screens/StartupScreen';
 import { AdminScreen } from '../screens/AdminScreen';
 import { AusleihScreen } from '../screens/AusleihScreen';
+
+
+
 
 
 
@@ -80,15 +83,34 @@ export const WarenkorbNavigator = createStackNavigator({
   }
 );
 
-export const AdminNavigator = createStackNavigator({
+export const AdminListNavigator = createStackNavigator({
   AdminScreen: {
     screen: AdminScreen
   },
-  DetailScreen: {
+  DetailScreen:{
     screen: DetailScreen
-  }, 
-  AusleihScreen:{
-    screen:AusleihScreen
+  },
+  AusleihScreen: {
+    screen: AusleihScreen
+  }
+},
+  {
+    navigationOptions: {
+      title: 'Adminbereich',
+      initialRouteName: 'AdminScreen',
+      headerRight:<Text onPress={() => this.props.navigation.navigate('DrawerToggle')}>hallo</Text>,
+      headerStyle: {
+        backgroundColor: colors.headerbarbg,
+      },
+      headerTintColor: colors.headerbartext
+    }
+  }
+);
+
+
+export const AdminNavigator = DrawerNavigator({
+  AdminScreen: {
+    screen: AdminListNavigator
   }
   
 },
@@ -103,7 +125,6 @@ export const AdminNavigator = createStackNavigator({
     }
   }
 );
-
 
 
 
@@ -188,7 +209,7 @@ export const AdminNav = createBottomTabNavigator({
 }, {
     tabBarOptions: {
       activeTintColor: colors.primary,
-      inactiveTintColor: colors.font,
+      inactiveTintColor: colors.grey,
       style: {
         backgroundColor: colors.white
       }

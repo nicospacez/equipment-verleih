@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, View, Button, ScrollView, ActivityIndicator, TouchableOpacity } from 'react-native';
 import { AdminList } from '../components/adminlist';
-import { getCartList } from '../services/RentalService';
+import { getCartList, getAdminList } from '../services/RentalService';
 import PubSub from 'pubsub-js';
 import { colors } from '../theme';
 import { ToggleButton } from '../components/togglebutton';
@@ -11,8 +11,42 @@ export class AdminScreen extends Component {
   state = {
     isDateTimePickerVisible: false,
     dateType: "start",
-
+    isLoading: true,
+    data: null,
   };
+
+
+
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      data: null,
+      pickedStartDate: new Date(),
+      pickedEndDate: new Date(),
+      isLoading: true
+    }
+
+  }
+
+  componentDidMount() {
+
+    this.fetchAdminList();
+  }
+
+
+  //DATA FETCHING
+  fetchAdminList() {
+    getAdminList().then((res) => {
+      console.log(res);
+      this.setState({
+        isLoading: false,
+        data: res
+      });
+    })
+  }
+  //==============
+
 
   _showDateTimePickerStart = () => {
     this.setState({
@@ -43,37 +77,27 @@ export class AdminScreen extends Component {
     this._hideDateTimePicker();
   };
 
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      data: null,
-      pickedStartDate: new Date(),
-      pickedEndDate: new Date()
-    }
-
-  }
-
-  componentDidMount() {
-    this.fetchCartList();
-  }
-
-  fetchCartList() {
-    data = getCartList();
-    this.setState({
-      data: data,
-    })
-  }
-
   formatDate(date) {
     return date.getDate() + "." + date.getMonth() + "." + date.getFullYear();
   }
 
+  renderAdminList() {
+
+    if(this.state.isLoading){
+      return   <ActivityIndicator size="large" color={colors.primary} />
+    }else{
+      return (
+        <ScrollView style={styles.sview} >
+          <AdminList nav={this.props.navigation} data={this.state.data} limit={50000} />
+        </ScrollView>
+      );
+    }
+
+   
+  }
+
 
   render() {
-    if (!this.state.data) {
-      return <ActivityIndicator size="large" color="#0000ff" />
-    }
 
     return (
 
@@ -102,15 +126,11 @@ export class AdminScreen extends Component {
           onCancel={this._hideDateTimePicker}
         />
         <View style={styles.box2}>
-          <ScrollView style={styles.sview} >
-
-            <AdminList nav={this.props.navigation} data={this.state.data} limit={50000} />
-
-          </ScrollView>
+          {this.renderAdminList()}
         </View>
 
       </View>
-    )
+    );
 
 
   }
@@ -120,7 +140,7 @@ export class AdminScreen extends Component {
 const styles = StyleSheet.create({
   container: {
     padding: 10,
-    height:'75%'
+    height: '75%'
   },
   box1: {
 
@@ -128,7 +148,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     backgroundColor: colors.white,
     alignItems: 'center',
-    height:'40%',
+    height: '40%',
     elevation: 2
 
   },
@@ -138,13 +158,13 @@ const styles = StyleSheet.create({
     marginTop: 10,
     backgroundColor: colors.white,
     alignItems: 'center',
-    height:'90%',
-    elevation:2
+    height: '90%',
+    elevation: 2
 
   },
   sview: {
     position: "relative",
-    height:'100%'
+    height: '100%'
   },
   filternnach: {
     fontSize: 18
