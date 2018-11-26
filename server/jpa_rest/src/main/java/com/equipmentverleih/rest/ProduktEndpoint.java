@@ -62,8 +62,23 @@ public class ProduktEndpoint {
 
 	@GET
 	@Path("/range/{id}")
-	public List<Produkt> findRange(@PathParam("id") int id) {
-		return dao.findRange(id);
+	public ProduktResponse findRange(@PathParam("id") int id) {
+		log.debug("findRangeProdukt: "+id+"...");
+
+		ProduktResponse response = new ProduktResponse();
+		List<ProduktDto> produktDtoList = new LinkedList<>();
+
+		List<Produkt> produktList = dao.findRange(id);
+		for (Produkt produkt : produktList) {
+			produktDtoList.add(produkt.toDto());
+		}
+		response.setProduktDtoList(produktDtoList);
+
+		if (response.getProduktDto() != null || !response.getProduktDtoList().isEmpty()) {
+			response.setState(SuccessState.SUCCESS);
+		}
+
+		return response;
 	}
 
 	@POST

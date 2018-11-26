@@ -25,7 +25,7 @@ public class ProduktDao {
 
 	public List<Produkt> findRange(int id) {
 		return em.createQuery("select p from Produkt p", Produkt.class) //
-				.setFirstResult(id * 10 - 9) //
+				.setFirstResult((id * 10) - 10) //
 				.setMaxResults(10) //
 				.getResultList();
 	}
