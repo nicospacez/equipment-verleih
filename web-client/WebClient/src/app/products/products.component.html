@@ -1,0 +1,31 @@
+<app-nav></app-nav>
+<table class="table">
+  <tr>
+    <th>
+      Kurzbezeichnung
+    </th>
+    <th>
+      Bezeichnung
+    </th>
+    <th>
+      Kategorie
+    </th>
+    <th>
+      Status
+    </th>
+  </tr>
+  <tr *ngFor="let product of productList">
+    <td>
+      {{ product.kurzbezeichnung}}
+    </td>
+    <td>
+      {{ product.bezeichnung }}
+    </td>
+    <td>
+      {{ product.kategorie.kurzbezeichnung }}
+    </td>
+    <td>
+      {{ product.status }}
+    </td>
+  </tr>
+</table>
