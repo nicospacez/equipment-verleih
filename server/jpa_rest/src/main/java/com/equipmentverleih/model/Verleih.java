@@ -2,9 +2,15 @@ package com.equipmentverleih.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.time.LocalDateTime;
+
+import javax.inject.Inject;
 import javax.persistence.*;
 
+import org.apache.log4j.Logger;
+
 import com.equipmentverleih.dto.VerleihDto;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 /**
  *
@@ -15,23 +21,26 @@ import com.equipmentverleih.dto.VerleihDto;
 public class Verleih implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long verleihId;
 
-	@Temporal(TemporalType.DATE)
-	private Date startDate, endDate;
+	@JsonFormat(pattern = "dd-MM-yyy")
+	private Date startDate;
+
+	@JsonFormat(pattern = "dd-MM-yyy")
+	private Date endDate;
 
 	@ManyToOne
 	@JoinColumn(name = "userId")
 	private User user;
 
-	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "produktId")
+	@ManyToOne
 	private Produkt produkt;
 
 	@ManyToOne
-	private User hergeborgtVon;	
+	private User hergeborgtVon;
 
 	@ManyToOne
 	private User zurueckgenommenVon;
@@ -134,8 +143,8 @@ public class Verleih implements Serializable {
 	}
 
 	public VerleihDto toDto() {
-		return new VerleihDto(this.verleihId, this.endDate, this.startDate, this.user.toDto(), this.hergeborgtVon.toDto(),
-				this.zurueckgenommenVon.toDto(), this.produkt.toDto());
+		return new VerleihDto(this.verleihId, this.endDate, this.startDate, this.user.toDto(),
+				this.hergeborgtVon.toDto(), this.zurueckgenommenVon.toDto(), this.produkt.toDto());
 	}
 
 }

@@ -1,6 +1,7 @@
 package com.equipmentverleih.rest;
 
 import java.lang.reflect.ReflectPermission;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -43,7 +44,6 @@ public class ProduktEndpoint {
 	@GET
 	public ProduktResponse findAll() {
 		log.debug("findAllProdukt...");
-
 		ProduktResponse response = new ProduktResponse();
 		List<ProduktDto> produktDtoList = new LinkedList<>();
 
@@ -63,7 +63,7 @@ public class ProduktEndpoint {
 	@GET
 	@Path("/range/{id}")
 	public ProduktResponse findRange(@PathParam("id") int id) {
-		log.debug("findRangeProdukt: "+id+"...");
+		log.debug("findRangeProdukt: " + id + "...");
 
 		ProduktResponse response = new ProduktResponse();
 		List<ProduktDto> produktDtoList = new LinkedList<>();
