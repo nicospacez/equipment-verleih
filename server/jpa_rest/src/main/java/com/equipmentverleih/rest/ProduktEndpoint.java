@@ -1,6 +1,5 @@
 package com.equipmentverleih.rest;
 
-import java.lang.reflect.ReflectPermission;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -14,17 +13,13 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 
 import org.apache.log4j.Logger;
 
 import com.equipmentverleih.dao.ProduktDao;
 import com.equipmentverleih.dto.ProduktDto;
-import com.equipmentverleih.dto.UserDto;
-import com.equipmentverleih.enums.ErrorNumber;
 import com.equipmentverleih.enums.SuccessState;
 import com.equipmentverleih.model.Produkt;
-import com.equipmentverleih.model.User;
 import com.equipmentverleih.repository.ProduktRepository;
 import com.equipmentverleih.response.ProduktResponse;
 
@@ -49,6 +44,8 @@ public class ProduktEndpoint {
 
 		List<Produkt> produktList = dao.findAll();
 		for (Produkt produkt : produktList) {
+			//log.debug(produkt.getVerleih().get(produkt.getVerleih().size()-1));
+			log.debug(new Date());
 			produktDtoList.add(produkt.toDto());
 		}
 		response.setProduktDtoList(produktDtoList);

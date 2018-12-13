@@ -1,14 +1,13 @@
 package com.equipmentverleih.model;
 
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.Date;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.util.LinkedList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -16,15 +15,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.MapsId;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.equipmentverleih.dto.ProduktDto;
-import com.equipmentverleih.dto.VerleihDto;
 import com.equipmentverleih.enums.ProduktStatus;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  *
@@ -169,7 +164,10 @@ public class Produkt implements Serializable {
 
 	@Override
 	public String toString() {
-		return "com.eqv.entities.Produkt[ id=" + produktId + " ]";
+		return "Produkt [produktId=" + produktId + ", kurzbezeichnung=" + kurzbezeichnung + ", inventurnummer="
+				+ inventurnummer + ", seriennummer=" + seriennummer + ", marke=" + marke + ", bezeichnung="
+				+ bezeichnung + ", langbezeichnung=" + langbezeichnung + ", foto=" + Arrays.toString(foto)
+				+ ", verleih=" + verleih + ", kategorie=" + kategorie + "]";
 	}
 
 	public ProduktDto toDto() {
@@ -178,11 +176,11 @@ public class Produkt implements Serializable {
 		DateFormat sdff = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 
 		if (!this.verleih.isEmpty()) {
-			if (this.verleih.get(this.verleih.size()).getEndDate() == new Date()) {
+			if (isVerliehen(this.verleih.get(this.verleih.size() - 1))) {
 				status = ProduktStatus.VERLIEHEN;
 			}
 		}
-		
+
 		String verleihId = "";
 		for (Verleih v : this.verleih) {
 			verleihId = v.getVerleihId().toString();
@@ -190,6 +188,27 @@ public class Produkt implements Serializable {
 
 		return new ProduktDto(produktId, bezeichnung, inventurnummer, kurzbezeichnung, langbezeichnung, marke,
 				seriennummer, kategorie.toDto(), verleihId, status);
+	}
+
+	public boolean isVerliehen(Verleih lastVerleih) {
+		Date date = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+
+		try {
+			Date currentDate = sdf.parse(sdf.format(new Date()));
+			Date startDate = sdf.parse(sdf.format(lastVerleih.getStartDate()));
+			Date endDate = sdf.parse(sdf.format(lastVerleih.getEndDate()));
+			if (currentDate.compareTo(startDate) == 0 || currentDate.compareTo(endDate) == 0 || //
+					(currentDate.compareTo(startDate) > 0 && currentDate.compareTo(endDate) < 0)) {
+				return true;
+			}
+
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return false;
 	}
 
 }

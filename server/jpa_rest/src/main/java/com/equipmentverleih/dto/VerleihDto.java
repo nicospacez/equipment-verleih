@@ -1,10 +1,7 @@
 package com.equipmentverleih.dto;
 
-import java.time.LocalDateTime;
 import java.util.Date;
 
-import com.equipmentverleih.model.Produkt;
-import com.equipmentverleih.model.User;
 import com.equipmentverleih.model.Verleih;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -16,10 +13,10 @@ public class VerleihDto implements Transferable<Verleih> {
 
 	Long verleihId;
 
-	@JsonFormat(pattern = "dd-MM-yyy")
+	@JsonFormat(pattern = "dd-MM-yyyy")
 	Date endDate;
 	
-	@JsonFormat(pattern = "dd-MM-yyy")
+	@JsonFormat(pattern = "dd-MM-yyyy")
 	Date startDate;
 
 	UserDto user;

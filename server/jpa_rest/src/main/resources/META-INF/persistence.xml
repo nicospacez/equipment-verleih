@@ -11,6 +11,7 @@
 		<properties>
 			<property name="hibernate.show_sql" value="true" />
 			<property name = "hibernate.hbm2ddl.auto" value="create" />
+			<property name="hibernate.schema_update.unique_constraint_strategy" value="RECREATE_QUIETLY"/>
 		</properties>
 	</persistence-unit>
 </persistence>

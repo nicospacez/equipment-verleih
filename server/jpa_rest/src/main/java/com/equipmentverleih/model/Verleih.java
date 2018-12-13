@@ -2,12 +2,8 @@ package com.equipmentverleih.model;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.time.LocalDateTime;
 
-import javax.inject.Inject;
 import javax.persistence.*;
-
-import org.apache.log4j.Logger;
 
 import com.equipmentverleih.dto.VerleihDto;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -26,10 +22,10 @@ public class Verleih implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long verleihId;
 
-	@JsonFormat(pattern = "dd-MM-yyy")
+	@JsonFormat(pattern = "dd-MM-yyyy")
 	private Date startDate;
 
-	@JsonFormat(pattern = "dd-MM-yyy")
+	@JsonFormat(pattern = "dd-MM-yyyy")
 	private Date endDate;
 
 	@ManyToOne
@@ -37,6 +33,7 @@ public class Verleih implements Serializable {
 	private User user;
 
 	@ManyToOne
+	@JoinColumn(name = "produktId")
 	private Produkt produkt;
 
 	@ManyToOne
