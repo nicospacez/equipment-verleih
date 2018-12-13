@@ -8,19 +8,17 @@ import { LoginComponent } from './login/login.component';
 import { Routes, RouterModule } from '@angular/router';
 import { HomepageComponent } from './homepage/homepage.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { EmailComponent } from './email/email.component';
 import { ProductsComponent } from './products/products.component';
-import { CalendarComponent } from './calendar/calendar.component';
 import { NavComponent } from './nav/nav.component';
+import { WarenkorbComponent } from './warenkorb/warenkorb.component';
+import { AdminComponent } from './admin/admin.component';
 
 const appRoutes:Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'home', component: HomepageComponent},
-  {path: 'dashboard', component: DashboardComponent},
-  {path: 'email', component: EmailComponent},
-  {path: 'calendar', component: CalendarComponent},
   {path: 'products', component: ProductsComponent},
+  {path: 'warenkorb', component: WarenkorbComponent},
+  {path: 'admin', component: AdminComponent},
   {path: '', redirectTo: '/login', pathMatch: 'full'}
 ];
 
@@ -30,10 +28,9 @@ const appRoutes:Routes = [
     AppComponent,
     LoginComponent,
     HomepageComponent,
-    DashboardComponent,
-    EmailComponent,
     ProductsComponent,
-    CalendarComponent,
+    AdminComponent,
+    WarenkorbComponent,
     NavComponent
   ],
   imports: [
