@@ -6,8 +6,16 @@ import PubSub from 'pubsub-js';
 import { colors } from '../theme';
 import { ToggleButton } from '../components/togglebutton';
 import DateTimePicker from 'react-native-modal-datetime-picker';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 export class AdminScreen extends Component {
+
+  static navigationOptions = ({navigation}) => ({
+    headerRight:(
+    <Icon color={colors.headerbartext} name="md-add-circle" size={24} style={{ marginRight: 15 }} onPress={() => navigation.push('AddProductScreen')} />
+    )
+  });
+
   state = {
     isDateTimePickerVisible: false,
     dateType: "start",
