@@ -18,6 +18,7 @@ import org.apache.log4j.Logger;
 
 import com.equipmentverleih.dao.ProduktDao;
 import com.equipmentverleih.dto.ProduktDto;
+import com.equipmentverleih.enums.ErrorNumber;
 import com.equipmentverleih.enums.SuccessState;
 import com.equipmentverleih.model.Produkt;
 import com.equipmentverleih.repository.ProduktRepository;
@@ -44,7 +45,7 @@ public class ProduktEndpoint {
 
 		List<Produkt> produktList = dao.findAll();
 		for (Produkt produkt : produktList) {
-			//log.debug(produkt.getVerleih().get(produkt.getVerleih().size()-1));
+			// log.debug(produkt.getVerleih().get(produkt.getVerleih().size()-1));
 			log.debug(new Date());
 			produktDtoList.add(produkt.toDto());
 		}
@@ -72,6 +73,26 @@ public class ProduktEndpoint {
 		response.setProduktDtoList(produktDtoList);
 
 		if (response.getProduktDto() != null || !response.getProduktDtoList().isEmpty()) {
+			response.setState(SuccessState.SUCCESS);
+		}
+
+		return response;
+	}
+
+	@GET
+	@Path("/findById/{id}")
+	public ProduktResponse findById(@PathParam("id") Long id) {
+
+		ProduktResponse response = new ProduktResponse();
+
+		try {
+			ProduktDto produktDto = repo.find(id).toDto();
+			response.setProduktDto(produktDto);
+		} catch (Exception e) {
+			response.setError(ErrorNumber.ID_NOT_FOUND);
+		}
+
+		if (response.getProduktDto() != null) {
 			response.setState(SuccessState.SUCCESS);
 		}
 
