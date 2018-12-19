@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, View } from 'react-native';
 
-import { createBottomTabNavigator, createStackNavigator } from 'react-navigation';
+import { createBottomTabNavigator, createStackNavigator, DrawerNavigator } from 'react-navigation';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { HomeScreen } from '../screens/HomeScreen';
 import { ProfileScreen } from '../screens/ProfileScreen';
@@ -15,6 +15,10 @@ import { colors } from '../theme';
 import { StartupScreen } from '../screens/StartupScreen';
 import { AdminScreen } from '../screens/AdminScreen';
 import { AusleihScreen } from '../screens/AusleihScreen';
+import { AddProductScreen } from '../screens/AddProductScreen';
+import { AdminMenuScreen } from '../screens/AdminMenuScreen';
+
+
 
 
 
@@ -81,28 +85,36 @@ export const WarenkorbNavigator = createStackNavigator({
 );
 
 export const AdminNavigator = createStackNavigator({
+ 
   AdminScreen: {
     screen: AdminScreen
   },
-  DetailScreen: {
+  DetailScreen:{
     screen: DetailScreen
-  }, 
-  AusleihScreen:{
-    screen:AusleihScreen
+  },
+  AusleihScreen: {
+    screen: AusleihScreen
+  },
+  AddProductScreen: {
+    screen: AddProductScreen
+  },
+  AdminMenuScreen: {
+    screen: AdminMenuScreen
   }
-  
 },
   {
     navigationOptions: {
       title: 'Adminbereich',
       initialRouteName: 'AdminScreen',
       headerStyle: {
-        backgroundColor: colors.headerbarbg,
+        backgroundColor: colors.headerbarbg
       },
       headerTintColor: colors.headerbartext
     }
   }
 );
+
+
 
 
 
@@ -154,7 +166,7 @@ export const AdminNav = createBottomTabNavigator({
     navigationOptions: {
       tabBarLabel: 'Home',
       tabBarIcon: ({ tintColor }) => (
-        <Icon name="md-home" size={24} color={tintColor} />
+        <Icon name="md-home" size={20} color={tintColor} />
       )
     }
   },
@@ -163,7 +175,7 @@ export const AdminNav = createBottomTabNavigator({
     navigationOptions: {
       tabBarLabel: "Equipment",
       tabBarIcon: ({ tintColor }) => (
-        <Icon name="md-camera" size={24} color={tintColor} />
+        <Icon name="md-camera" size={20} color={tintColor} />
       )
     }
   },
@@ -172,7 +184,7 @@ export const AdminNav = createBottomTabNavigator({
     navigationOptions: {
       tabBarLabel: "Warenkorb",
       tabBarIcon: ({ tintColor }) => (
-        <Icon name="md-cart" size={24} color={tintColor} />
+        <Icon name="md-cart" size={20} color={tintColor} />
       )
     }
   },
@@ -181,16 +193,18 @@ export const AdminNav = createBottomTabNavigator({
     navigationOptions: {
       tabBarLabel: "Admin",
       tabBarIcon: ({ tintColor }) => (
-        <Icon name="md-settings" size={24} color={tintColor} />
+        <Icon name="md-settings" size={20} color={tintColor} />
       )
     }
   }
 }, {
     tabBarOptions: {
-      activeTintColor: colors.primary,
-      inactiveTintColor: colors.font,
+      activeTintColor: colors.white,
+      inactiveTintColor: colors.primary2,
       style: {
-        backgroundColor: colors.white
+        borderRadius:0,
+        elevation:1,
+        backgroundColor: colors.primary
       }
     }
   }

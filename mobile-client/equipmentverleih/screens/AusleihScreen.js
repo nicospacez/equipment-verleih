@@ -2,11 +2,7 @@ import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, View, Picker, Alert, TouchableOpacity, Image, ScrollView } from 'react-native';
 import { colors, gstyles } from '../theme';
 import Button from '../components/button';
-
-
-
-
-
+import { postVerleih } from '../services/RentalService';
 
 export class AusleihScreen extends Component {
 
@@ -23,6 +19,11 @@ export class AusleihScreen extends Component {
         console.log(this.navdata);
 
     }
+
+    onAusleihenPressed(){
+        postVerleih(this.navdata.produktId);
+    }
+
     componentDidMount() {
 
     }
@@ -35,7 +36,7 @@ export class AusleihScreen extends Component {
             <View>
                 <View style={gstyles.box}>
                     <Text style={gstyles.title}>Equipment</Text>
-                    <Text>asdfa</Text>
+                    <Text>{this.navdata.marke} {this.navdata.bezeichnung}</Text>
                 </View>
                 <View style={gstyles.box}>
                     <Text style={gstyles.title}>Klasse</Text>
@@ -50,7 +51,7 @@ export class AusleihScreen extends Component {
                     </Picker>
                 </View>
                 <View style={gstyles.box}>
-                    <Button onPress={() => { console.log("asdf"); }} title="Ausborgen" textcolor={colors.grey1} bgcolor={colors.green} />
+                    <Button onPress={() => this.onAusleihenPressed()} title="Ausborgen" textcolor={colors.grey1} bgcolor={colors.green} />
                 </View>
             </View>
 

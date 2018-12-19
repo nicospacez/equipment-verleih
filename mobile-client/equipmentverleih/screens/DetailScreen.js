@@ -36,7 +36,7 @@ export class DetailScreen extends Component {
 
   pushAusleihScreen(){
     console.log("pressed");
-    this.props.navigation.navigate("AusleihScreen");
+    this.props.navigation.navigate("AusleihScreen", {navdata:this.navdata});
   }
 
   render() {
@@ -52,10 +52,10 @@ export class DetailScreen extends Component {
         
         <View style={gstyles.box}>
           
-          <DetailLabel title={"asdf"} text={"lol"} />
-          <DetailLabel title={"asdf"} text={"lol"} />
-          <DetailLabel title={"asdf"} text={"lol"} />
-          <DetailLabel title={"asdf"} text={"lol"} />
+          <DetailLabel title={"Hersteller"} text={this.navdata.marke} />
+          <DetailLabel title={"Bezeichnung"} text={this.navdata.bezeichnung} />
+          <DetailLabel title={"Kurzbezeichnung"} text={this.navdata.kurzbezeichnung} />
+          <DetailLabel title={"Kategorie"} text={this.navdata.kategorie.kurzbezeichnung} />
         </View>
       </ScrollView>
     );

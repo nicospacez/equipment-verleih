@@ -20,7 +20,7 @@ export class ToggleButton extends Component {
 
 
         return (
-            <TouchableOpacity onPress={()=>this.toggle()}>
+            <TouchableOpacity onPress={() => this.combindedFunctions()}  >
                 <View style={[styles.button,{backgroundColor:this.state.bgcolor, borderColor:this.props.buttoncolor}]}>
 
                     <Text style={[styles.buttonText,{color:this.state.textcolor}]}>{this.props.title}</Text>
@@ -31,7 +31,14 @@ export class ToggleButton extends Component {
 
 
     }
+
+    combindedFunctions(){
+        this.props.onClick();
+        this.toggle();
+    }
+
     toggle(){
+
         if(this.state.activated){
             this.setState({
                 activated:false,
@@ -54,13 +61,13 @@ export class ToggleButton extends Component {
 
 const styles = StyleSheet.create({
     button:{
-        height:40,
+        height:35,
         borderWidth:2,
-        width:100,
+        width:85,
         alignItems:'center',                        
         justifyContent:'center',
         borderRadius:100,
-        margin:10
+        margin:5
     },
     buttonText:{
         fontSize:13

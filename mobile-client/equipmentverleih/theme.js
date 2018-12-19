@@ -1,18 +1,19 @@
 const colors = {
-    primary:'#373e6c',
-    primary2: '#43425d', 
-    secondary: '#3c3b54',
+    primary:'#4b7bec',
+    primary2: '#d1d8e0', 
+    secondary: '#706fd3',
     lightblue:'#3b86ff',
     black:'#000000',
-    grey1: '#f0f0f7',
+    grey1: '#d1d8e0',
     grey2: '#f5f6fa',
     white: '#fff',
-    green:'#2ecc71',
-    red:'#f37164',
-    yellow: '#f1c40f',
+    green:'#26de81',
+    red:'#fc5c65',
+    yellow: '#fed330',
     font:'#b0b2bf',
     headerbartext:"#fff",
-    headerbarbg:"#373e6c"
+    headerbarbg:"#4b7bec",
+    grey:"#dcdde1"
   }
   const fonts = {
     hairline: 'Lato-Hairline',
@@ -26,7 +27,8 @@ const colors = {
       backgroundColor:colors.white,
       margin:10,
       padding:10,
-      elevation:2
+      elevation:2,
+      flex:1
     },
     title:{
       color:colors.primary,
