@@ -1,22 +1,23 @@
 import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, View, Button, ScrollView, ActivityIndicator, TouchableOpacity } from 'react-native';
 import { AdminList } from '../components/adminlist';
-import { getCartList, getAdminList } from '../services/RentalService';
+import { getCartList, getAdminList, dataStore } from '../services/RentalService';
 import PubSub from 'pubsub-js';
-import { colors } from '../theme';
+import { colors, gstyles } from '../theme';
 import { ToggleButton } from '../components/togglebutton';
 import DateTimePicker from 'react-native-modal-datetime-picker';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 export class AdminScreen extends Component {
 
-  static navigationOptions = ({navigation}) => ({
-    headerRight:(
-    <Icon color={colors.headerbartext} name="md-add-circle" size={24} style={{ marginRight: 15 }} onPress={() => navigation.push('AddProductScreen')} />
+  static navigationOptions = ({ navigation }) => ({
+    headerRight: (
+      <Icon color={colors.headerbartext} name="md-menu" size={24} style={{ marginRight: 15 }} onPress={() => navigation.push('AdminMenuScreen')} />
     )
   });
 
   state = {
+    renderDatePicker: false,
     isDateTimePickerVisible: false,
     dateType: "start",
     isLoading: true,
@@ -48,6 +49,7 @@ export class AdminScreen extends Component {
     getAdminList().then((res) => {
       console.log(res);
       this.setState({
+        
         isLoading: false,
         data: res
       });
@@ -89,11 +91,24 @@ export class AdminScreen extends Component {
     return date.getDate() + "." + date.getMonth() + "." + date.getFullYear();
   }
 
+  toggleRenderDate(){
+    console.log("toggle");
+    if(this.state.renderDatePicker){
+      this.setState({
+        renderDatePicker:false
+      })
+    }else{
+      this.setState({
+        renderDatePicker:true
+      })
+    }
+  }
+
   renderAdminList() {
 
-    if(this.state.isLoading){
-      return   <ActivityIndicator size="large" color={colors.primary} />
-    }else{
+    if (this.state.isLoading) {
+      return <ActivityIndicator size="large" color={colors.primary} />
+    } else {
       return (
         <ScrollView style={styles.sview} >
           <AdminList nav={this.props.navigation} data={this.state.data} limit={50000} />
@@ -101,24 +116,16 @@ export class AdminScreen extends Component {
       );
     }
 
-   
   }
 
+  renderDatePicker() {
 
-  render() {
+    if (this.state.renderDatePicker) {
+      return (
 
-    return (
 
-      <View style={styles.container}>
-        <View style={styles.box1}>
-          <Text style={styles.filternnach}>Filtern nach:</Text>
-          <View style={{ flexDirection: 'row', borderBottomColor: colors.grey1, borderBottomWidth: 2 }}>
-            <ToggleButton buttoncolor={colors.green} title={"Frei"} />
-            <ToggleButton buttoncolor={colors.yellow} title={"Reserviert"} />
-            <ToggleButton buttoncolor={colors.red} title={"Ausgeliehen"} />
-          </View>
-          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-            <ToggleButton buttoncolor={colors.primary} title={"Datum"} />
+        <View style={styles.box2}>
+          <View style={{ flexDirection: 'row' }}>
             <TouchableOpacity onPress={this._showDateTimePickerStart}>
               <Text >{this.formatDate(this.state.pickedStartDate)}</Text>
             </TouchableOpacity>
@@ -127,7 +134,39 @@ export class AdminScreen extends Component {
               <Text >{this.formatDate(this.state.pickedEndDate)}</Text>
             </TouchableOpacity>
           </View>
+
         </View>
+
+      );
+
+    } else {
+
+    }
+
+
+  }
+
+
+  render() {
+
+    return (
+
+      <View>
+        <View style={styles.box2}>
+          <Text style={styles.filternnach}>Filtern nach:</Text>
+          <View style={{ flexDirection: 'row' }}>
+            <ToggleButton buttoncolor={colors.green} title={"Frei"} />
+            <ToggleButton buttoncolor={colors.yellow} title={"Reserviert"} />
+            <ToggleButton buttoncolor={colors.red} title={"Ausgeliehen"} />
+            <ToggleButton buttoncolor={colors.primary} title={"Datum"} onClick={() =>this.toggleRenderDate()} />
+          </View>
+        </View>
+
+        {this.renderDatePicker()}
+
+
+
+
         <DateTimePicker
           isVisible={this.state.isDateTimePickerVisible}
           onConfirm={this._handleDatePicked}
@@ -146,18 +185,18 @@ export class AdminScreen extends Component {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    padding: 10,
-    height: '75%'
-  },
-  box1: {
 
+
+  box1: {
+    flex: 1,
+    justifyContent: 'center',
     padding: 10,
     marginTop: 10,
     backgroundColor: colors.white,
     alignItems: 'center',
-    height: '40%',
-    elevation: 2
+    elevation: 2,
+    height: 50
+
 
   },
   box2: {
@@ -166,13 +205,11 @@ const styles = StyleSheet.create({
     marginTop: 10,
     backgroundColor: colors.white,
     alignItems: 'center',
-    height: '90%',
     elevation: 2
 
   },
   sview: {
     position: "relative",
-    height: '100%'
   },
   filternnach: {
     fontSize: 18

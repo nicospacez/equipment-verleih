@@ -27,7 +27,8 @@ const colors = {
       backgroundColor:colors.white,
       margin:10,
       padding:10,
-      elevation:2
+      elevation:2,
+      flex:1
     },
     title:{
       color:colors.primary,

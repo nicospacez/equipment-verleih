@@ -7,20 +7,27 @@ export class AdminList extends Component {
 
     constructor(props) {
         super(props);
-
-
     }
 
-    pushDetailScreen(i) {
+    //VARIABLES
+    accentColor = {
+        backgroundColor: '#123123'
+    }
+
+    rowColor = {
+        backgroundColor: '#123123'
+    }
+    //=========
+    
+    pushDetailScreen(value) {
         nav = this.props.nav;
-        nav.navigate("DetailScreen", { navdata: this.props.data[i] });
-        console.log(i);
+        nav.navigate("DetailScreen", { navdata: value });
+        console.log(value);
     }
-
 
 
     render() {
-        
+
 
         return (
             <View>
@@ -30,30 +37,50 @@ export class AdminList extends Component {
                     <Text style={styles.text} >Kürzel</Text>
                 </View>
                 <ScrollView horizontal={false}>
-                    {this.props.data.map((value, i) => {
-                        if (i % 2 == 0) {
-                            return (
-                                <TouchableOpacity onPress={() => this.pushDetailScreen(i)} key={i}>
-                                    <View style={styles.row} >
-                                        <Text style={styles.text}>{value.marke}{value.bezeichnung}</Text>
-                                        <Text style={styles.text}>{value.kategorie.kurzbezeichnung}</Text>
-                                        <Text style={styles.text}>{value.kurzbezeichnung}</Text>
-                                        <View style={styles.accent}></View>
-                                    </View>
-                                </TouchableOpacity>
-                            );
-                        } else {
-                            return (
-                                <TouchableOpacity onPress={() => this.pushDetailScreen(i)} key={i}>
-                                    <View style={styles.row2} >
-                                        <Text style={styles.text}>{value.marke}{value.bezeichnung}</Text>
-                                        <Text style={styles.text}>{value.kategorie.kurzbezeichnung}</Text>
-                                        <Text style={styles.text}>{value.kurzbezeichnung}</Text>
-                                        <View style={styles.accent}></View>
-                                    </View>
-                                </TouchableOpacity>
-                            );
+                    {this.props.data.produktDtoList.map((value, i) => {
+
+                        //CHANGE STATUS COLOR
+                        if (value.status == "FREI") {
+                            this.accentColor = {
+                                backgroundColor: colors.green
+                            }
+                        } else if (value.status == "VERLIEHEN") {
+                            this.accentColor = {
+                                backgroundColor: colors.red
+                            }
+                        } else if (value.status == "RESERVIERT") {
+                            this.accentColor = {
+                                backgroundColor: colors.yellow
+                            }
+                        } else if (value.status == "GESPERRT") {
+                            this.accentColor = {
+                                backgroundColor: colors.grey
+                            }
                         }
+                        //===================
+                        //CHANGE BACKGROUND COLOR (2nd ROW)
+                        if (i % 2 == 0) {
+                            this.rowColor = {
+                                backgroundColor: colors.grey2
+                            }
+                        } else {
+                            this.rowColor = {
+                                backgroundColor: null
+                            }
+                        }
+                        //=================================
+                        //RENDER ROW
+                        return (
+                            <TouchableOpacity onPress={() => this.pushDetailScreen(value)} key={i}>
+                                <View style={[styles.row, this.rowColor]} >
+                                    <Text style={styles.text}>{value.marke}{value.bezeichnung}</Text>
+                                    <Text style={styles.text}>{value.kategorie.kurzbezeichnung}</Text>
+                                    <Text style={styles.text}>{value.kurzbezeichnung}</Text>
+                                    <View style={[styles.accent, this.accentColor]}></View>
+                                </View>
+                            </TouchableOpacity>
+                        );
+                        //==========
                     })}
                 </ScrollView>
             </View>
@@ -75,13 +102,6 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center'
     },
-    row2: {
-        width: '100%',
-        height: 45,
-        flexDirection: 'row',
-        alignItems: 'center',
-        backgroundColor: colors.grey2
-    },
     text: {
         width: '33%',
         textAlign: 'center'
@@ -91,7 +111,6 @@ const styles = StyleSheet.create({
         position: 'absolute',
         right: 0,
         width: '1%',
-        height: '80%',
-        backgroundColor: colors.red
+        height: '80%'
     }
 });

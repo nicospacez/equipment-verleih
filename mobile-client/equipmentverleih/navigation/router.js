@@ -16,6 +16,7 @@ import { StartupScreen } from '../screens/StartupScreen';
 import { AdminScreen } from '../screens/AdminScreen';
 import { AusleihScreen } from '../screens/AusleihScreen';
 import { AddProductScreen } from '../screens/AddProductScreen';
+import { AdminMenuScreen } from '../screens/AdminMenuScreen';
 
 
 
@@ -96,6 +97,9 @@ export const AdminNavigator = createStackNavigator({
   },
   AddProductScreen: {
     screen: AddProductScreen
+  },
+  AdminMenuScreen: {
+    screen: AdminMenuScreen
   }
 },
   {

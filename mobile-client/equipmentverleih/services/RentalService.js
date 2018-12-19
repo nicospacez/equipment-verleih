@@ -207,3 +207,7 @@ export const postVerleih = (produktId) => {
     console.error(error);
   });
 }
+
+export const dataStore = {
+  allProducts:null
+}
