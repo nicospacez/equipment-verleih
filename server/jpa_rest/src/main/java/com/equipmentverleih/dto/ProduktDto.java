@@ -32,8 +32,10 @@ public class ProduktDto implements Transferable<Produkt> {
 
 	ProduktStatus status;
 
+	Produkt produkt;
+	
 	public ProduktDto(Long produktId, String bezeichnung, String inventurnummer, String kurzbezeichnung,
-			String langbezeichnung, String marke, String seriennummer, KategorieDto kategorie, String verleih,
+			String langbezeichnung, String marke, String seriennummer, KategorieDto kategorie, String verleih, Produkt produkt,
 			ProduktStatus status) {
 		super();
 		this.produktId = produktId;
@@ -45,6 +47,7 @@ public class ProduktDto implements Transferable<Produkt> {
 		this.seriennummer = seriennummer;
 		this.kategorie = kategorie;
 		this.verleih = verleih;
+		this.produkt = produkt;
 		this.status = status;
 	}
 
@@ -56,7 +59,7 @@ public class ProduktDto implements Transferable<Produkt> {
 		verleihList.add(verleih);
 
 		return new Produkt(kurzbezeichnung, inventurnummer, seriennummer, marke, bezeichnung, langbezeichnung,
-				kategorie.toEntity(), verleihList);
+				kategorie.toEntity(), verleihList, produkt);
 	}
 
 	@Override
@@ -64,6 +67,15 @@ public class ProduktDto implements Transferable<Produkt> {
 		// TODO Auto-generated method stub
 		return this.kurzbezeichnung != null && this.inventurnummer != null && this.seriennummer != null
 				&& this.marke != null && this.bezeichnung != null && this.langbezeichnung != null;
+	}
+
+	
+	public Produkt getProdukt() {
+		return produkt;
+	}
+
+	public void setProdukt(Produkt produkt) {
+		this.produkt = produkt;
 	}
 
 	public Long getProduktId() {

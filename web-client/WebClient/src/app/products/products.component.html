@@ -8,7 +8,7 @@
   <div class="rounded float-left" *ngFor="let product of productList?.produktDtoList" (click) = "goToDetailView(product)" >
       <div class = "floatingBoxes">
         <img class = "floatingImages" src="../../assets/product_gh4.png" alt="...">
-        <label class = "productName">{{ product.bezeichnung }}</label>
+        <label class = "productName">{{ product.marke }} {{ product.bezeichnung }} <br> {{ product.kurzbezeichnung }}</label>
       </div>
     </div>
 </div>
