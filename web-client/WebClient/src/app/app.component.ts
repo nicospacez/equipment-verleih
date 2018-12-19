@@ -8,14 +8,19 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class AppComponent {
   public shownav: boolean = true;
-  constructor(private router: ActivatedRoute){
+  constructor(private router: Router){
+
+    this.router.events.subscribe(data =>{
+      if(window.location.pathname=="/login"){
+        this.shownav=false;
+      }
+      else{
+        this.shownav = true;
+      }
+    })
+
     console.log(window.location.pathname)
-    if(window.location.pathname=="/login"){
-      this.shownav=false;
-    }
-    else{
-      this.shownav = true;
-    }
+
   }
   title = 'app';
 }
