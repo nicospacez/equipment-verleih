@@ -1,7 +1,64 @@
-*{
+/* *{
 
     background-color: #f4fbfe;
 
 }
+*/
+
+.rounded.float-left{
+
+background-color: white;
+color: red;
+
+margin:2%;
+
+width: 20%;
+height: 270px;
+box-shadow: 0px 0px 9px 0px rgba(0,0,0,0.2);
+
+}
+
+.floatingImages{
+    width: 50%; 
+    margin-left:25%;
+    margin-top: 25%;
+    cursor: pointer;
+}
+
+.productName{
+
+    position: absolute;
+    color: #5360c6;
+    margin-top: 13%;
 
 
+}
+::placeholder { 
+    color:  white;
+ }
+
+.over{
+    background-color: #f4fbfe !important;
+    margin-left: 10%;
+}
+
+.searchBar{
+
+    margin-left: 10%;
+    width: 80%;
+    height: 30px;
+    background-color: #5360c6;
+    border: none;
+    border-radius: 15px;
+    padding: 10px;
+    display: inline-block;
+
+}
+
+.title{
+
+font-size: 3em;
+margin-top:5%;
+margin-left:41%;
+
+}
