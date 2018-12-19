@@ -12,6 +12,8 @@ import { ProductsComponent } from './products/products.component';
 import { NavComponent } from './nav/nav.component';
 import { WarenkorbComponent } from './warenkorb/warenkorb.component';
 import { AdminComponent } from './admin/admin.component';
+import { ProductsDetailViewComponent } from './products/products-detail-view/products-detail-view.component';
+import { ProductService } from "./services/product.service";
 
 const appRoutes:Routes = [
   {path: 'login', component: LoginComponent},
@@ -19,6 +21,7 @@ const appRoutes:Routes = [
   {path: 'products', component: ProductsComponent},
   {path: 'warenkorb', component: WarenkorbComponent},
   {path: 'admin', component: AdminComponent},
+  {path: 'productDetailView', component: ProductsDetailViewComponent},
   {path: '', redirectTo: '/login', pathMatch: 'full'}
 ];
 
@@ -31,7 +34,8 @@ const appRoutes:Routes = [
     ProductsComponent,
     AdminComponent,
     WarenkorbComponent,
-    NavComponent
+    NavComponent,
+    ProductsDetailViewComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +44,7 @@ const appRoutes:Routes = [
     RouterModule.forRoot(appRoutes),
     BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [ProductService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
