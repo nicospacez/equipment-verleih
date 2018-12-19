@@ -61,7 +61,7 @@ public class ProduktEndpoint {
 	}
 
 	@GET
-	@Path("/range/{id}")
+	@Path("/page/{id}")
 	public ProduktResponse findRange(@PathParam("id") int id) {
 		log.debug("findRangeProdukt: " + id + "...");
 
