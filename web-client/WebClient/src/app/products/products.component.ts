@@ -25,7 +25,7 @@ export class ProductsComponent implements OnInit {
   goToDetailView(product) {
 
     this.productService.product = product;
-    this.router.navigate(['productDetailView']);
+    this.router.navigate(['productsDetailView/'+product.produktId]);
 
   }
 

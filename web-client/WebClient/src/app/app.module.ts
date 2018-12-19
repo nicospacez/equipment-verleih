@@ -21,7 +21,7 @@ const appRoutes:Routes = [
   {path: 'products', component: ProductsComponent},
   {path: 'warenkorb', component: WarenkorbComponent},
   {path: 'admin', component: AdminComponent},
-  {path: 'productDetailView', component: ProductsDetailViewComponent},
+  {path: 'productsDetailView/:id', component: ProductsDetailViewComponent},
   {path: '', redirectTo: '/login', pathMatch: 'full'}
 ];
 
