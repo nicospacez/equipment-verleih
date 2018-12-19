@@ -1,4 +1,4 @@
-<app-nav></app-nav>
+<div>
 <div class="container">
 <table class="table">
   <tr>
@@ -15,7 +15,7 @@
       Status
     </th>
   </tr>
-  <tr *ngFor="let product of productList">
+  <tr *ngFor="let product of productList?.produktDtoList" (click) = "goToDetailView(product)" >
     <td>
       {{ product.kurzbezeichnung}}
     </td>
@@ -30,4 +30,5 @@
     </td>
   </tr>
 </table>
+</div>
 </div>

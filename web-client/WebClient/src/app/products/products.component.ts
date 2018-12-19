@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { ProductService } from '../services/product.service';
 
 @Component({
   selector: 'app-products',
@@ -9,7 +11,7 @@ import { HttpClient } from '@angular/common/http';
 export class ProductsComponent implements OnInit {
 
   private productList
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private router: Router, private productService: ProductService) {
     
    }
 
@@ -19,5 +21,13 @@ export class ProductsComponent implements OnInit {
       console.log(this.productList)
     })
   }
+
+  goToDetailView(product) {
+
+    this.productService.product = product;
+    this.router.navigate(['productDetailView']);
+
+  }
+
 
 }
