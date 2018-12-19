@@ -24,6 +24,6 @@ public class VerleihDao {
 	}
 	
 	public Verleih findByProduktId(int id){
-		return em.createQuery("select v from Verleih v where v.produktId = "+id, Verleih.class).getSingleResult();
+		return em.createQuery("select v from Verleih v where v.produkt.produktId = "+id, Verleih.class).getSingleResult();
 	}
 }

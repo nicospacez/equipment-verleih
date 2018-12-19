@@ -1,14 +1,24 @@
 package com.equipmentverleih.dto;
 
+import java.util.LinkedList;
+import java.util.List;
+
+import javax.inject.Inject;
+
+import com.equipmentverleih.dao.VerleihDao;
+import com.equipmentverleih.enums.ProduktStatus;
 import com.equipmentverleih.model.Produkt;
+import com.equipmentverleih.model.Verleih;
 
 /**
  * @author nicoz
  *
  */
-public class ProduktDto implements Transferable<Produkt>{
+public class ProduktDto implements Transferable<Produkt> {
 
-	
+	@Inject
+	VerleihDao dao;
+
 	Long produktId;
 	String bezeichnung;
 	String inventurnummer;
@@ -16,14 +26,15 @@ public class ProduktDto implements Transferable<Produkt>{
 	String langbezeichnung;
 	String marke;
 	String seriennummer;
-	
+	String verleih;
+
 	KategorieDto kategorie;
-	VerleihDto verleih;
-	
-	
-	
+
+	ProduktStatus status;
+
 	public ProduktDto(Long produktId, String bezeichnung, String inventurnummer, String kurzbezeichnung,
-			String langbezeichnung, String marke, String seriennummer, KategorieDto kategorie) {
+			String langbezeichnung, String marke, String seriennummer, KategorieDto kategorie, String verleih,
+			ProduktStatus status) {
 		super();
 		this.produktId = produktId;
 		this.bezeichnung = bezeichnung;
@@ -34,23 +45,25 @@ public class ProduktDto implements Transferable<Produkt>{
 		this.seriennummer = seriennummer;
 		this.kategorie = kategorie;
 		this.verleih = verleih;
+		this.status = status;
 	}
 
 	@Override
 	public Produkt toEntity() {
 		// TODO Auto-generated method stub
-		return new Produkt(kurzbezeichnung, inventurnummer, seriennummer, marke, bezeichnung, langbezeichnung);
+		List<Verleih> verleihList = new LinkedList<>();
+		Verleih verleih = dao.findByProduktId(Integer.parseInt(this.verleih));
+		verleihList.add(verleih);
+
+		return new Produkt(kurzbezeichnung, inventurnummer, seriennummer, marke, bezeichnung, langbezeichnung,
+				kategorie.toEntity(), verleihList);
 	}
 
 	@Override
 	public boolean isValid() {
 		// TODO Auto-generated method stub
-		return this.kurzbezeichnung != null &&
-				this.inventurnummer != null &&
-				this.seriennummer != null &&
-				this.marke != null &&
-				this.bezeichnung != null &&
-				this.langbezeichnung != null;
+		return this.kurzbezeichnung != null && this.inventurnummer != null && this.seriennummer != null
+				&& this.marke != null && this.bezeichnung != null && this.langbezeichnung != null;
 	}
 
 	public Long getProduktId() {
@@ -117,14 +130,22 @@ public class ProduktDto implements Transferable<Produkt>{
 		this.kategorie = kategorie;
 	}
 
-	public VerleihDto getVerleih() {
+	public ProduktStatus getStatus() {
+		return status;
+	}
+
+	public void setStatus(ProduktStatus status) {
+		this.status = status;
+	}
+
+	public String getVerleih() {
 		return verleih;
 	}
 
-	public void setVerleih(VerleihDto verleih) {
+	public void setVerleih(String verleih) {
 		this.verleih = verleih;
 	}
-	
-	
+
+
 
 }
