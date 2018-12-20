@@ -195,7 +195,7 @@ export const postVerleih = (produktId) => {
     },
     body: JSON.stringify({
       "startDate": new Date(),
-      "endDate": "null",
+      "endDate": "21-12-2018",
       "hergeborgtVon": { "userId": 1 },
       "zurueckgenommenVon": { "userId": 1 },
       "produkt": { "produktId": produktId },
@@ -208,6 +208,17 @@ export const postVerleih = (produktId) => {
   });
 }
 
+export const getKlassen = () => {
+
+  return getUser().then(data => data.filter((el, i, a) => i === a.indexOf(el)).map(v => v.klasse).sort());
+}
+
+export const getUser = () => {
+  const url = "http://192.168.99.100:8080/jee/app/user/";
+  return fetch(url)
+    .then((res) => res.json());
+}
+
 export const dataStore = {
-  allProducts:null
+  allProducts: null
 }
