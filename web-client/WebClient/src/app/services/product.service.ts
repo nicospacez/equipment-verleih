@@ -28,7 +28,15 @@ export class ProductService {
   }
 
   ausleihen(sendJSON){
-    this.http.post(this.baseUrl +'verleih' ,sendJSON);
+    this.http.post(this.baseUrl+'verleih', sendJSON).subscribe(data =>{
+      console.log(data)
+    })
+  }
+
+  createProdukt(data){
+    this.http.post(this.baseUrl+'produkt', data).subscribe(data =>{
+      console.log(data)
+    })
   }
 
 }
