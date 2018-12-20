@@ -7,13 +7,13 @@ import { HttpClient } from '@angular/common/http';
 export class ProductService {
 
   product: any;
-  baseUrl = "http://192.168.99.100:8080/jee/app/produkt";
+  baseUrl = "http://192.168.99.100:8080/jee/app/";
 
   constructor(private http: HttpClient) { }
 
   getProductById(id): Promise<any> {
     return new Promise((resolve, reject) => {
-      this.http.get(this.baseUrl+ '/findById/' + id).subscribe(data => {
+      this.http.get(this.baseUrl+ 'produkt/findById/' + id).subscribe(data => {
         resolve(data);
       });
     });
@@ -21,10 +21,14 @@ export class ProductService {
 
   getAllProducts(): Promise<any> {
     return new Promise((resolve, reject) => {
-      this.http.get(this.baseUrl).subscribe(data => {
+      this.http.get(this.baseUrl+ 'produkt').subscribe(data => {
         resolve(data);
       });
     });
+  }
+
+  ausleihen(sendJSON){
+    this.http.post(this.baseUrl +'verleih' ,sendJSON);
   }
 
 }

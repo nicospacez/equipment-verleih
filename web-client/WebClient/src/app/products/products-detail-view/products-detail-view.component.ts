@@ -11,6 +11,26 @@ export class ProductsDetailViewComponent implements OnInit {
 
   product: any;
   id: any;
+  ausleihenClicked: boolean;
+  classes: any;
+  selectedClass: string= "xx";
+  selectedStudent: string = "xx";
+  sendJSON = {
+    "startDate": "18-12-2018",
+    "endDate": "20-12-2018",
+    "hergeborgtVon": {
+        "userId": 1
+    },
+    "zurueckgenommenVon": {
+        "userId": 1
+    },
+    "produkt": {
+        "produktId": 2
+    },
+    "user": {
+        "userId": 1
+    }
+};
 
   constructor(private productService: ProductService, private router: ActivatedRoute) { }
 
@@ -22,9 +42,17 @@ export class ProductsDetailViewComponent implements OnInit {
 
   }
 
-  getProduct(){
-    this.productService.getProductById(this.id).then(data =>{
+  getProduct() {
+    this.productService.getProductById(this.id).then(data => {
       console.log(data);
       this.product = data;
     })
-  }}
+  }
+  ausleihen() {
+    this.ausleihenClicked=true;
+  }
+  
+  pushAusleihen(){
+    this.productService.ausleihen(this.sendJSON);
+  }
+}
