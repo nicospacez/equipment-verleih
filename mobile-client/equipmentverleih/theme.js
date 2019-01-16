@@ -31,6 +31,7 @@ const gstyles = {
     backgroundColor: colors.white,
     alignItems: 'center',
     elevation: 2,
+    borderRadius:15
     
   
   },
