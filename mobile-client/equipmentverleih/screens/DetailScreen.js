@@ -48,7 +48,7 @@ export class DetailScreen extends Component {
         <View style={styles.imgbox}>
           <Image style={styles.img} source={require('../images/logo_text.png')} />
         </View>
-        {this.state.admin && (<View style={gstyles.box}><Button onPress={()=>this.pushAusleihScreen()} style={styles.ausborgenbutton} title="Ausborgen" textcolor={colors.grey1} bgcolor={colors.green}/></View>)}
+        {this.state.admin && (<View style={gstyles.box}><Button onPress={()=>this.pushAusleihScreen()} style={styles.ausborgenbutton} title="Ausborgen" textcolor={colors.white} bgcolor={colors.green}/></View>)}
         
         <View style={gstyles.box}>
           
@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
     padding: 15
   },
   ausborgenbutton:{
-    margin:20
+   width:'100%'
   },
   img: {
     height: 200,

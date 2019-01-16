@@ -47,14 +47,16 @@ export class EquipmentScreen extends Component {
   render() {
 
     return (
-      <ScrollView style={styles.container}>
+      <View >
         <View style={gstyles.box}>
-          <EquipmentList data={this.data} style={styles.equipmentList} onClick={this.launchDetailScreen} />
+          <ScrollView>
+            <EquipmentList data={this.data} style={styles.equipmentList} onClick={this.launchDetailScreen} />
+          </ScrollView>
         </View>
         <View style={gstyles.box}>
           <EquipmentList data={this.data} style={styles.equipmentList} onClick={this.launchDetailScreen} />
         </View>
-         </ScrollView>
+      </View>
     );
   }
 
@@ -70,12 +72,12 @@ const styles = StyleSheet.create({
     backgroundColor: colors.grey1
 
   },
-  box:{
+  box: {
     padding: 10,
     marginTop: 10,
     backgroundColor: colors.white,
     alignItems: 'center',
-    elevation:2
+    elevation: 2
   },
   container: {
     backgroundColor: colors.lightgrey
