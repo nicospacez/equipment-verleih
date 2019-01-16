@@ -2,9 +2,11 @@ package com.equipmentverleih.model;
 
 import java.io.Serializable;
 import java.util.Date;
+
 import javax.persistence.*;
 
 import com.equipmentverleih.dto.VerleihDto;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 /**
  *
@@ -15,18 +17,22 @@ import com.equipmentverleih.dto.VerleihDto;
 public class Verleih implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long verleihId;
 
-	@Temporal(TemporalType.DATE)
-	private Date startDate, endDate;
+	@JsonFormat(pattern = "dd-MM-yyyy")
+	private Date startDate;
+
+	@JsonFormat(pattern = "dd-MM-yyyy")
+	private Date endDate;
 
 	@ManyToOne
 	@JoinColumn(name = "userId")
 	private User user;
 
-	@OneToOne(fetch = FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name = "produktId")
 	private Produkt produkt;
 
@@ -134,8 +140,8 @@ public class Verleih implements Serializable {
 	}
 
 	public VerleihDto toDto() {
-		return new VerleihDto(this.verleihId, this.endDate, this.startDate, this.user.toDto(), this.hergeborgtVon.toDto(),
-				this.zurueckgenommenVon.toDto(), this.produkt.toDto());
+		return new VerleihDto(this.verleihId, this.endDate, this.startDate, this.user.toDto(),
+				this.hergeborgtVon.toDto(), this.zurueckgenommenVon.toDto(), this.produkt.toDto());
 	}
 
 }

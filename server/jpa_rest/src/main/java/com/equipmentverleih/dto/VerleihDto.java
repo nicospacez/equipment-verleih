@@ -2,9 +2,8 @@ package com.equipmentverleih.dto;
 
 import java.util.Date;
 
-import com.equipmentverleih.model.Produkt;
-import com.equipmentverleih.model.User;
 import com.equipmentverleih.model.Verleih;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 /**
  * @author nicoz
@@ -14,16 +13,18 @@ public class VerleihDto implements Transferable<Verleih> {
 
 	Long verleihId;
 
+	@JsonFormat(pattern = "dd-MM-yyyy")
 	Date endDate;
-	Date startDate;
 	
+	@JsonFormat(pattern = "dd-MM-yyyy")
+	Date startDate;
+
 	UserDto user;
 	UserDto hergeborgtVon;
 	UserDto zurueckgenommenVon;
-	
+
 	ProduktDto produkt;
 
-	
 	public VerleihDto(Long verleihId, Date endDate, Date startDate, UserDto user, UserDto hergeborgtVon,
 			UserDto zurueckgenommenVon, ProduktDto produkt) {
 		super();
@@ -39,7 +40,8 @@ public class VerleihDto implements Transferable<Verleih> {
 	@Override
 	public Verleih toEntity() {
 		// TODO Auto-generated method stub
-		return new Verleih(startDate, endDate, user.toEntity(), produkt.toEntity(), hergeborgtVon.toEntity(), zurueckgenommenVon.toEntity());
+		return new Verleih(startDate, endDate, user.toEntity(), produkt.toEntity(), hergeborgtVon.toEntity(),
+				zurueckgenommenVon.toEntity());
 	}
 
 	@Override
@@ -103,10 +105,5 @@ public class VerleihDto implements Transferable<Verleih> {
 	public void setProdukt(ProduktDto produkt) {
 		this.produkt = produkt;
 	}
-
-
-
-
-
 
 }

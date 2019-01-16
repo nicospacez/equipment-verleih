@@ -7,14 +7,14 @@
 
 .sidenav {
     height: 100%;
-    width: 160px;
+    width: 10%;
     position: fixed;
     z-index: 1;
     top: 0;
     left: 0;
     background-color: #5360c6;
     overflow-x: hidden;
-    padding-top: 20px;
+    padding-top: 15%;
 }
 
 .sidenav a {
@@ -39,8 +39,3 @@
     .sidenav {padding-top: 15px;}
     .sidenav a {font-size: 18px;}
 }
-
-.profil{
-
-}
-
