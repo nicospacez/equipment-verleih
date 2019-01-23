@@ -1,0 +1,38 @@
+.sidenav a {
+    padding: 5pt;
+    text-decoration: none;
+    font-size: 15pt;
+    color: #ffffff;
+    display: block;
+}
+
+.sidenav a:hover {
+    color: black;
+    background-color: #DBDBDB;
+}
+
+.sidenav{
+    text-align: center;
+    display:table-cell;
+    vertical-align:middle;
+}
+html, body { height: 100%; width: 100%; margin: 0; }
+
+.leftBox{
+    float:left; 
+    background-color: red;
+    height: 100%;
+    padding: 5px;
+    padding-top: 10%;
+}
+
+.rightBox{
+    width: 80%;
+    float:left;
+    margin: 5%;
+}
+
+.all{
+    width: 100%;
+    height: 1000px;
+}

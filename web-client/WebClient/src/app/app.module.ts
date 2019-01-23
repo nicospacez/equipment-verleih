@@ -14,15 +14,23 @@ import { WarenkorbComponent } from './warenkorb/warenkorb.component';
 import { AdminComponent } from './admin/admin.component';
 import { ProductsDetailViewComponent } from './products/products-detail-view/products-detail-view.component';
 import { ProductService } from "./services/product.service";
+import { CreateProduktComponent } from './admin/create-produkt/create-produkt.component';
 
-const appRoutes:Routes = [
-  {path: 'login', component: LoginComponent},
-  {path: 'home', component: HomepageComponent},
-  {path: 'products', component: ProductsComponent},
-  {path: 'warenkorb', component: WarenkorbComponent},
-  {path: 'admin', component: AdminComponent},
-  {path: 'productsDetailView/:id', component: ProductsDetailViewComponent},
-  {path: '', redirectTo: '/login', pathMatch: 'full'}
+const appRoutes: Routes = [
+  { path: 'login', component: LoginComponent },
+  { path: 'home', component: HomepageComponent },
+  { path: 'products', component: ProductsComponent },
+  { path: 'warenkorb', component: WarenkorbComponent },
+  {
+    path: 'admin', component: AdminComponent, children: [
+      {
+        path: 'create',
+        component: CreateProduktComponent
+      }
+    ]
+  },
+  { path: 'productsDetailView/:id', component: ProductsDetailViewComponent },
+  { path: '', redirectTo: '/login', pathMatch: 'full' }
 ];
 
 
@@ -35,7 +43,8 @@ const appRoutes:Routes = [
     AdminComponent,
     WarenkorbComponent,
     NavComponent,
-    ProductsDetailViewComponent
+    ProductsDetailViewComponent,
+    CreateProduktComponent
   ],
   imports: [
     BrowserModule,

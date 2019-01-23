@@ -1,9 +1,6 @@
 <div>
     <div class="container">
 
-
-
-
         <br><br><br>
         <span class="label label-info">Bezeichnung</span> {{product?.produktDto.bezeichnung}}
         <br><br>
@@ -18,43 +15,43 @@
         <div *ngIf="ausleihenClicked">
             <br>
             <div class="form-group">
-                    <select [(ngModel)]="selectedClass" class="form-control dropdown">
-                            <option value="xx">
-                                -- Klasse auswählen --
-                            </option>
-                            <option>
-                                5BHITM
-                            </option>
-                            <option>
-                                5AHITM
-                            </option>
-                            <option>
-                                4AHITM
-                            </option>
-                        </select>
+                <select [(ngModel)]="selectedClass" class="form-control dropdown">
+                    <option value="xx">
+                        -- Klasse auswählen --
+                    </option>
+                    <option>
+                        5BHITM
+                    </option>
+                    <option>
+                        5AHITM
+                    </option>
+                    <option>
+                        4AHITM
+                    </option>
+                </select>
             </div>
             <div class="form-group">
-                    <select [(ngModel)]="selectedStudent" class="form-control dropdown">
-                            <option value="xx">
-                                -- Schüler auswählen --
-                            </option>
-                            <option>
-                                Pascal Bachinger
-                            </option>
-                            <option>
-                                Janine Feyrer
-                            </option>
-                            <option>
-                                Raphael Spitzbart
-                            </option>
-                            <option>
-                                Nico Zandomeneghi
-                            </option>
-                        </select>
+                <select [(ngModel)]="selectedStudent" class="form-control dropdown">
+                    <option value="xx">
+                        -- Schüler auswählen --
+                    </option>
+                    <option>
+                        Pascal Bachinger
+                    </option>
+                    <option>
+                        Janine Feyrer
+                    </option>
+                    <option>
+                        Raphael Spitzbart
+                    </option>
+                    <option>
+                        Nico Zandomeneghi
+                    </option>
+                </select>
             </div>
-           <br>
-           <input class="datepicker" type="date"> <br>
-           <button type="button" class="btn btn-success" (click)="pushAusleihen()">jetzt Ausleihen</button>
+            <br>
+            <input class="datepicker" type="date"> <br>
+            <button type="button" class="btn btn-success" (click)="pushAusleihen()">jetzt Ausleihen</button>
         </div>
     </div>
 </div>
