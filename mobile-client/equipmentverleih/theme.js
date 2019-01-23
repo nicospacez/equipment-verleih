@@ -24,16 +24,23 @@ const fonts = {
 
 const gstyles = {
   box: {
-    margin: 10,
-    padding: 10,
-    width:'100%',
-    position:'relative',
+    marginVertical:10,
+    padding:5,
+    width: '98%',
+    position: 'relative',
     backgroundColor: colors.white,
     alignItems: 'center',
     elevation: 2,
-    borderRadius:15
-    
-  
+    borderRadius: 15
+
+
+  },
+  container: {
+
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: '100%',
+    width: '100%'
   },
   title: {
     color: colors.primary,

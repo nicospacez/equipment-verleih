@@ -31,10 +31,13 @@ export class AddProductScreen extends Component {
 
 
         return (
-            <View style={gstyles.box}>
-                
-                <AddProductForm></AddProductForm>
-                
+            <View style={gstyles.container}>
+                <View style={gstyles.box}>
+                    <ScrollView style={styles.scrollview}>
+                        <AddProductForm style={styles.form}></AddProductForm>
+                    </ScrollView>
+
+                </View>
             </View>
 
         );
@@ -48,6 +51,12 @@ const styles = StyleSheet.create({
         flex: 1,
         height: '100%',
         width: '100%'
+    },
+    scrollview:{
+        width:'100%'
+    },
+    form:{
+        margin:30
     }
 
 });

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, View, Button, Alert, TouchableOpacity, ScrollView } from 'react-native';
-import { colors, fonts } from '../theme';
+import { colors, fonts, gstyles } from '../theme';
 import { ListView } from '../components/listView';
 
 
@@ -24,25 +24,27 @@ export class ListScreen extends Component {
 
   render() {
     return (
-      <ScrollView style={styles.container}>
-        <View style={styles.innerbox}>
-        <ListView data={this.data} limit={400000} />
+      <View style={gstyles.container}>
+        <View style={gstyles.box}>
+          <ScrollView>
+            <ListView data={this.data} limit={400000} />
+          </ScrollView>
         </View>
-      </ScrollView>
+      </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
 
-  container:{
+  container: {
     backgroundColor: colors.grey1,
-    padding:10
+    padding: 10
   },
-  innerbox:{
-    backgroundColor:colors.white,
-    elevation:1,
-    padding:10
+  innerbox: {
+    backgroundColor: colors.white,
+    elevation: 1,
+    padding: 10
   }
 
 });
