@@ -1,15 +1,27 @@
-<div class="over">
-<div class="container">
+  <div class="all">
+  <div class="leftBox">
 
-<label class= "title">Kameras</label>
-
-    <input class="searchBar" type="text" placeholder="nach Kamera suchen ...">
-
-  <div class="rounded float-left" *ngFor="let product of productList?.produktDtoList" (click) = "goToDetailView(product)" >
-      <div class = "floatingBoxes">
-        <img class = "floatingImages" src="../../assets/product_gh4.png" alt="...">
-        <label class = "productName">{{ product.marke }} {{ product.bezeichnung }} <br> {{ product.kurzbezeichnung }}</label>
-      </div>
+    <div class="sidenav">
+      <a href="/products">Kameras</a>
+      <a href="/audio">Audiogeräte</a>
+      <a href="/attachments">Zubehör</a>
     </div>
+
+  </div>
 </div>
-</div>
+
+  <div class="container">
+        
+      <label class= "title">Kameras</label>
+      
+          <input class="searchBar" type="text" placeholder="nach Kamera suchen ...">
+      
+      
+      
+          
+        <div class="rounded float-left" *ngFor="let product of productList?.produktDtoList" (click) = "goToDetailView(product)" >      
+              <img class = "floatingImages" src="../../assets/product_gh4.png" alt="...">
+              <label class = "productName">{{ product.marke }} {{ product.bezeichnung }}</label><br>
+              <label class = "productShort">{{ product.kurzbezeichnung }}</label>
+          </div>
+      </div>

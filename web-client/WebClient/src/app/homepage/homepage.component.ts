@@ -17,7 +17,8 @@ export class HomepageComponent implements OnInit {
 
     this.productService.getAllProducts().then(data => {
 
-      this.products = data;
+        this.products = data.produktDtoList.filter(produkt => produkt.status == "VERLIEHEN");
+    
 
     })
 
