@@ -1,41 +1,21 @@
-.topnav{
-     background-color: #ffffff;
-}
-.item{
-   width: 12.5%;
+.menuIcon{
+    width: 24pt !important;
+    height: 24pt !important;
 }
 
-.sidenav {
-    height: 100%;
-    width: 10%;
-    position: fixed;
-    z-index: 1;
-    top: 0;
-    left: 0;
-    background-color: #5360c6;
-    overflow-x: hidden;
-    padding-top: 15%;
+.topBar{
+    background-color: white;
+    /* activate if top bar > left bar
+    height: 10%;
+    width: 100%;
+    padding: 5px;
+    position: absolute;
+    z-index: 100;
+    */
+    padding: 5px;
+    border-bottom: 2px solid #DBDBDB;
 }
 
-.sidenav a {
-    padding: 6px 8px 6px 16px;
-    text-decoration: none;
-    font-size: 25px;
-    color: #ffffff;
-    display: block;
-}
-
-.sidenav a:hover {
-    color: #f1f1f1;
-}
-
-.main {
-    margin-left: 160px; /* Same as the width of the sidenav */
-    font-size: 28px; /* Increased text to enable scrolling */
-    padding: 0px 10px;
-}
-
-@media screen and (max-height: 450px) {
-    .sidenav {padding-top: 15px;}
-    .sidenav a {font-size: 18px;}
+.myItem{
+    font-size: 15pt;
 }
