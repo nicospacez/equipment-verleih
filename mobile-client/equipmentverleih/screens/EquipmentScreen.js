@@ -47,14 +47,16 @@ export class EquipmentScreen extends Component {
   render() {
 
     return (
-      <View >
+      <View style={gstyles.container}>
         <View style={gstyles.box}>
           <ScrollView>
             <EquipmentList data={this.data} style={styles.equipmentList} onClick={this.launchDetailScreen} />
           </ScrollView>
         </View>
         <View style={gstyles.box}>
-          <EquipmentList data={this.data} style={styles.equipmentList} onClick={this.launchDetailScreen} />
+          <ScrollView>
+            <EquipmentList data={this.data} style={styles.equipmentList} onClick={this.launchDetailScreen} />
+          </ScrollView>
         </View>
       </View>
     );

@@ -33,20 +33,20 @@ export class WarenkorbScreen extends Component {
       return <ActivityIndicator size="large" color={colors.primary} />
     }
     return (
-      <View>
+      <View style={gstyles.container}>
         <View style={gstyles.box}>
           <WarenkorbList data={this.state.data} limit={3000} />
-          </View>
-        </View >
-      );
+        </View>
+      </View >
+    );
   }
 }
 
 const styles = StyleSheet.create({
-  container:{
-    margin:10,
-    padding:10,
-    backgroundColor:colors.white,
-    elevation:2
+  container: {
+    margin: 10,
+    padding: 10,
+    backgroundColor: colors.white,
+    elevation: 2
   }
 });

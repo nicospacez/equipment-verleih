@@ -35,12 +35,14 @@ export class AdminMenuScreen extends Component {
 
 
         return (
+            <View style={gstyles.container}>
             <View style={gstyles.box}>
                 <View  style={styles.btn1}><Button bgcolor={colors.primary} textcolor={colors.white} onPress={()=>this.launchAddProductScreen()} title="Produkt hinzufügen"/></View>
                 <View  style={styles.btn1}><Button style={styles.btn} bgcolor={colors.primary} textcolor={colors.white} title="Kategorie hinzufügen"/></View>
                 <View  style={styles.btn1}><Button style={styles.btn} bgcolor={colors.primary} textcolor={colors.white} title="Produkt löschen"/></View>
                 <View  style={styles.btn1}><Button style={styles.btn} bgcolor={colors.primary} textcolor={colors.white} title="Kategorie löschen"/></View>
                 
+            </View>
             </View>
 
         );
@@ -56,7 +58,8 @@ const styles = StyleSheet.create({
         width: '100%'
     },
     btn1:{
-        marginVertical:10
+        marginVertical:10,
+        width:'100%'
     }
 
 });

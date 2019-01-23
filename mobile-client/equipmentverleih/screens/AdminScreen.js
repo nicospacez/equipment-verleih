@@ -49,7 +49,7 @@ export class AdminScreen extends Component {
     getAdminList().then((res) => {
       console.log(res);
       this.setState({
-        
+
         isLoading: false,
         data: res
       });
@@ -91,15 +91,15 @@ export class AdminScreen extends Component {
     return date.getDate() + "." + date.getMonth() + "." + date.getFullYear();
   }
 
-  toggleRenderDate(){
+  toggleRenderDate() {
     console.log("toggle");
-    if(this.state.renderDatePicker){
+    if (this.state.renderDatePicker) {
       this.setState({
-        renderDatePicker:false
+        renderDatePicker: false
       })
-    }else{
+    } else {
       this.setState({
-        renderDatePicker:true
+        renderDatePicker: true
       })
     }
   }
@@ -124,7 +124,7 @@ export class AdminScreen extends Component {
       return (
 
 
-        <View style={styles.box2}>
+        <View style={gstyles.box}>
           <View style={{ flexDirection: 'row' }}>
             <TouchableOpacity onPress={this._showDateTimePickerStart}>
               <Text >{this.formatDate(this.state.pickedStartDate)}</Text>
@@ -151,14 +151,18 @@ export class AdminScreen extends Component {
 
     return (
 
-      <View>
-        <View style={styles.box2}>
+      <View style={gstyles.container}>
+        <View style={gstyles.box}>
           <Text style={styles.filternnach}>Filtern nach:</Text>
           <View style={{ flexDirection: 'row' }}>
-            <ToggleButton buttoncolor={colors.green} title={"Frei"} />
-            <ToggleButton buttoncolor={colors.yellow} title={"Reserviert"} />
-            <ToggleButton buttoncolor={colors.red} title={"Ausgeliehen"} />
-            <ToggleButton buttoncolor={colors.primary} title={"Datum"} onClick={() =>this.toggleRenderDate()} />
+            <View>
+              <ToggleButton buttoncolor={colors.green} title={"Frei"} />
+              <ToggleButton buttoncolor={colors.yellow} title={"Reserviert"} />
+            </View>
+            <View>
+              <ToggleButton buttoncolor={colors.red} title={"Ausgeliehen"} />
+              <ToggleButton buttoncolor={colors.primary} title={"Datum"} onClick={() => this.toggleRenderDate()} />
+            </View>
           </View>
         </View>
 
@@ -172,7 +176,7 @@ export class AdminScreen extends Component {
           onConfirm={this._handleDatePicked}
           onCancel={this._hideDateTimePicker}
         />
-        <View style={styles.box2}>
+        <View style={gstyles.box}>
           {this.renderAdminList()}
         </View>
 

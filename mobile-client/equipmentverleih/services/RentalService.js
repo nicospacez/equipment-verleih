@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PubSub from 'pubsub-js';
 
-export const PATH = "http://192.168.99.100:8080/jee/app/";
+export const baseUrl = "http://192.168.99.100:8080/jee/app/";
 
 export const getCartList = () => {
   cartlist = {
@@ -180,14 +180,14 @@ export const getReserviertList = () => {
 }
 
 export const getAdminList = () => {
-  const url = "http://192.168.99.100:8080/jee/app/produkt/";
+  const url = baseUrl + "produkt/";
   return fetch(url)
     .then((res) => res.json());
 }
 
 export const postVerleih = (produktId) => {
   console.log("service " + produktId);
-  fetch('http://192.168.99.100:8080/jee/app/verleih/', {
+  fetch(baseUrl + 'verleih/', {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
@@ -208,17 +208,39 @@ export const postVerleih = (produktId) => {
   });
 }
 
+export const postProdukt = (data) => {
+
+  fetch(baseUrl + 'produkt/', {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+  }).then((res) => {
+    console.log(res);
+  }).catch((error) => {
+    console.error(error);
+  });
+}
+
 export const getKlassen = () => {
 
   return getUser().then(data => data.filter((el, i, a) => i === a.indexOf(el)).map(v => v.klasse).sort());
 }
 
 export const getUser = () => {
-  const url = "http://192.168.99.100:8080/jee/app/user/";
+  const url = baseUrl + "user/";
   return fetch(url)
     .then((res) => res.json());
 }
 
 export const dataStore = {
   allProducts: null
+}
+
+export const getKategorien = () => {
+  const url = baseUrl + "kategorie";
+  return fetch(url)
+    .then((res) => res.json());
 }

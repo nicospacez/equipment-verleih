@@ -75,7 +75,7 @@ export class HomeScreen extends Component {
   render() {
     return (
 
-      <View style={styles.container}>
+      <View style={gstyles.container}>
 
         <View style={gstyles.box}>
           {this.renderGeliehen()}
