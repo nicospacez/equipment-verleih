@@ -1,6 +1,9 @@
-div{
+.container{
 
-    background-color: #f4fbfe;
+    background-color: white;
+    padding: 40px;
+    width: 50%;
+    box-shadow: 0px 0px 9px 0px rgba(0,0,0,0.2);
 
 }
 .dropdown{
@@ -9,18 +12,63 @@ div{
 
 .productInfo{
 
-font-size: 2em;
+font-size: 1.5em;
+color: #608aed;
+
 
 }
 
 .divider{
-    width: 50%;
+    width: 100%;
     height: 3px;
     background-color: #608aed;
 }
 
+.over{
+    width: 100%;
+}
+
+
 .info{
 
-    
+    float: right;
+    right: 0;
+    margin-top: 10px;
+    font-size: 1.5em;
 
 }
+
+.centeredImage{
+    display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+
+button {
+    background-color: rgb(39, 221, 45);
+    border: none;
+    color: white;
+    padding: 16px 32px;
+    text-align: center;
+    font-size: 16px;
+    margin: 4px 2px;
+    opacity: 0.6;
+    transition: 0.3s;
+    text-decoration: none;
+    cursor: pointer;
+    float: right;
+  }
+
+input{
+
+width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+
+  }
+

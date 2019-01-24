@@ -1,22 +1,25 @@
-<div>
     <div class="container">
 
+
+        <img class = "centeredImage" src="../../assets/product_gh4.png" alt="...">
         <br>
-        <div class="productInfo">Kurzbezeichnung <div class= "info">{{product?.produktDto.kurzbezeichnung}}</div></div>
+        <div class= "over"><div class="productInfo" style="display:inline-block">Kurzbezeichnung</div> <div class= "info" style="display:inline-block">{{product?.produktDto.kurzbezeichnung}}</div></div>
 
         <br><div class = "divider"></div>
 
-        <span class="productInfo">Bezeichnung</span> {{product?.produktDto.bezeichnung}}
+        <div class= "over"><div class="productInfo" style="display:inline-block">Bezeichnung</div> <div class= "info" style="display:inline-block">{{product?.produktDto.bezeichnung}}</div></div>
 
         <br><div class = "divider"></div>
 
-        <span class="productInfo">Langbezeichung</span> {{product?.produktDto.langbezeichnung}}
+        <div class= "over"><div class="productInfo" style="display:inline-block">Langbezeichung</div> <div class= "info" style="display:inline-block">{{product?.produktDto.langbezeichnung}}</div></div>
 
         <br><div class = "divider"></div><br>
 
 
-        <button type="button" class="btn btn-success" (click)="ausleihen()">Ausleihen</button>
+        <button type="button" class="btn btn-success" (click)="ausleihen()">Verleihen</button>
 
+
+        
         <div *ngIf="ausleihenClicked">
             <br>
             <div class="form-group">
@@ -37,6 +40,7 @@
             </div>
             <div class="form-group">
                 <select [(ngModel)]="selectedStudent" class="form-control dropdown">
+                   
                     <option value="xx">
                         -- Schüler auswählen --
                     </option>
@@ -55,8 +59,11 @@
                 </select>
             </div>
             <br>
+            <label>Wählen Sie ein Datum aus</label>
             <input class="datepicker" type="date"> <br>
-            <button type="button" class="btn btn-success" (click)="pushAusleihen()">jetzt Ausleihen</button>
+            <button type="button" class="btn btn-success" (click)="pushAusleihen()">jetzt Verleihen</button>
+
+            
+                
         </div>
     </div>
-</div>
