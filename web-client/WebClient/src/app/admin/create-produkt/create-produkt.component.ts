@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../../services/product.service';
 import { KategorieService } from 'src/app/services/kategorie.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-produkt',
@@ -13,7 +14,7 @@ export class CreateProduktComponent implements OnInit {
   selectedKategorie;
   selectedUeberkategorie;
 
-  constructor(private productService: ProductService, private kategorieService: KategorieService) { }
+  constructor(private productService: ProductService, private kategorieService: KategorieService, private router: Router) { }
 
   ngOnInit() {
     this.kategorieService.getAllProdukte().then(data => {
@@ -45,6 +46,8 @@ export class CreateProduktComponent implements OnInit {
     };
     console.log(bsp)
     this.productService.createProdukt(bsp);
+    alert("Produkt hinzugefügt");
+    location.reload();
   }
   createKategorie(bezeichnung) {
     let arr = {};
@@ -62,6 +65,8 @@ export class CreateProduktComponent implements OnInit {
     }
     console.log(arr)
     this.kategorieService.createKategorie(arr);
+    alert("Kategorie   hinzugefügt");
+    location.reload();
   }
 }
 
