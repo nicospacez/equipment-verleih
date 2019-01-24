@@ -186,6 +186,22 @@ export const getAdminList = () => {
 }
 
 export const postVerleih = (produktId) => {
+
+  sday = new Date().getDate();
+  smMonth = new Date().getMonth() + 1;
+  syear = new Date().getFullYear();
+  smonth = ("0" + smMonth).slice(-2);
+  sDate = sday + "-" + smonth + "-" + syear;
+
+  ed = new Date();
+  ed.setDate(ed.getDate() + 7);
+
+  eday = ed.getDate();
+  emMonth = ed.getMonth() + 1;
+  eyear = ed.getFullYear();
+  emonth = ("0" + emMonth).slice(-2);
+  eDate = eday + "-" + emonth + "-" + eyear;
+
   console.log("service " + produktId);
   fetch(baseUrl + 'verleih/', {
     method: 'POST',
@@ -194,8 +210,8 @@ export const postVerleih = (produktId) => {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      "startDate": new Date(),
-      "endDate": "21-12-2018",
+      "startDate": sDate,
+      "endDate": eDate,
       "hergeborgtVon": { "userId": 1 },
       "zurueckgenommenVon": { "userId": 1 },
       "produkt": { "produktId": produktId },

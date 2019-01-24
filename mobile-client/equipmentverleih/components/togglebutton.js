@@ -33,7 +33,12 @@ export class ToggleButton extends Component {
     }
 
     combindedFunctions(){
-        this.props.onClick();
+        if(this.state.activated){
+            this.props.onDeactivate();
+        }else{
+            this.props.onClick();
+        }
+        
         this.toggle();
     }
 

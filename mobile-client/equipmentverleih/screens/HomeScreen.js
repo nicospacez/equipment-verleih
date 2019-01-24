@@ -23,6 +23,7 @@ export class HomeScreen extends Component {
       reserviertData: null
     }
 
+
   }
 
   componentDidMount(){

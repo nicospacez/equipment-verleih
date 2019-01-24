@@ -7,7 +7,7 @@ import { postVerleih, getKlassen, getUser } from '../services/RentalService';
 export class AusleihScreen extends Component {
 
     static navigationOptions = {
-        title: 'Ausleihen',
+        title: 'Verleihen',
     };
 
     state = {
@@ -82,7 +82,7 @@ export class AusleihScreen extends Component {
                         })}
                     </Picker>
 
-                    <Button style={styles.submitbutton} onPress={() => this.onAusleihenPressed()} title="Ausborgen" textcolor={colors.white} bgcolor={colors.green} />
+                    <Button style={styles.submitbutton} onPress={() => this.onAusleihenPressed()} title="Verleihen" textcolor={colors.white} bgcolor={colors.green} />
                 </View>
             </View>
 
