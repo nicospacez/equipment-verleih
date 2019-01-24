@@ -1,48 +1,13 @@
-<div class="container">
+<div class="all">
+  <div class="half left">
+      <div class="sidenav">
+          <a href="/admin/list"><img src="../../assets/side_icons/admin_list.png" width="70%"> Übersicht</a>
+          <a href="/admin/create"><img src="../../assets/side_icons/admin_create.png" width="65%"> Erstellen</a>
+          <!-- <a href="/admin">Protokoll</a> -->
+        </div>
+  </div>
+  <div class="half right">
+      <router-outlet></router-outlet>
+  </div>
 
-  <form>
-    <div class="form-group">
-      <label for="exampleFormControlInput1">Bezeichnung</label>
-      <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="bsp. GH4" #bez>
-    </div>
-
-    <div class="form-group">
-      <label for="exampleFormControlInput1">Inventurnummer</label>
-      <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="bsp. htl-a1231" #inv>
-    </div>
-
-    <div class="form-group">
-      <label for="exampleFormControlInput1">Kurzbezeichnung</label>
-      <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="bsp. VK01"  #kbz>
-    </div>
-
-    <div class="form-group">
-      <label for="exampleFormControlInput1">Langbezeichnung</label>
-      <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="bsp. Videokamera01" #lbz>
-    </div>
-
-    <div class="form-group">
-      <label for="exampleFormControlInput1">Marke</label>
-      <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="bsp. Lumix" #marke>
-    </div>
-
-    <div class="form-group">
-      <label for="exampleFormControlInput1">Seriennummer</label>
-      <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="bsp. sada1-12asd-123a-asd12" #ser>
-    </div>
-
-
-    <!-- -->
-    <div class="form-group">
-      <label for="exampleFormControlSelect1">Example select</label>
-      <select class="form-control" id="exampleFormControlSelect1">
-        <option>Kamera</option>
-        <option>Zubehör</option>
-      </select>
-    </div>
-
-    <button type="button" class="btn btn-success" (click)="createProdukt(bez.value, inv.value, kbz.value, lbz.value, marke.value, ser.value)">Success</button>
-
-  </form>
-
-</div>>
+</div>

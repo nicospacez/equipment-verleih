@@ -1,0 +1,82 @@
+<form>
+  <h1>Produkt erstellen</h1>
+
+  <div class="contentform">
+
+    <div class="leftcontact">
+      <div class="form-group">
+        <p>Bezeichnung<span>*</span></p>
+        <input type="text" placeholder="bsp. GH4" #bez />
+        <!-- <div class="validation"></div> -->
+      </div>
+
+      <div class="form-group">
+        <p>Langbezeichnung <span>*</span></p>
+        <input type="text" placeholder="bsp. Videokamera01" #lbz />
+        <!-- <div class="validation"></div> -->
+      </div>
+
+      <div class="form-group">
+        <p>Kurzbezeichnung <span>*</span></p>
+        <input type="text" placeholder="bsp. VK01" #kbz />
+        <!-- <div class="validation"></div> -->
+      </div>
+
+    </div>
+
+    <div class="rightcontact">
+
+      <div class="form-group">
+        <p> Inventurnummer<span>*</span></p>
+        <input type="text" placeholder="bsp. htl-a1231" #inv />
+        <!-- <div class="validation"></div> -->
+      </div>
+
+      <div class="form-group">
+        <p>Marke <span>*</span></p>
+        <input type="text" placeholder="bsp. Lumix" #marke />
+        <!-- <div class="validation"></div> -->
+      </div>
+      <div class="form-group">
+        <p>Seriennummer <span>*</span></p>
+        <input type="text" placeholder="bsp. sada1-12asd-123a-asd12" #ser />
+        <!-- <div class="validation"></div> -->
+      </div>
+
+
+    </div>
+    <div class="form-group">
+      <p>Kategorie wählen <span>*</span></p>
+      <select class="form-control"  (change)="changeShape($event.target)">
+        <option disabled>--- Kategorie wählen ---</option>
+        <option value="{{kategorie.kategorieId}}" *ngFor="let kategorie of kategorien">{{kategorie.kurzbezeichnung}}</option>
+      </select>
+    </div>
+  </div>
+  <button type="submit" class="bouton-contact" (click)="createProdukt(bez.value, inv.value, kbz.value, lbz.value, marke.value, ser.value)">Erstellen</button>
+
+</form>
+
+<form class="secondForm">
+  <h1>Kategorie erstellen</h1>
+
+  <div class="contentform">
+
+    <div class="form-group">
+      <p>Bezeichnung<span>*</span></p>
+      <input type="text" placeholder="bsp. Kamera" #katName />
+      <!-- <div class="validation"></div> -->
+    </div>
+
+    <div class="form-group">
+      <p>Überkategorie wählen </p>
+      <select class="form-control" (change)="changeUeberKategorie($event.target)">
+        <option disabled>--- Kategorie wählen ---</option>
+        <option value="{{kategorie.kategorieId}}"  *ngFor="let kategorie of kategorien">{{kategorie.kurzbezeichnung}}</option>
+      </select>
+    </div>
+
+  </div>
+  <button type="submit" class="bouton-contact" (click)="createKategorie(katName.value)">Erstellen</button>
+
+</form>

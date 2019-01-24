@@ -1,60 +1,69 @@
-<div>
     <div class="container">
 
 
+        <img class = "centeredImage" src="../../assets/product_gh4.png" alt="...">
+        <br>
+        <div class= "over"><div class="productInfo" style="display:inline-block">Kurzbezeichnung</div> <div class= "info" style="display:inline-block">{{product?.produktDto.kurzbezeichnung}}</div></div>
+
+        <br><div class = "divider"></div>
+
+        <div class= "over"><div class="productInfo" style="display:inline-block">Bezeichnung</div> <div class= "info" style="display:inline-block">{{product?.produktDto.bezeichnung}}</div></div>
+
+        <br><div class = "divider"></div>
+
+        <div class= "over"><div class="productInfo" style="display:inline-block">Langbezeichung</div> <div class= "info" style="display:inline-block">{{product?.produktDto.langbezeichnung}}</div></div>
+
+        <br><div class = "divider"></div><br>
 
 
-        <br><br><br>
-        <span class="label label-info">Bezeichnung</span> {{product?.produktDto.bezeichnung}}
-        <br><br>
-        <span class="label label-info">Kurzbezeichnung</span> {{product?.produktDto.kurzbezeichnung}}
-        <br><br>
-        <span class="label label-info">Langbezeichung</span> {{product?.produktDto.langbezeichnung}}
-        <br><br><br>
+        <button type="button" class="btn btn-success" (click)="ausleihen()">Verleihen</button>
 
 
-        <button type="button" class="btn btn-success" (click)="ausleihen()">Ausleihen</button>
-
+        
         <div *ngIf="ausleihenClicked">
             <br>
             <div class="form-group">
-                    <select [(ngModel)]="selectedClass" class="form-control dropdown">
-                            <option value="xx">
-                                -- Klasse auswählen --
-                            </option>
-                            <option>
-                                5BHITM
-                            </option>
-                            <option>
-                                5AHITM
-                            </option>
-                            <option>
-                                4AHITM
-                            </option>
-                        </select>
+                <select [(ngModel)]="selectedClass" class="form-control dropdown">
+                    <option value="xx">
+                        -- Klasse auswählen --
+                    </option>
+                    <option>
+                        5BHITM
+                    </option>
+                    <option>
+                        5AHITM
+                    </option>
+                    <option>
+                        4AHITM
+                    </option>
+                </select>
             </div>
             <div class="form-group">
-                    <select [(ngModel)]="selectedStudent" class="form-control dropdown">
-                            <option value="xx">
-                                -- Schüler auswählen --
-                            </option>
-                            <option>
-                                Pascal Bachinger
-                            </option>
-                            <option>
-                                Janine Feyrer
-                            </option>
-                            <option>
-                                Raphael Spitzbart
-                            </option>
-                            <option>
-                                Nico Zandomeneghi
-                            </option>
-                        </select>
+                <select [(ngModel)]="selectedStudent" class="form-control dropdown">
+                   
+                    <option value="xx">
+                        -- Schüler auswählen --
+                    </option>
+                    <option>
+                        Pascal Bachinger
+                    </option>
+                    <option>
+                        Janine Feyrer
+                    </option>
+                    <option>
+                        Raphael Spitzbart
+                    </option>
+                    <option>
+                        Nico Zandomeneghi
+                    </option>
+                </select>
             </div>
-           <br>
-           <input class="datepicker" type="date"> <br>
-           <button type="button" class="btn btn-success" (click)="pushAusleihen()">jetzt Ausleihen</button>
+            <br>
+            <label>Wählen Sie ein Datum aus</label>
+            <input class="datepicker" type="date"> <br>
+            <button type="button" class="btn btn-success" (click)="pushAusleihen()">jetzt Verleihen</button>
+
+            
+                
         </div>
     </div>
-</div>

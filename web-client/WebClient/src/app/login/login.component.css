@@ -4,18 +4,17 @@
   position: fixed; /* or absolute */
   top: 0%;
   left: 0%;
-  background-color: #5360c6;
-  width: 50%;
+  background-color: #4B7BEC;
+  width: 20%;
   height: 100%;
-  background-image: url("../../assets/bg_logo.png");
   background-repeat: no-repeat;
   background-position: center; 
 }
 #right{
     position: fixed; /* or absolute */
     top: 0%;
-    left: 50%;
-    width: 50%;
+    left: 20%;
+    width: 80%;
     height: 100%;
     text-align: center;
     padding: 5%;
@@ -34,7 +33,7 @@
 }
 
 .btn.btn-primary{
-    background-color: #5360c6;
+    background-color: #4B7BEC;
     width: 50%;
     color: white;
 }
