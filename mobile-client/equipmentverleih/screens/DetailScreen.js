@@ -53,8 +53,11 @@ export class DetailScreen extends Component {
         <View style={gstyles.box}>
           
           <DetailLabel title={"Hersteller"} text={this.navdata.marke} />
+          <View style={styles.line}></View>
           <DetailLabel title={"Bezeichnung"} text={this.navdata.bezeichnung} />
+          <View style={styles.line}></View>
           <DetailLabel title={"Kurzbezeichnung"} text={this.navdata.kurzbezeichnung} />
+          <View style={styles.line}></View>
           <DetailLabel title={"Kategorie"} text={this.navdata.kategorie.kurzbezeichnung} />
         </View>
       </ScrollView>
@@ -84,5 +87,10 @@ const styles = StyleSheet.create({
     height: 250,
     backgroundColor: colors.green
   },
+  line:{
+    height:1,
+    width:'90%',
+    backgroundColor:colors.primary
+  }
   
 });
