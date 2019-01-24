@@ -16,14 +16,16 @@
           <tr>
             <th scope="col">Name</th>
             <th scope="col">Kurzbezeichnung</th>
-            <th scope="col">Status</th>
+            <th scope="col">Marke</th>
+            <th scope="col">Inventurnummer</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let product of products">
             <td>{{product.bezeichnung}}</td>
             <td>{{product.kurzbezeichnung}}</td>
-            <td>{{product.status}}</td>
+            <td>{{product.marke}}</td>
+            <td>{{product.inventurnummer}}</td>
           </tr>
         </tbody>
       </table>
