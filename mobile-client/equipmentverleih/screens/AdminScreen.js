@@ -22,6 +22,8 @@ export class AdminScreen extends Component {
     dateType: "start",
     isLoading: true,
     data: null,
+    adminListData: null
+
   };
 
 
@@ -29,16 +31,22 @@ export class AdminScreen extends Component {
 
   constructor(props) {
     super(props);
+   
+
     this.state = {
       data: null,
       pickedStartDate: new Date(),
       pickedEndDate: new Date(),
-      isLoading: true
+      isLoading: true,
+      activatedStatusFilter: []
+
     }
 
   }
 
   componentDidMount() {
+
+    
 
     this.fetchAdminList();
   }
@@ -51,7 +59,8 @@ export class AdminScreen extends Component {
       this.setState({
 
         isLoading: false,
-        data: res
+        data: res,
+        adminListData: res.produktDtoList
       });
     })
   }
@@ -104,6 +113,51 @@ export class AdminScreen extends Component {
     }
   }
 
+  filterListByStatus(status) {
+    console.log("Add Filter:", status);
+    f = this.state.activatedStatusFilter;
+    f.push(status);
+    this.setState({
+      activatedStatusFilter: f
+    });
+    console.log("filter:", this.state.activatedStatusFilter);
+
+    this.filterList();
+
+  }
+
+  removeFilterByStatus(status) {
+    console.log("Remove Filter:", status);
+    f = this.state.activatedStatusFilter;
+    index = f.indexOf(status);
+    f.splice(index, 1);
+    this.setState({
+      activatedStatusFilter: f
+    });
+    console.log("filter:", this.state.activatedStatusFilter);
+    this.filterList();
+  }
+
+  filterList() {
+    arr = [];
+    console.log(this.state.data);
+
+    if (this.state.activatedStatusFilter.length == 0) {
+      arr = this.state.data.produktDtoList;
+    } else {
+      this.state.data.produktDtoList.map((v, i) => {
+        console.log("filtermap");
+        if (this.state.activatedStatusFilter.indexOf(v.status) > -1) {
+          arr.push(v);
+        }
+      });
+    }
+    this.setState({
+      adminListData: arr
+    });
+
+  }
+
   renderAdminList() {
 
     if (this.state.isLoading) {
@@ -111,7 +165,7 @@ export class AdminScreen extends Component {
     } else {
       return (
         <ScrollView style={styles.sview} >
-          <AdminList nav={this.props.navigation} data={this.state.data} limit={50000} />
+          <AdminList nav={this.props.navigation} data={this.state.adminListData} limit={50000} />
         </ScrollView>
       );
     }
@@ -151,17 +205,17 @@ export class AdminScreen extends Component {
 
     return (
 
-      <View style={gstyles.container}>
+      <View style={[gstyles.container, {}]}>
         <View style={gstyles.box}>
           <Text style={styles.filternnach}>Filtern nach:</Text>
           <View style={{ flexDirection: 'row' }}>
             <View>
-              <ToggleButton buttoncolor={colors.green} title={"Frei"} />
-              <ToggleButton buttoncolor={colors.yellow} title={"Reserviert"} />
+              <ToggleButton buttoncolor={colors.green} title={"Frei"} onClick={() => this.filterListByStatus("FREI")} onDeactivate={() => this.removeFilterByStatus("FREI")} />
+              <ToggleButton buttoncolor={colors.yellow} title={"Reserviert"} onClick={() => this.filterListByStatus("RESERVIERT")} onDeactivate={() => this.removeFilterByStatus("RESERVIERT")} />
             </View>
             <View>
-              <ToggleButton buttoncolor={colors.red} title={"Ausgeliehen"} />
-              <ToggleButton buttoncolor={colors.primary} title={"Datum"} onClick={() => this.toggleRenderDate()} />
+              <ToggleButton buttoncolor={colors.red} title={"Verliehen"} onClick={() => this.filterListByStatus("VERLIEHEN")} onDeactivate={() => this.removeFilterByStatus("VERLIEHEN")} />
+              <ToggleButton buttoncolor={colors.primary} title={"Datum"} />
             </View>
           </View>
         </View>
@@ -176,7 +230,7 @@ export class AdminScreen extends Component {
           onConfirm={this._handleDatePicked}
           onCancel={this._hideDateTimePicker}
         />
-        <View style={gstyles.box}>
+        <View style={[gstyles.box, { maxHeight: '50%' }]}>
           {this.renderAdminList()}
         </View>
 
@@ -185,6 +239,8 @@ export class AdminScreen extends Component {
 
 
   }
+
+
 
 }
 
@@ -211,9 +267,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     elevation: 2
 
-  },
-  sview: {
-    position: "relative",
   },
   filternnach: {
     fontSize: 18

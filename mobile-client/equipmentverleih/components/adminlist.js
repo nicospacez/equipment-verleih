@@ -37,7 +37,7 @@ export class AdminList extends Component {
                     <Text style={styles.text} >Kürzel</Text>
                 </View>
                 <ScrollView horizontal={false}>
-                    {this.props.data.produktDtoList.map((value, i) => {
+                    {this.props.data.map((value, i) => {
 
                         //CHANGE STATUS COLOR
                         if (value.status == "FREI") {
