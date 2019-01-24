@@ -13,8 +13,11 @@ import { NavComponent } from './nav/nav.component';
 import { WarenkorbComponent } from './warenkorb/warenkorb.component';
 import { AdminComponent } from './admin/admin.component';
 import { ProductsDetailViewComponent } from './products/products-detail-view/products-detail-view.component';
-import { ProductService } from "./services/product.service";
 import { CreateProduktComponent } from './admin/create-produkt/create-produkt.component';
+import { ProduktListComponent } from './admin/produkt-list/produkt-list.component';
+
+import {KategorieService} from './services/kategorie.service';
+import { ProductService } from "./services/product.service";
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -26,7 +29,12 @@ const appRoutes: Routes = [
       {
         path: 'create',
         component: CreateProduktComponent
-      }
+      },
+      {
+        path: 'list',
+        component: ProduktListComponent
+      },
+      { path: '', redirectTo: '/admin/list', pathMatch: 'full' }
     ]
   },
   { path: 'productsDetailView/:id', component: ProductsDetailViewComponent },
@@ -44,7 +52,8 @@ const appRoutes: Routes = [
     WarenkorbComponent,
     NavComponent,
     ProductsDetailViewComponent,
-    CreateProduktComponent
+    CreateProduktComponent,
+    ProduktListComponent
   ],
   imports: [
     BrowserModule,
@@ -53,7 +62,7 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     BrowserAnimationsModule
   ],
-  providers: [ProductService],
+  providers: [ProductService, KategorieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

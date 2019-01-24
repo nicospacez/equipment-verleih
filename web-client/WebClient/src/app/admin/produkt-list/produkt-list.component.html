@@ -1,0 +1,37 @@
+<div class="container">
+
+  <div class="filterMenu">
+      <div class="btn-group btn-group-toggle fullWidth" data-toggle="buttons">
+          <label id="buttonGreen" class="btn btn-green divide" (click)="changeFilter('FREI')">
+            <input type="radio" name="options" id="option1" autocomplete="off" checked> Active
+          </label>
+          <label id="buttonOrange" class="btn btn-orange divide" (click)="changeFilter('RESERVIERT')">
+            <input type="radio" name="options" id="option2" autocomplete="off"> Radio
+          </label>
+          <label id="buttonRed" class="btn btn-red divide" (click)="changeFilter('VERLIEHEN')">
+            <input type="radio" name="options" id="option3" autocomplete="off"> Radio
+          </label>
+        </div>
+  </div>
+
+
+  <table cellspacing="0" cellpadding="0" class="table-hover">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Kurzbezeichnung</th>
+        <th scope="col" width="1%">Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of products">
+        <td>{{product.bezeichnung}}</td>
+        <td>{{product.kurzbezeichnung}}</td>
+        <td>
+            <div class="circle statusGreen" *ngIf="product.status == 'FREI'"></div>
+            <div class="circle statusRed" *ngIf="product.status != 'FREI'"></div>
+          </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

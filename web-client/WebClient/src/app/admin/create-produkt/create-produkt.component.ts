@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../../services/product.service';
+import { KategorieService } from 'src/app/services/kategorie.service';
 
 @Component({
   selector: 'app-create-produkt',
@@ -8,12 +9,29 @@ import { ProductService } from '../../services/product.service';
 })
 export class CreateProduktComponent implements OnInit {
 
-  constructor(private productService: ProductService) { }
+  kategorien;
+  selectedKategorie;
+  selectedUeberkategorie;
+
+  constructor(private productService: ProductService, private kategorieService: KategorieService) { }
 
   ngOnInit() {
+    this.kategorieService.getAllProdukte().then(data => {
+      console.log(data);
+      this.kategorien = data;
+    })
   }
 
-  createProdukt(bez, inv, kbz, lbz, marke, ser){
+  changeShape(shape) {
+    console.log(shape.value);
+    this.selectedKategorie = shape.value;
+  }
+  changeUeberKategorie(shape) {
+    console.log(shape.value);
+    this.selectedUeberkategorie = shape.value;
+  }
+
+  createProdukt(bez, inv, kbz, lbz, marke, ser) {
     let bsp = {
       "bezeichnung": bez,
       "inventurnummer": inv,
@@ -22,11 +40,28 @@ export class CreateProduktComponent implements OnInit {
       "marke": marke,
       "seriennummer": ser,
       "kategorie": {
-        "kategorieId": 1
+        "kategorieId": this.selectedKategorie
       }
     };
     console.log(bsp)
     this.productService.createProdukt(bsp);
+  }
+  createKategorie(bezeichnung) {
+    let arr = {};
+    if (this.selectedUeberkategorie != null) {
+      arr = {
+        "kurzbezeichnung": bezeichnung,
+        "kategorie": {
+          "kategorieId": this.selectedUeberkategorie
+        }
+      }
+    } else {
+      arr = {
+        "kurzbezeichnung": bezeichnung,
+      }
+    }
+    console.log(arr)
+    this.kategorieService.createKategorie(arr);
   }
 }
 
