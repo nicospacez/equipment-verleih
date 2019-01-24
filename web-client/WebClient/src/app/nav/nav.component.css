@@ -25,3 +25,9 @@
 }
 
 a{color: white;}
+
+.logo{
+    position: absolute;
+    top:1%;
+    left: 2%;
+}
