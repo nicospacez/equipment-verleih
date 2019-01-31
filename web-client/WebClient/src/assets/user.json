@@ -1,0 +1,7 @@
+[{"id":6104,"firstname":"Manuel","lastname":"Wiltz", "username":"manuel", "password": "manu", "position:":"owner"},
+{"id":6097,"firstname":"Florian","lastname":"Hubner",  "username":"florian", "password": "hubyy", "position:":"owner"},
+{"id":6091,"firstname":"Pascal","lastname":"Bachinger",  "username":"pascal", "password": "paci", "position:":"owner"},
+{"id":6100,"firstname":"Alexandra","lastname":"Oancea", "username":"alexandra", "password": "alex", "position:":"user"},
+{"id":6094,"firstname":"Janine","lastname":"Feyrer", "username":"janine", "password": "janine", "position:":"owner"},
+{"id":6102,"firstname":"Felix","lastname":"Reichel", "username":"felix", "password": "flix", "position:":"owner"}
+]
