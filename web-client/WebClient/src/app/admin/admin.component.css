@@ -1,41 +1,8 @@
-.sidenav a {
-    text-decoration: none;
-    font-size: 1.4vw;
-    color: #ffffff;
-    display: block;
-    margin-bottom: 30%;
-}
-
-.sidenav a:hover {
-    color: black;
-    background-color: #DBDBDB;
-}
-
-.sidenav{
-    text-align: center;
-    display:table-cell;
-    vertical-align:middle;
-}
-div {
-	margin: 0;
-	border: 0;
-    display: inline-block;
-    
-}
-.left {
-	height: 160%;
-    padding-top: 10%;
-    padding-left: 0.4%;
-    position: absolute;
-    width: 7%;
-	background-color: #608aed;
-}
-.right {
-    position: relative;
-    float: right;
-    width: 94%;
-}
-
 .all{
-    width: 100%;
+
+    position: fixed;
+    top:0;
+    right: 0;
+    width: 85%;
+    z-index: 0;
 }

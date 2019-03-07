@@ -1,0 +1,8 @@
+    .all{
+
+        position: fixed;
+        top:0;
+        right: 0;
+        width: 85%;
+        z-index: 0;
+    }

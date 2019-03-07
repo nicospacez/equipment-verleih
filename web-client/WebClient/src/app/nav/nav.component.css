@@ -1,33 +1,61 @@
-.menuIcon{
-    width: 24pt !important;
-    margin-right: 10px;
-    margin-bottom: 10px;
-}
 
-.activeLink:hover{
-    background-color: green;
-}
 
-.topBar{
-    background-color: #4B7BEC;
-    /* activate if top bar > left bar
-    height: 10%;
-    width: 100%;
-    padding: 5px;
-    position: absolute;
+.sideBar{
+    background-color: #333F65;
+    width: 15%;
+    height: 100vh;
     z-index: 100;
-    */
-    /*border-bottom: 2px solid #DBDBDB;*/
+}
+
+.myMenu{
+    display: block;
+    padding-top: 5%;
+    text-decoration: none;
+    font-family: 'Karla', sans-serif;
 }
 
 .myItem{
     font-size: 15pt;
+    height:100%;
+    color: white;
+    padding-top: 20%;
+    text-decoration: none;
+
 }
 
-a{color: white;}
+.menuIcon{
+    width: 20pt !important;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    text-decoration: none;
+}
 
 .logo{
-    position: absolute;
-    top:1%;
-    left: 2%;
+    color: white;
+    background-color: #3D4A73;
+    height: 50px;
+
+}
+
+
+.topBar{
+    position: fixed;
+    right: 0;
+    background-color: #FFFFFF;
+    height: 50px;
+    width: 85%;
+    z-index: 200;
+}
+
+.content{
+
+    margin-left: 70%;
+    margin-top: 5px;
+    font-size: 2em;
+    font-family: 'Karla', sans-serif;
+}
+
+.content img{
+    width: 10%;
+    border-radius: 50%;
 }
