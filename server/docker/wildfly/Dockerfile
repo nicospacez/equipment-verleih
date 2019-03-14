@@ -1,8 +1,5 @@
 FROM jboss/wildfly
 
-ADD keystore.bin ./
-RUN update-ca-certificates
-
 USER root
 
 COPY docker-entrypoint.sh /usr/local/bin/

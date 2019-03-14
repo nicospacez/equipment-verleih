@@ -16,4 +16,3 @@ echo "yeah, mysql available, so lets go..."
 #see https://stackoverflow.com/questions/20965737/docker-jboss7-war-commit-server-boot-failed-in-an-unrecoverable-manner:
 rm -rf /opt/jboss/wildfly/standalone/configuration/standalone_xml_history/current/*
 /opt/jboss/wildfly/bin/standalone.sh -b 0.0.0.0 -bmanagement 0.0.0.0 --debug
-
