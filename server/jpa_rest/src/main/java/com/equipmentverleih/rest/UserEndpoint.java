@@ -19,9 +19,12 @@ import com.equipmentverleih.dao.UserDao;
 import com.equipmentverleih.dto.UserDto;
 import com.equipmentverleih.enums.ErrorNumber;
 import com.equipmentverleih.enums.SuccessState;
+import com.equipmentverleih.exceptions.LdapAuthException;
+import com.equipmentverleih.exceptions.LdapException;
 import com.equipmentverleih.model.User;
 import com.equipmentverleih.repository.UserRepository;
 import com.equipmentverleih.response.UserResponse;
+import com.equipmentverleih.security.LdapUser;
 
 /**
  * @author nicoz
@@ -79,4 +82,12 @@ public class UserEndpoint {
 		return response;
 	}
 
+	@GET
+	@Path("/checkLogin")
+	@Produces(MediaType.APPLICATION_JSON)
+	public String checkLogin() throws LdapException, LdapAuthException {
+		LdapUser user = new LdapUser("it140059", "testtes".toCharArray());
+		return user.getFirstname() + " " + user.getLastname() + " " + user.getClassId() + " " + user.getClass() + " "
+				+ user.getUserId();
+	}
 }
