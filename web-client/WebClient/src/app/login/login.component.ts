@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from '../../entities';
-import { RestService } from '../rest.service';
 import { Router } from '@angular/router';
+import { LoginService } from '../services/login.service';
 
 @Component({
   selector: 'app-login',
@@ -10,46 +9,33 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  
-  public users: User[];
   public inputUser: string;
   public inputPassword: string;
-  public selectedUser: User = null;
   public loginFailed: Boolean = false;
-  constructor(private service: RestService, private router: Router) {
-    if (service.getUsers().length == 0) {
-      this.service.usersLoaded.subscribe(() => {
-        this.users = service.getUsers();
-      })
-    }
-    else {
-      this.users = service.getUsers();
-    }
-    console.log(this.users);
-   }
+  public loggedIn;
+  constructor(private router: Router, private ls: LoginService) {
+  }
 
   ngOnInit() {
+
   }
 
   public loginUser() {
-    this.users.forEach(user => {
-      if (this.inputUser == user.username) {
-        this.selectedUser = user;
+    this.ls.getTokenWithCredentials(this.inputUser, this.inputPassword).subscribe(success => {
+
+      console.log(success)
+
+      if (success) {
+
+        //localStorage.setItem("User", this.loggedIn.username);
+        this.navigateToAccount();
+      } else {
+        this.loginFailed = true;
       }
     });
-    if (this.selectedUser == null) {
-      this.loginFailed = true;
-    }
-    else if (this.inputPassword === this.selectedUser.password) {
-      this.navigateToLoglist();
-      this.loginFailed = false;
-    }
-    else if (this.inputPassword != this.selectedUser.password) {
-      this.loginFailed = true;
-    }
   }
 
-  public navigateToLoglist() {
+  public navigateToAccount() {
     this.router.navigate(['home']);
   }
 }

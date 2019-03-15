@@ -1,45 +1,45 @@
-<div class = "all">
-<div class = "topBar">
-  <div class="content"> 
-    
-    Prof. Rager
-    <img src="../../assets/rager.png">
+<div class="all">
+  <div class="topBar">
+    <div class="content">
 
+      Prof. Rager
+      <img src="../../assets/rager.png">
+
+
+    </div>
 
   </div>
 
-</div>
 
+  <div class="sideBar">
 
-<div class="sideBar">
+    <div class="logo">LOGO</div>
 
-  <div class = "logo">LOGO</div>
-
-  <ul class="myMenu">
+    <ul class="myMenu">
 
       <!--<div class = "logo"><img src="../../assets/logo_ev_white.png" width="15%"></div>-->
-    
-      <div  class="myItem">
-      <a  class="myItem" routerLink="home" > 
-      <img src="../../assets/home.png" class="menuIcon">Home</a>
-      </div>  
 
-      <div  class="myItem">
-      <a  class="myItem" routerLink="products">
-      <img src="../../assets/products.png" class="menuIcon">Equipments</a>
-    </div>
+      <div class="myItem">
+        <a class="myItem" routerLink="home">
+          <img src="../../assets/home.png" class="menuIcon">Home</a>
+      </div>
 
-      <div  class="myItem">
-      <a class="myItem" routerLink="warenkorb">
-      <img src="../../assets/warenkorb.png" class="menuIcon"> Warenkorb</a>
-    </div>
+      <div class="myItem">
+        <a class="myItem" routerLink="products">
+          <img src="../../assets/products.png" class="menuIcon">Equipments</a>
+      </div>
 
-      <div  class="myItem">
-      <a class="myItem" routerLink="admin">
-      <img src="../../assets/admin.png" class="menuIcon"> Admin</a>
-    </div>
+      <div class="myItem">
+        <a class="myItem" routerLink="warenkorb">
+          <img src="../../assets/warenkorb.png" class="menuIcon"> Warenkorb</a>
+      </div>
 
-  </ul>
-</div>
+      <div class="myItem" *ngIf="isAdmin">
+        <a class="myItem" routerLink="admin">
+          <img src="../../assets/admin.png" class="menuIcon"> Admin</a>
+      </div>
+
+    </ul>
+  </div>
 
 </div>

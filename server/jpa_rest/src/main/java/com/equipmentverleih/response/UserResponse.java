@@ -6,8 +6,10 @@ import com.equipmentverleih.dto.UserDto;
  * @author nicoz
  *
  */
-public class UserResponse extends DefaultResponse{
+public class UserResponse extends DefaultResponse {
 	UserDto userDto;
+
+	String token;
 
 	public UserResponse() {
 		super();
@@ -20,7 +22,13 @@ public class UserResponse extends DefaultResponse{
 	public void setUserDto(UserDto userDto) {
 		this.userDto = userDto;
 	}
-	
-	
-	
+
+	public String getToken() {
+		return token;
+	}
+
+	public void setToken(String token) {
+		this.token = token;
+	}
+
 }
