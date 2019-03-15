@@ -49,15 +49,11 @@ public class Produkt implements Serializable {
 	@ManyToOne
 	private Produkt produkt;
 	
-	@JsonIgnore
-	@OneToMany(fetch = FetchType.LAZY, mappedBy ="produkt")
-	private List<Produkt> produkte;
-
 	public Produkt() {
 	}
 
 	public Produkt(String kurzbezeichnung, String inventurnummer, String seriennummer, String marke, String bezeichnung,
-			String langbezeichnung, Kategorie kategorie, List<Verleih> verleih, Produkt produkt) {
+			String langbezeichnung, Kategorie kategorie, List<Verleih> verleih) {
 		this.kurzbezeichnung = kurzbezeichnung;
 		this.inventurnummer = inventurnummer;
 		this.seriennummer = seriennummer;
@@ -67,7 +63,6 @@ public class Produkt implements Serializable {
 		this.kategorie = kategorie;
 		this.verleih = verleih;
 		this.foto = foto;
-		this.produkt = produkt;
 	}
 
 	
@@ -77,14 +72,6 @@ public class Produkt implements Serializable {
 
 	public void setProdukt(Produkt produkt) {
 		this.produkt = produkt;
-	}
-
-	public List<Produkt> getProdukte() {
-		return produkte;
-	}
-
-	public void setProdukte(List<Produkt> produkte) {
-		this.produkte = produkte;
 	}
 
 	public Kategorie getKategorie() {

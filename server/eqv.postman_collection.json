@@ -1,0 +1,548 @@
+{
+	"info": {
+		"_postman_id": "e96b655a-bab5-15f7-74f2-3f59710d6136",
+		"name": "eqv",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "insert moser JWT",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"vorname\": \"Jakob\",\n    \"nachname\": \"Moser\",\n    \"username\": \"it150043\",\n    \"klasse\": \"5bhitm\",\n    \"katalognummer\": 8,\n    \"isAdmin\": false,\n    \"password\": \"passme\"\n}"
+						},
+						"url": {
+							"raw": "http://192.168.99.100:8080/jee/app/jwt/createUser",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"99",
+								"100"
+							],
+							"port": "8080",
+							"path": [
+								"jee",
+								"app",
+								"jwt",
+								"createUser"
+							]
+						},
+						"description": "insert user"
+					},
+					"response": []
+				},
+				{
+					"name": "insert franz JWT",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"vorname\": \"Franz\",\n    \"nachname\": \"Rager\",\n    \"username\": \"frager\",\n    \"klasse\": \"Lehrer\",\n    \"katalognummer\": 1220,\n    \"isAdmin\": true,\n    \"password\": \"passme\"\n}"
+						},
+						"url": {
+							"raw": "http://192.168.99.100:8080/jee/app/jwt/createUser",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"99",
+								"100"
+							],
+							"port": "8080",
+							"path": [
+								"jee",
+								"app",
+								"jwt",
+								"createUser"
+							]
+						},
+						"description": "insert admin"
+					},
+					"response": []
+				},
+				{
+					"name": "getAllUsers",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NTI2MDgxODgsInN1YiI6ImZyYWdlciJ9.M9yRz0W8r1U1AeMDCLsTO7aCLKOsnspDQdQLY5n_kPA",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://192.168.99.100:8080/jee/app/user/",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"99",
+								"100"
+							],
+							"port": "8080",
+							"path": [
+								"jee",
+								"app",
+								"user",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAuthKey Moser",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"it150043\",\n    \"password\": \"passme\"\n}"
+						},
+						"url": {
+							"raw": "http://192.168.99.100:8080/jee/app/jwt",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"99",
+								"100"
+							],
+							"port": "8080",
+							"path": [
+								"jee",
+								"app",
+								"jwt"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAuthKey Franz",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"frager\",\n    \"password\": \"passme\"\n}"
+						},
+						"url": {
+							"raw": "http://192.168.99.100:8080/jee/app/jwt",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"99",
+								"100"
+							],
+							"port": "8080",
+							"path": [
+								"jee",
+								"app",
+								"jwt"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Kategorie",
+			"item": [
+				{
+					"name": "insert Kategorie Kamera",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NTI2MDk3NjAsInN1YiI6ImZyYWdlciJ9.NEeWnFnhcKQMaI624x_lsiG2hytgiwB1ndySYeDW53A",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"kurzbezeichnung\": \"Kamera\"\n}"
+						},
+						"url": {
+							"raw": "http://192.168.99.100:8080/jee/app/kategorie/",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"99",
+								"100"
+							],
+							"port": "8080",
+							"path": [
+								"jee",
+								"app",
+								"kategorie",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "insert UnterKategorie Kameraobjektive",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"kurzbezeichnung\": \"Kameraobjektiv\",\n    \"kategorie\": {\n    \t\"kategorieId\": 1\n    }\n}"
+						},
+						"url": {
+							"raw": "http://192.168.99.100:8080/jee/app/kategorie/",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"99",
+								"100"
+							],
+							"port": "8080",
+							"path": [
+								"jee",
+								"app",
+								"kategorie",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllKategorie",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://192.168.99.100:8080/jee/app/kategorie/",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"99",
+								"100"
+							],
+							"port": "8080",
+							"path": [
+								"jee",
+								"app",
+								"kategorie",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getKategorieById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://192.168.99.100:8080/jee/app/kategorie/findById/1",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"99",
+								"100"
+							],
+							"port": "8080",
+							"path": [
+								"jee",
+								"app",
+								"kategorie",
+								"findById",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Produkt",
+			"item": [
+				{
+					"name": "insert produkt1",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NTI2MDk3NjAsInN1YiI6ImZyYWdlciJ9.NEeWnFnhcKQMaI624x_lsiG2hytgiwB1ndySYeDW53A",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"bezeichnung\": \"GH4\",\n    \"inventurnummer\": \"htl-a1231\",\n    \"kurzbezeichnung\": \"VK01\",\n    \"langbezeichnung\": \"Videokamera01\",\n    \"marke\": \"Lumix\",\n    \"seriennummer\": \"sada1-12asd-123a-asd12\",\n    \"kategorie\": {\n        \"kategorieId\": 1\n    }\n}"
+						},
+						"url": {
+							"raw": "http://192.168.99.100:8080/jee/app/produkt",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"99",
+								"100"
+							],
+							"port": "8080",
+							"path": [
+								"jee",
+								"app",
+								"produkt"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "insert UnterProdukt ",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NTI2MDgxODgsInN1YiI6ImZyYWdlciJ9.M9yRz0W8r1U1AeMDCLsTO7aCLKOsnspDQdQLY5n_kPA",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"bezeichnung\": \"GH4\",\n    \"inventurnummer\": \"htl-a1231\",\n    \"kurzbezeichnung\": \"VK01\",\n    \"langbezeichnung\": \"Videokamera01\",\n    \"marke\": \"Lumix\",\n    \"seriennummer\": \"sada1-12asd-123a-asd12\",\n    \"kategorie\": {\n        \"kategorieId\": 1\n    },\n    \"produkt\": {\n    \t\"produktId\": 1\n    }\n}"
+						},
+						"url": {
+							"raw": "http://192.168.99.100:8080/jee/app/produkt",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"99",
+								"100"
+							],
+							"port": "8080",
+							"path": [
+								"jee",
+								"app",
+								"produkt"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllProdukte",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NTI2MDk3NjAsInN1YiI6ImZyYWdlciJ9.NEeWnFnhcKQMaI624x_lsiG2hytgiwB1ndySYeDW53A",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://192.168.99.100:8080/jee/app/produkt",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"99",
+								"100"
+							],
+							"port": "8080",
+							"path": [
+								"jee",
+								"app",
+								"produkt"
+							]
+						},
+						"description": "getAllProdukte"
+					},
+					"response": []
+				},
+				{
+					"name": "getProduktPage",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://192.168.99.100:8080/jee/app/produkt/page/10",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"99",
+								"100"
+							],
+							"port": "8080",
+							"path": [
+								"jee",
+								"app",
+								"produkt",
+								"page",
+								"10"
+							]
+						},
+						"description": "returns 10 Produkte eacht page (like pornhub pages)"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Verleih",
+			"item": [
+				{
+					"name": "insert Verleih",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NTI2MDk3NjAsInN1YiI6ImZyYWdlciJ9.NEeWnFnhcKQMaI624x_lsiG2hytgiwB1ndySYeDW53A",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"startDate\": \"19-12-2018\",\n    \"endDate\": \"24-01-2020\",\n    \"hergeborgtVon\": {\n        \"userId\": 1\n    },\n    \"zurueckgenommenVon\": {\n        \"userId\": 1\n    },\n    \"produkt\": {\n        \"produktId\": 1\n    },\n    \"user\": {\n        \"userId\": 1\n    }\n}"
+						},
+						"url": {
+							"raw": "http://192.168.99.100:8080/jee/app/verleih",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"99",
+								"100"
+							],
+							"port": "8080",
+							"path": [
+								"jee",
+								"app",
+								"verleih"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllVerleih",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://192.168.99.100:8080/jee/app/verleih",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"99",
+								"100"
+							],
+							"port": "8080",
+							"path": [
+								"jee",
+								"app",
+								"verleih"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
