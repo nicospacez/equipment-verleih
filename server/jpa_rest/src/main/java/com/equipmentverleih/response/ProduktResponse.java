@@ -3,6 +3,7 @@
  */
 package com.equipmentverleih.response;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -15,7 +16,7 @@ import com.equipmentverleih.dto.ProduktDto;
 public class ProduktResponse extends DefaultResponse{
 	ProduktDto produktDto;
 	
-	List<ProduktDto> produktDtoList = new LinkedList<>();
+	List<ProduktDto> produktDtoList = new ArrayList<>();
 
 	public ProduktDto getProduktDto() {
 		return produktDto;
