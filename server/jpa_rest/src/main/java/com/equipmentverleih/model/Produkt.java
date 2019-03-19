@@ -2,18 +2,21 @@ package com.equipmentverleih.model;
 
 import java.io.Serializable;
 import java.util.Arrays;
+import java.util.Base64;
 import java.util.Date;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -37,7 +40,8 @@ public class Produkt implements Serializable {
 
 	private String kurzbezeichnung, inventurnummer, seriennummer, marke, bezeichnung, langbezeichnung;
 
-	private byte[] foto;
+	@Column(columnDefinition = "LONGTEXT")
+	private String foto;
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "produkt")
 	private List<Verleih> verleih;
@@ -53,7 +57,7 @@ public class Produkt implements Serializable {
 	}
 
 	public Produkt(String kurzbezeichnung, String inventurnummer, String seriennummer, String marke, String bezeichnung,
-			String langbezeichnung, Kategorie kategorie, List<Verleih> verleih) {
+			String langbezeichnung, String foto, Kategorie kategorie, List<Verleih> verleih) {
 		this.kurzbezeichnung = kurzbezeichnung;
 		this.inventurnummer = inventurnummer;
 		this.seriennummer = seriennummer;
@@ -138,11 +142,13 @@ public class Produkt implements Serializable {
 		this.langbezeichnung = langbezeichnung;
 	}
 
-	public byte[] getFoto() {
+
+
+	public String getFoto() {
 		return foto;
 	}
 
-	public void setFoto(byte[] foto) {
+	public void setFoto(String foto) {
 		this.foto = foto;
 	}
 
@@ -179,7 +185,7 @@ public class Produkt implements Serializable {
 	public String toString() {
 		return "Produkt [produktId=" + produktId + ", kurzbezeichnung=" + kurzbezeichnung + ", inventurnummer="
 				+ inventurnummer + ", seriennummer=" + seriennummer + ", marke=" + marke + ", bezeichnung="
-				+ bezeichnung + ", langbezeichnung=" + langbezeichnung + ", foto=" + Arrays.toString(foto)
+				+ bezeichnung + ", langbezeichnung=" + langbezeichnung + ", foto=" + foto
 				+ ", verleih=" + verleih + ", kategorie=" + kategorie + "]";
 	}
 
@@ -200,7 +206,7 @@ public class Produkt implements Serializable {
 		}
 
 		return new ProduktDto(produktId, bezeichnung, inventurnummer, kurzbezeichnung, langbezeichnung, marke,
-				seriennummer, kategorie.toDto(), verleihId, produkt, status);
+				seriennummer, foto,kategorie.toDto(), verleihId, produkt, status);
 	}
 
 	public boolean isVerliehen(Verleih lastVerleih) {

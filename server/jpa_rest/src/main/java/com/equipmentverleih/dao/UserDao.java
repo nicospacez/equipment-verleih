@@ -24,4 +24,12 @@ public class UserDao {
 		return em.createQuery("select u from User u", User.class).getResultList();
 		
 	}
+	
+	public List<String> findKlassen(){
+		return em.createQuery("select u.klasse from User u GROUP BY u.klasse", String.class).getResultList();
+	}
+	
+	public List<User> findUserToKlasse(String klasse){
+		return em.createQuery("select u from User u WHERE u.klasse='"+klasse+"'", User.class).getResultList();
+	}
 }

@@ -1,5 +1,6 @@
 package com.equipmentverleih.dto;
 
+import java.util.Base64;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -27,13 +28,13 @@ public class ProduktDto implements Transferable<Produkt> {
 	String marke;
 	String seriennummer;
 	String verleih;
-
+	String foto;
 	KategorieDto kategorie;
 
 	ProduktStatus status;
 	
 	public ProduktDto(Long produktId, String bezeichnung, String inventurnummer, String kurzbezeichnung,
-			String langbezeichnung, String marke, String seriennummer, KategorieDto kategorie, String verleih, Produkt produkt,
+			String langbezeichnung, String marke, String seriennummer,String foto, KategorieDto kategorie, String verleih, Produkt produkt,
 			ProduktStatus status) {
 		super();
 		this.produktId = produktId;
@@ -46,6 +47,7 @@ public class ProduktDto implements Transferable<Produkt> {
 		this.kategorie = kategorie;
 		this.verleih = verleih;
 		this.status = status;
+		this.foto = foto;
 	}
 
 	@Override
@@ -55,7 +57,7 @@ public class ProduktDto implements Transferable<Produkt> {
 		Verleih verleih = dao.findByProduktId(Integer.parseInt(this.verleih));
 		verleihList.add(verleih);
 
-		return new Produkt(kurzbezeichnung, inventurnummer, seriennummer, marke, bezeichnung, langbezeichnung,
+		return new Produkt(kurzbezeichnung, inventurnummer, seriennummer, marke, bezeichnung, langbezeichnung, foto.toString(),
 				kategorie.toEntity(), verleihList);
 	}
 
@@ -64,6 +66,18 @@ public class ProduktDto implements Transferable<Produkt> {
 		// TODO Auto-generated method stub
 		return this.kurzbezeichnung != null && this.inventurnummer != null && this.seriennummer != null
 				&& this.marke != null && this.bezeichnung != null && this.langbezeichnung != null;
+	}
+
+	
+
+
+
+	public String getFoto() {
+		return foto;
+	}
+
+	public void setFoto(String foto) {
+		this.foto = foto;
 	}
 
 	public Long getProduktId() {

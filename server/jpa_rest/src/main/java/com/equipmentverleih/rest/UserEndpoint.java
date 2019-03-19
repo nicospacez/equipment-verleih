@@ -28,10 +28,6 @@ import com.equipmentverleih.response.UserResponse;
 import com.equipmentverleih.security.JwtBuilder;
 import com.equipmentverleih.security.Password;
 
-
-
-
-
 /**
  * @author nicoz
  *
@@ -88,32 +84,56 @@ public class UserEndpoint {
 		return response;
 	}
 
-	
-    @POST
-    @Path("/login")
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response loginUser(TempAuthUser reqUser) throws NoSuchAlgorithmException, InvalidKeySpecException {
-    	UserResponse response = new UserResponse();
-        List<User> list = repo.findAll();
-        User user = null;
-        for (int i = 0; i < list.size(); i++) {
-            if (list.get(i).getUsername().equals(reqUser.getUsername())) {
-                user = list.get(i);
-            }
-        }
-        if (user != null) {
-            if (Password.check(reqUser.getPassword(), user.getPassword())) {
-                response.setToken(new JwtBuilder().create(user.getUsername()));
-                response.setUserDto(user.toDto());
-                response.setError(ErrorNumber.NO_ERROR);
-                response.setState(SuccessState.SUCCESS);
-                return Response.ok(response).build();
-            }
-        }
-        response.setError(ErrorNumber.INVALID_CREDENTIALS);
-        return Response.status(Response.Status.FORBIDDEN).entity(response).build();
+	@POST
+	@Path("/login")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response loginUser(TempAuthUser reqUser) throws NoSuchAlgorithmException, InvalidKeySpecException {
+		UserResponse response = new UserResponse();
+		List<User> list = repo.findAll();
+		User user = null;
+		for (int i = 0; i < list.size(); i++) {
+			if (list.get(i).getUsername().equals(reqUser.getUsername())) {
+				user = list.get(i);
+			}
+		}
+		if (user != null) {
+			if (Password.check(reqUser.getPassword(), user.getPassword())) {
+				response.setToken(new JwtBuilder().create(user.getUsername()));
+				response.setUserDto(user.toDto());
+				response.setError(ErrorNumber.NO_ERROR);
+				response.setState(SuccessState.SUCCESS);
+				return Response.ok(response).build();
+			}
+		}
+		response.setError(ErrorNumber.INVALID_CREDENTIALS);
+		return Response.status(Response.Status.FORBIDDEN).entity(response).build();
 
-    }
-	
+	}
+
+	@GET
+	@Path("/getAllKlassen")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<String> getAllKlassen() {
+		return dao.findKlassen();
+	}
+
+	@GET
+	@Path("/getUserToKlasse/{klasse}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public UserResponse getUserToKlasse(@PathParam("klasse") String klasse) {
+		UserResponse response = new UserResponse();
+		try {
+			List<User> users = dao.findUserToKlasse(klasse);
+			response.setUserDtoList(users);
+		} catch (Exception e) {
+			response.setError(ErrorNumber.REPO_ERROR);
+		}
+		
+		if (response.getUserDtoList() != null) {
+			response.setState(SuccessState.SUCCESS);
+		}
+
+		return response;
+	}
 }
