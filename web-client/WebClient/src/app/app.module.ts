@@ -20,6 +20,7 @@ import { ProduktListComponent } from './admin/produkt-list/produkt-list.componen
 
 import { KategorieService } from './services/kategorie.service';
 import { ProductService } from "./services/product.service";
+import { VerleihService} from './services/verleih.service';
 import { TokenInterceptor } from './services/token.interceptor';
 import { AuthGuard} from './services/auth.guard.service';
 import { LoginService } from './services/login.service';
@@ -87,7 +88,8 @@ const appRoutes: Routes = [
     },
     AuthGuard,
     IsAdmin,
-    LoginService
+    LoginService,
+    VerleihService
   ],
   bootstrap: [AppComponent]
 })

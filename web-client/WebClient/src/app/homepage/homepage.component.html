@@ -1,27 +1,28 @@
 <div class="over">
 
-<div class="container">
-        <label class= "title">Verliehen</label>
+  <div class="container">
+    <label class="title">Verliehen</label>
 
-    <table cellspacing="0" cellpadding="0" class="table-hover" >
-        <thead>
-          <tr>
-            <th scope="col">Name</th>
-            <th scope="col">Kurzbezeichnung</th>
-            <th scope="col">Marke</th>
-            <th scope="col">Inventurnummer</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let product of products">
-            <td>{{product.bezeichnung}}</td>
-            <td>{{product.kurzbezeichnung}}</td>
-            <td>{{product.marke}}</td>
-            <td>{{product.inventurnummer}}</td>
-          </tr>
-        </tbody>
-      </table>
-     
-</div>
-</div>
+    <table cellspacing="0" cellpadding="0" class="table-hover">
+      <thead>
+        <tr>
+          <th scope="col"></th>
+          <th scope="col">Name</th>
+          <th scope="col">Kurzbezeichnung</th>
+          <th scope="col">Marke</th>
+          <th scope="col">Inventurnummer</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let product of products?.verleihDtoList">
+          <td><img class="myImage" *ngIf="product.produkt.foto" src="data:image/png;base64,{{product.produkt.foto}}" alt="..."></td>
+          <td>{{product.produkt.bezeichnung}}</td>
+          <td>{{product.produkt.kurzbezeichnung}}</td>
+          <td>{{product.produkt.marke}}</td>
+          <td>{{product.produkt.inventurnummer}}</td>
+        </tr>
+      </tbody>
+    </table>
 
+  </div>
+</div>

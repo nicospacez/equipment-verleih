@@ -15,15 +15,21 @@ import com.equipmentverleih.model.Verleih;
 @Named
 public class VerleihDao {
 
-	@PersistenceContext 
+	@PersistenceContext
 	EntityManager em;
 
 	public List<Verleih> findAll() {
 		return em.createQuery("select v from Verleih v", Verleih.class).getResultList();
-		
+
 	}
-	
-	public Verleih findByProduktId(int id){
-		return em.createQuery("select v from Verleih v where v.produkt.produktId = "+id, Verleih.class).getSingleResult();
+
+	public Verleih findByProduktId(int id) {
+		return em.createQuery("select v from Verleih v where v.produkt.produktId = " + id, Verleih.class)
+				.getSingleResult();
+	}
+
+	public List<Verleih> findOverUsername(String username) {
+		return em.createQuery("select v from Verleih v where v.user.username = '" + username + "'", Verleih.class)
+				.getResultList();
 	}
 }

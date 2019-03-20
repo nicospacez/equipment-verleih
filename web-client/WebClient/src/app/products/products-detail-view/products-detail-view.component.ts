@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from 'src/app/services/product.service';
 import { ActivatedRoute } from '@angular/router';
+import { VerleihService } from 'src/app/services/verleih.service';
 
 @Component({
   selector: 'app-products-detail-view',
@@ -32,7 +33,7 @@ export class ProductsDetailViewComponent implements OnInit {
     }
 };
 
-  constructor(private productService: ProductService, private router: ActivatedRoute) { }
+  constructor(private productService: ProductService, private router: ActivatedRoute, private verleihService: VerleihService) { }
 
   ngOnInit() {
     this.router.params.subscribe(params => {
@@ -53,6 +54,6 @@ export class ProductsDetailViewComponent implements OnInit {
   }
   
   pushAusleihen(){
-    this.productService.ausleihen(this.sendJSON);
+    this.verleihService.ausleihen(this.sendJSON);
   }
 }

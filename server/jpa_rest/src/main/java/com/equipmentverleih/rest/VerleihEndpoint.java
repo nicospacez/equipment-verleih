@@ -1,5 +1,6 @@
 package com.equipmentverleih.rest;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -23,6 +24,7 @@ import com.equipmentverleih.model.Verleih;
 import com.equipmentverleih.repository.VerleihRepository;
 import com.equipmentverleih.response.UserResponse;
 import com.equipmentverleih.response.VerleihResponse;
+import com.sun.mail.iap.Response;
 
 /**
  * @author nicoz
@@ -30,17 +32,21 @@ import com.equipmentverleih.response.VerleihResponse;
  */
 
 @Path("/verleih")
-@Produces({MediaType.APPLICATION_JSON})
-@Consumes({MediaType.APPLICATION_JSON})
+@Produces({ MediaType.APPLICATION_JSON })
+@Consumes({ MediaType.APPLICATION_JSON })
 
 @Transactional
 public class VerleihEndpoint {
 
-	@Inject Logger log;
-	@Inject VerleihDao dao;
-    @Inject VerleihRepository repo; //= new UserRepository();
-    
+	@Inject
+	Logger log;
+	@Inject
+	VerleihDao dao;
+	@Inject
+	VerleihRepository repo; // = new UserRepository();
+
 	@GET
+	@Path("/findAll")
 	public List<VerleihDto> findAll() {
 		log.debug("findAllVerleih...");
 		List<Verleih> verleihList = dao.findAll();
@@ -51,7 +57,7 @@ public class VerleihEndpoint {
 
 		return verleihDtoList;
 	}
-	
+
 	@GET
 	@Path("/id/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -70,7 +76,7 @@ public class VerleihEndpoint {
 
 		return response;
 	}
-	
+
 	@GET
 	@Path("/findByProduktId/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -89,12 +95,34 @@ public class VerleihEndpoint {
 
 		return response;
 	}
-	
-    @POST
-    @Consumes(MediaType.APPLICATION_JSON)
-    public void create(Verleih entity) {
-    	log.debug("creating verleih: "+entity.toString());
-        repo.create(entity);
-    }
 
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	public void create(Verleih entity) {
+		log.debug("creating verleih: " + entity.toString());
+		repo.create(entity);
+	}
+
+	@GET
+	@Path("/getUsersVerleih/{username}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public VerleihResponse getVerleihFromUser(@PathParam("username") String username) {
+		VerleihResponse response = new VerleihResponse();
+		List<Verleih> verleihs = new ArrayList<>();
+		try {
+			verleihs = dao.findOverUsername(username);
+			List<VerleihDto> toSendVerleih = new ArrayList<>();
+			for (Verleih verleih : verleihs) {
+				toSendVerleih.add(verleih.toDto());
+			}
+			response.setVerleihDtoList(toSendVerleih);
+		} catch (Exception e) {
+			response.setError(ErrorNumber.ID_NOT_FOUND);
+		}
+
+		if (!response.getVerleihDtoList().isEmpty()) {
+			response.setState(SuccessState.SUCCESS);
+		}
+		return response;
+	}
 }

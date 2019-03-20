@@ -60,6 +60,17 @@ export class AuthService {
         }
     }
 
+    getUser(){
+        const tokens = localStorage.getItem('token');
+        if (tokens != null) {
+            if(JSON.parse(tokens).userDto){
+                return JSON.parse(tokens).userDto;
+            }else{
+                return false;
+            }
+        }
+    }
+
     logoutUser() {
         localStorage.removeItem('token');
     }

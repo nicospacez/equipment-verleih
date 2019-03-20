@@ -144,6 +144,14 @@ public class User implements Serializable {
 	}
 
 
+	public boolean isAdmin() {
+		return isAdmin;
+	}
+
+	public void setAdmin(boolean isAdmin) {
+		this.isAdmin = isAdmin;
+	}
+
 	@Override
     public int hashCode() {
         int hash = 0;
