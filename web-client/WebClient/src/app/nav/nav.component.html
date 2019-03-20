@@ -2,8 +2,7 @@
   <div class="topBar">
     <div class="content">
 
-      Prof. Rager
-      <img src="../../assets/rager.png">
+      <div>Username</div>
 
 
     </div>
@@ -13,11 +12,10 @@
 
   <div class="sideBar">
 
-    <div class="logo">LOGO</div>
+    <div class="logo"><img src="../../assets/logo_ev_white.png" width="90%"></div>
 
     <ul class="myMenu">
 
-      <!--<div class = "logo"><img src="../../assets/logo_ev_white.png" width="15%"></div>-->
 
       <div class="myItem">
         <a class="myItem" routerLink="home">
@@ -26,12 +24,7 @@
 
       <div class="myItem">
         <a class="myItem" routerLink="products">
-          <img src="../../assets/products.png" class="menuIcon">Equipments</a>
-      </div>
-
-      <div class="myItem">
-        <a class="myItem" routerLink="warenkorb">
-          <img src="../../assets/warenkorb.png" class="menuIcon"> Warenkorb</a>
+          <img src="../../assets/products.png" class="menuIcon">Equipment</a>
       </div>
 
       <div class="myItem" *ngIf="isAdmin">
@@ -39,7 +32,24 @@
           <img src="../../assets/admin.png" class="menuIcon"> Admin</a>
       </div>
 
+      <div class="myItem" *ngIf="isAdmin && inAdmin">
+        <a class="myItem" routerLink="admin/list">
+          <img src="../../assets/admin.png" class="menuIcon"> Liste </a>
+      </div>
+
+      <div class="myItem" *ngIf="isAdmin && inAdmin">
+        <a class="myItem" routerLink="admin/create">
+          <img src="../../assets/admin.png" class="menuIcon">Erstellen</a>
+      </div>
+
+      
+
+      
+
     </ul>
+
+    <button class = "logout" (click)="logoutUser()">Logout</button>
+
   </div>
 
 </div>
