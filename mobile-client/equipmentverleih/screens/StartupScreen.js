@@ -48,7 +48,7 @@ export class StartupScreen extends Component {
 
         return (
             <View style={styles.splash}>
-                <Image style={styles.image} source={require('../images/logo_text.png')} />
+                <Image style={styles.image} source={require('../images/logo.png')} />
             </View>
         );
 
@@ -58,14 +58,15 @@ export class StartupScreen extends Component {
 }
 const styles = StyleSheet.create({
     splash: {
-        flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: colors.grey2
+        backgroundColor: colors.grey2,
+        width:'100%',
+        height:'100%'
     },
     image: {
 
-        width: '60%',
+        width: '100%',
         resizeMode: 'contain'
     }
 

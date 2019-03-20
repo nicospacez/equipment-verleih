@@ -30,6 +30,8 @@ export class AusleihScreen extends Component {
     onAusleihenPressed() {
         console.log(this.navdata.produktId)
          postVerleih(this.navdata.produktId);
+
+         this.props.navigation.navigate("AdminScreen");
     }
 
     componentDidMount() {

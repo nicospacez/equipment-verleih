@@ -46,7 +46,7 @@ export class DetailScreen extends Component {
     return (
       <ScrollView>
         <View style={styles.imgbox}>
-          <Image style={styles.img} source={require('../images/logo_text.png')} />
+          <Image style={styles.img} source={require('../images/camera.png')} />
         </View>
         {this.state.admin && (<View style={gstyles.box}><Button onPress={()=>this.pushAusleihScreen()} style={styles.ausborgenbutton} title="Verleihen" textcolor={colors.white} bgcolor={colors.green}/></View>)}
         

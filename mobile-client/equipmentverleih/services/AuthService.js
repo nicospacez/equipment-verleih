@@ -3,7 +3,7 @@ import PubSub from 'pubsub-js';
 
 export default class LoginService{
 
-    user = {name:"max", admin:true};
+    user = {name:"max", admin:false};
 
     constructor(){
 
