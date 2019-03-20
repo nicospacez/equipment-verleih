@@ -1,8 +1,7 @@
-
-
 .sideBar{
+    position: fixed;
     background-color: #333F65;
-    width: 15%;
+    width: 10%;
     height: 100vh;
     z-index: 100;
 }
@@ -24,7 +23,7 @@
 }
 
 .menuIcon{
-    width: 20pt !important;
+    width: 20px !important;
     margin-right: 10px;
     margin-bottom: 10px;
     text-decoration: none;
@@ -43,19 +42,40 @@
     right: 0;
     background-color: #FFFFFF;
     height: 50px;
-    width: 85%;
+    width: 90%;
     z-index: 200;
 }
 
 .content{
 
-    margin-left: 70%;
+    margin-left: 90%;
     margin-top: 5px;
-    font-size: 2em;
+    font-size: 1.5em;
     font-family: 'Karla', sans-serif;
 }
 
 .content img{
     width: 10%;
     border-radius: 50%;
+}
+
+
+
+.logout {
+
+    position: absolute;
+    bottom: 1%;
+    left: 3%;
+
+    background-color: rgb(216, 94, 94);
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+
 }

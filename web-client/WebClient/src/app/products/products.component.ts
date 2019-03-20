@@ -18,7 +18,20 @@ export class ProductsComponent implements OnInit {
   ngOnInit() {
     this.http.get('http://192.168.99.100:8080/jee/app/produkt').subscribe(data =>{
       this.productList = data;
-      console.log(this.productList)
+
+      /*
+      this.productList.forEach(element => {
+
+        var imageBase64 = element.foto;
+        var blob = new Blob([imageBase64], {type: 'image/png'});
+        element.foto = new File([blob], 'imageFileName.png');
+
+      })
+      */
+
+
+
+
     })
   }
 
@@ -28,6 +41,8 @@ export class ProductsComponent implements OnInit {
     this.router.navigate(['productsDetailView/'+product.produktId]);
 
   }
+
+
 
 
 }

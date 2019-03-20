@@ -1,7 +1,13 @@
+    <div class= "all">
+    
     <div class="container">
 
 
-        <img class = "centeredImage" src="../../assets/product_gh4.png" alt="...">
+         
+        <img class = "centeredImage" *ngIf="!product?.produktDto?.foto" src="../../assets/default_camera.png" alt="...">
+        <img class = "centeredImage" *ngIf="product?.produktDto?.foto" src="data:image/png;base64,{{product?.produktDto?.foto}}" alt="...">
+
+        
         <br>
         <div class= "over"><div class="productInfo" style="display:inline-block">Kurzbezeichnung</div> <div class= "info" style="display:inline-block">{{product?.produktDto.kurzbezeichnung}}</div></div>
 
@@ -67,3 +73,4 @@
                 
         </div>
     </div>
+</div>

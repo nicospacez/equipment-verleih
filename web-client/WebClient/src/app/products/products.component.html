@@ -2,18 +2,29 @@
 
   <div class="container">
         
-      <label class= "title">Kameras</label>
+      <label class= "title">Equipment</label>
       
-          <input class="searchBar" type="text" placeholder="nach Kamera suchen ...">
+          <input class="searchBar" type="text" placeholder="nach Equipment suchen ...">
       
       
       
-          
+          <!--
         <div class="rounded float-left" *ngFor="let product of productList?.produktDtoList" (click) = "goToDetailView(product)" >      
-              <img class = "floatingImages" src="../../assets/product_gh4.png" alt="...">
+              <img class = "floatingImages" *ngIf="!product.foto" src="../../assets/product_gh4.png" alt="...">
+              <img class = "floatingImages" *ngIf="product.foto" src="data:image/png;base64,{{product.foto}}" alt="...">
               <label class = "productName">{{ product.marke }} {{ product.bezeichnung }}</label><br>
               <label class = "productShort">{{ product.kurzbezeichnung }}</label>
           </div>
       </div>
+        -->
+
+        <div class="rounded float-left" *ngFor="let product of productList?.produktDtoList" (click) = "goToDetailView(product)" >      
+            <img class = "floatingImages" *ngIf="!product.foto" src="../../assets/default_camera.png" alt="...">
+            <img class = "floatingImages" *ngIf="product.foto" src="data:image/png;base64,{{product.foto}}" alt="...">
+            <label class = "productName">{{ product.marke }} {{ product.bezeichnung }}</label><br>
+            <label class = "productShort">{{ product.kurzbezeichnung }}</label>
+        </div>
+    </div>
+
 
     </div>
