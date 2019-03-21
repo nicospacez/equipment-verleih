@@ -11,8 +11,12 @@ import { Router } from '@angular/router';
 export class CreateProduktComponent implements OnInit {
 
   kategorien;
+  kategorienCSV;
   selectedKategorie;
+  selectedKategorieCSV;
   selectedUeberkategorie;
+
+  fileToUpload: File = null;
 
   constructor(private productService: ProductService, private kategorieService: KategorieService, private router: Router) { }
 
@@ -20,13 +24,29 @@ export class CreateProduktComponent implements OnInit {
     this.kategorieService.getAllProdukte().then(data => {
       console.log(data);
       this.kategorien = data;
+      this.kategorienCSV = this.kategorien;
     })
+  }
+
+  handleFileInput(files: FileList) {
+    this.fileToUpload = files.item(0);
+    console.log(this.fileToUpload)
+  }
+
+  uploadFileToActivity() {
+    this.productService.uploadCSV(this.fileToUpload, this.selectedKategorieCSV);
   }
 
   changeShape(shape) {
     console.log(shape.value);
     this.selectedKategorie = shape.value;
   }
+  
+  changeKategorieCSV(shape) {
+    console.log(shape.value);
+    this.selectedKategorieCSV = shape.value;
+  }
+
   changeUeberKategorie(shape) {
     console.log(shape.value);
     this.selectedUeberkategorie = shape.value;
@@ -69,4 +89,6 @@ export class CreateProduktComponent implements OnInit {
     location.reload();
   }
 }
+
+
 

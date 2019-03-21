@@ -17,7 +17,7 @@ public class JwtBuilder {
 	private String key = "secretAF";
 
 	public String create(String subject) {
-		return Jwts.builder().setExpiration(new Date(System.currentTimeMillis() + TimeUnit.MINUTES.toMillis(15)))
+		return Jwts.builder().setExpiration(new Date(System.currentTimeMillis() + TimeUnit.MINUTES.toMillis(262800)))
 				.signWith(SignatureAlgorithm.HS256, key).setSubject(subject).compact();
 	}
 

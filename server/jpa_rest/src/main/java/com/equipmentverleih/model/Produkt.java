@@ -57,6 +57,18 @@ public class Produkt implements Serializable {
 	}
 
 	public Produkt(String kurzbezeichnung, String inventurnummer, String seriennummer, String marke, String bezeichnung,
+			String langbezeichnung, String foto, Kategorie kategorie) {
+		this.kurzbezeichnung = kurzbezeichnung;
+		this.inventurnummer = inventurnummer;
+		this.seriennummer = seriennummer;
+		this.marke = marke;
+		this.bezeichnung = bezeichnung;
+		this.langbezeichnung = langbezeichnung;
+		this.kategorie = kategorie;
+		this.foto = foto;
+	}
+	
+	public Produkt(String kurzbezeichnung, String inventurnummer, String seriennummer, String marke, String bezeichnung,
 			String langbezeichnung, String foto, Kategorie kategorie, List<Verleih> verleih) {
 		this.kurzbezeichnung = kurzbezeichnung;
 		this.inventurnummer = inventurnummer;
