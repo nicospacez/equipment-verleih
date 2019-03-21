@@ -13,6 +13,8 @@ export class ProduktListComponent implements OnInit {
 
   lastStatus: any;
 
+
+
   constructor(private productService: ProductService) { }
 
   ngOnInit() {

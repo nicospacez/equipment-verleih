@@ -10,7 +10,9 @@ import { ProductService } from '../services/product.service';
 })
 export class ProductsComponent implements OnInit {
 
-  private productList
+  private productList;
+  viewChanger = false;
+  
   constructor(private http: HttpClient, private router: Router, private productService: ProductService) {
     
    }
@@ -33,6 +35,10 @@ export class ProductsComponent implements OnInit {
 
 
     })
+  }
+
+  changeView(){
+    this.viewChanger = !this.viewChanger;
   }
 
   goToDetailView(product) {

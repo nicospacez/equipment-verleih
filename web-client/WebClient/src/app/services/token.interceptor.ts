@@ -11,6 +11,7 @@ export class TokenInterceptor implements HttpInterceptor {
       setHeaders: {
         Authorization: `Bearer ${this.auth.getToken()}`,
         'Content-Type': 'application/json'
+        //'Content-Type': 'multipart/form-data; boundary=--xxxxSEPARATIONxxxx--'
       }
     });
     return next.handle(request);

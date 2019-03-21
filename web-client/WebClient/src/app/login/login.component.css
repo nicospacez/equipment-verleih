@@ -4,7 +4,7 @@
   position: fixed; /* or absolute */
   top: 0%;
   left: 0%;
-  background-color: #4B7BEC;
+  background-color: #333F65;
   width: 20%;
   height: 100%;
   background-repeat: no-repeat;
@@ -33,7 +33,7 @@
 }
 
 .btn.btn-primary{
-    background-color: #4B7BEC;
+    background-color: #333F65;
     width: 50%;
     color: white;
 }

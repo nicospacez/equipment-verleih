@@ -1,49 +1,48 @@
-  <div class="all">
+<div class="all">
 
   <div class="container">
-        
-      <label class= "title">Equipment</label>
-      
-          <input class="searchBar" type="text" placeholder="nach Equipment suchen ...">
-      
-      
-      
-          <!-- Kachel Ansicht
 
-            
-        <div class="rounded float-left" *ngFor="let product of productList?.produktDtoList" (click) = "goToDetailView(product)" >      
-              <img class = "floatingImages" *ngIf="!product.foto" src="../../assets/product_gh4.png" alt="...">
-              <img class = "floatingImages" *ngIf="product.foto" src="data:image/png;base64,{{product.foto}}" alt="...">
-              <label class = "productName">{{ product.marke }} {{ product.bezeichnung }}</label><br>
-              <label class = "productShort">{{ product.kurzbezeichnung }}</label>
-          </div>
+    <label class="title">Equipment</label>
+
+  
+    <input class="searchBar" type="text" placeholder="nach Equipment suchen ...">
+
+    Listenanzeige <input type="checkbox" name="viewChanger" value="viewChanger" (click)=changeView()>
+
+    <div *ngIf="!viewChanger">
+      <div class="rounded float-left" *ngFor="let product of productList?.produktDtoList" (click)="goToDetailView(product)">
+        <img class="floatingImages" *ngIf="!product.foto" src="../../assets/product_gh4.png" alt="...">
+        <img class="floatingImages" *ngIf="product.foto" src="data:image/png;base64,{{product.foto}}" alt="...">
+        <label class="productName">{{ product.marke }} {{ product.bezeichnung }}</label>
+        <br>
+        <label class="productShort">{{ product.kurzbezeichnung }}</label>
       </div>
-        -->
-        <div class="container">
-        <table cellspacing="0" cellpadding="0" class="table-hover" >
-                <thead>
-                  <tr>
-                    <th scope="col">Vorschau</th>
-                    <th scope="col">Modell</th>
-                    <th scope="col">Kurzberzeichnung</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let product of productList?.produktDtoList" (click) = "goToDetailView(product)">
-                    <td>
-                        <img class = "listImage" *ngIf="!product.foto" src="../../assets/default_camera.png" alt="...">
-                        <img class = "listImage" *ngIf="product.foto" src="data:image/png;base64,{{product.foto}}" alt="...">
-                    </td>
-                    <td>{{ product.marke }} {{ product.bezeichnung }}</td>
-                    <td>{{ product.kurzbezeichnung }}}</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-
+    </div>
+    <div class="container" *ngIf="viewChanger">
+      <table cellspacing="0" cellpadding="0" class="table-hover">
+        <thead>
+          <tr>
+            <th scope="col">Vorschau</th>
+            <th scope="col">Modell</th>
+            <th scope="col">Kurzberzeichnung</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let product of productList?.produktDtoList" (click)="goToDetailView(product)">
+            <td>
+              <img class="listImage" *ngIf="!product.foto" src="../../assets/default_camera.png" alt="...">
+              <img class="listImage" *ngIf="product.foto" src="data:image/png;base64,{{product.foto}}" alt="...">
+            </td>
+            <td>{{ product.marke }} {{ product.bezeichnung }}</td>
+            <td>{{ product.kurzbezeichnung}}</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
 
+  </div>
 
 
 
-    </div>
+
+</div>

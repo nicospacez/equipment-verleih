@@ -41,7 +41,7 @@
     width: 100%;
     min-width: 180px;
     z-index: 201;
-
+    min-width: 180px;
 }
 
 
