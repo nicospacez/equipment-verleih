@@ -1,76 +1,106 @@
-    <div class= "all">
-    
+<div class="all">
+
     <div class="container">
 
 
-         
-        <img class = "centeredImage" *ngIf="!product?.produktDto?.foto" src="../../assets/default_camera.png" alt="...">
-        <img class = "centeredImage" *ngIf="product?.produktDto?.foto" src="data:image/png;base64,{{product?.produktDto?.foto}}" alt="...">
 
-        
+        <img class="centeredImage" *ngIf="!product?.produktDto?.foto" src="../../assets/default_camera.png" alt="...">
+        <img class="centeredImage" *ngIf="product?.produktDto?.foto"
+            src="data:image/png;base64,{{product?.produktDto?.foto}}" alt="...">
+
+
         <br>
-        <div class= "over"><div class="productInfo" style="display:inline-block">Kurzbezeichnung</div> <div class= "info" style="display:inline-block">{{product?.produktDto.kurzbezeichnung}}</div></div>
-
-        <br><div class = "divider"></div>
-
-        <div class= "over"><div class="productInfo" style="display:inline-block">Bezeichnung</div> <div class= "info" style="display:inline-block">{{product?.produktDto.bezeichnung}}</div></div>
-
-        <br><div class = "divider"></div>
-
-        <div class= "over"><div class="productInfo" style="display:inline-block">Langbezeichung</div> <div class= "info" style="display:inline-block">{{product?.produktDto.langbezeichnung}}</div></div>
-
-        <br><div class = "divider"></div><br>
-
-
-        <button type="button" class="btn btn-success" (click)="ausleihen()">Verleihen</button>
-
-
-        
-        <div *ngIf="ausleihenClicked">
-            <br>
-            <div class="form-group">
-                <select [(ngModel)]="selectedClass" class="form-control dropdown">
-                    <option value="xx">
-                        -- Klasse auswählen --
-                    </option>
-                    <option>
-                        5BHITM
-                    </option>
-                    <option>
-                        5AHITM
-                    </option>
-                    <option>
-                        4AHITM
-                    </option>
-                </select>
-            </div>
-            <div class="form-group">
-                <select [(ngModel)]="selectedStudent" class="form-control dropdown">
-                   
-                    <option value="xx">
-                        -- Schüler auswählen --
-                    </option>
-                    <option>
-                        Pascal Bachinger
-                    </option>
-                    <option>
-                        Janine Feyrer
-                    </option>
-                    <option>
-                        Raphael Spitzbart
-                    </option>
-                    <option>
-                        Nico Zandomeneghi
-                    </option>
-                </select>
-            </div>
-            <br>
-            <label>Wählen Sie ein Datum aus</label>
-            <input class="datepicker" type="date"> <br>
-            <button type="button" class="btn btn-success" (click)="pushAusleihen()">jetzt Verleihen</button>
-
-            
-                
+        <div class="over">
+            <div class="productInfo" style="display:inline-block">Kurzbezeichnung</div>
+            <div class="info" style="display:inline-block">{{product?.produktDto.kurzbezeichnung}}</div>
         </div>
+
+        <br>
+        <div class="divider"></div>
+
+        <div class="over">
+            <div class="productInfo" style="display:inline-block">Bezeichnung</div>
+            <div class="info" style="display:inline-block">{{product?.produktDto.bezeichnung}}</div>
+        </div>
+
+        <br>
+        <div class="divider"></div>
+
+        <div class="over">
+            <div class="productInfo" style="display:inline-block">Langbezeichung</div>
+            <div class="info" style="display:inline-block">{{product?.produktDto.langbezeichnung}}</div>
+        </div>
+
+        <br>
+        <div class="divider"></div><br>
+
+        <div class="btn btn-danger verleihButton" (click)="zuruecknahme()"
+            *ngIf="product?.produktDto.status == 'VERLIEHEN' && isAdmin">
+            Zurücknehmen
+        </div>
+        <div class="btn btn-success verleihButton" data-toggle="collapse" data-target="#collapseExample"
+            aria-expanded="false" aria-controls="collapseExample" *ngIf="product?.produktDto.status != 'VERLIEHEN' && isAdmin">
+            Verleihen
+        </div>
+        <div class="collapse" id="collapseExample">
+            <div class="card card-body">
+
+                <br>
+                <div class="form-group">
+                    <label>Klasse</label>
+                    <select class="form-control" (change)="changeKlasse($event.target)">
+                        <option disabled>--- Klasse wählen ---</option>
+                        <option value="{{class}}" *ngFor="let class of classes">{{class}}
+                        </option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Schüler</label>
+                    <select class="form-control" (change)="changeUser($event.target)">
+                        <option disabled>--- Schüler wählen ---</option>
+                        <option value="{{user.userId}}" *ngFor="let user of users?.userDtoList">{{user.vorname}}
+                            {{user.nachname}}
+                        </option>
+                    </select>
+                </div>
+                <br>
+                <label>Rückgabedatum:</label>
+                <p class="hint">Wenn kein Rückgabedatum gesetzt wird, wird die Standardausleihedauer gewählt!</p>
+                <mat-form-field>
+                    <input matInput [matDatepicker]="picker" placeholder="Datum wählen"
+                        (dateChange)="changeRuecknahmeDate($event)">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+                <br>
+                <div class="errorMessage" *ngIf="showError">
+                    <p>Bitte Schüler wählen. <br></p>
+                </div>
+                <div class="btn btn-success" (click)="pushAusleihen()">
+                    Jetzt verleihen
+                </div>
+
+            </div>
+        </div>
+        <hr>
+        
+        <h4 *ngIf="latestVerleihs?.verleihDtoList.length > 0">Wo wars zuletzt?</h4>
+        <table cellspacing="0" cellpadding="0" class="table-hover" *ngIf="latestVerleihs?.verleihDtoList.length > 0">
+            <thead>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Von</th>
+                    <th scope="col">Bis</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let product of latestVerleihs?.verleihDtoList">
+                    <td>{{product.user.vorname}} {{product.user.nachname}}</td>
+                    <td>{{product.startDate}}</td>
+                    <td>{{product.endDate}}</td>
+                </tr>
+            </tbody>
+        </table>
+
     </div>
 </div>

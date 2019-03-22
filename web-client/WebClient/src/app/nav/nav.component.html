@@ -1,5 +1,6 @@
 <div class="all">
   <div class="topBar">
+    <div class="logo"><img src="../../assets/logo_ev_white.png" class="logoItself"></div>
     <div class="content">
 
       <div>{{user?.vorname}} {{user?.nachname}}</div>
@@ -12,7 +13,7 @@
 
   <div class="sideBar">
 
-    <div class="logo"><img src="../../assets/logo_ev_white.png" width="90%"></div>
+
 
     <ul class="myMenu">
 
@@ -32,23 +33,23 @@
           <img src="../../assets/admin.png" class="menuIcon"> Admin</a>
       </div>
 
-      <div class="myItem" class = "under" *ngIf="isAdmin && inAdmin">
+      <div class="myItem" class="under" *ngIf="isAdmin && inAdmin">
         <a class="myItem" routerLink="admin/list">
           <img src="../../assets/side_icons/admin_list.png" class="menuIcon"> Liste </a>
       </div>
 
-      <div class="myItem" class = "under" *ngIf="isAdmin && inAdmin">
+      <div class="myItem" class="under" *ngIf="isAdmin && inAdmin">
         <a class="myItem" routerLink="admin/create">
           <img src="../../assets/side_icons/admin_create.png" class="menuIcon">Erstellen</a>
       </div>
 
-      
 
-      
+
+
 
     </ul>
 
-    <button class = "logout" (click)="logoutUser()">Logout</button>
+    <button class="logout" (click)="logoutUser()">Logout</button>
 
   </div>
 

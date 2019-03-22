@@ -7,6 +7,7 @@
     min-width: 180px;
     height: 100vh;
     z-index: 100;
+    top: 50px;
 }
 
 .myMenu{
@@ -38,26 +39,33 @@
     color: white;
     background-color: #3D4A73;
     height: 50px;
-    width: 100%;
+    width: 10%;
     min-width: 180px;
-    z-index: 201;
-    min-width: 180px;
+    left:0px;
 }
 
-
+.logoItself{
+    width:90%;
+    margin-top:2%;
+}
 .topBar{
     position: fixed;
     right: 0;
+    left:0px;
     background-color: #FFFFFF;
     height: 50px;
-    width: 90%;
+    width: 100%;
     z-index: 200;
+    text-align:center;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    justify-content: space-between;
 }
 
 .content{
-
-    margin-left: 90%;
-    margin-top: 5px;
+    margin-top:0.5%;
+    margin-right: 2%;
     font-size: 1.5em;
     font-family: 'Karla', sans-serif;
 }
@@ -72,9 +80,9 @@
 .logout {
 
     position: absolute;
-    bottom: 1%;
+    bottom: 7%;
     left: 3%;
-
+    width: 90%;
     background-color: rgb(216, 94, 94);
     border: none;
     color: white;

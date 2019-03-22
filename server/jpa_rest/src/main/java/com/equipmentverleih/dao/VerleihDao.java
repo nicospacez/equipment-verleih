@@ -28,8 +28,15 @@ public class VerleihDao {
 				.getSingleResult();
 	}
 
-	public List<Verleih> findOverUsername(String username) {
-		return em.createQuery("select v from Verleih v where v.user.username = '" + username + "'", Verleih.class)
-				.getResultList();
+	public List<Verleih> findOpenUserVerleih(Long userId) {
+		return em.createQuery(
+				"select v from Verleih v where v.user.userId = " + userId + " AND v.zurueckgenommenVon IS NULL order by v.verleihId desc",
+				Verleih.class).setMaxResults(15).getResultList();
+	}
+
+	public List<Verleih> findLatestVerleih(Long produktId) {
+		return em.createQuery(
+				"select v from Verleih v where v.produkt.produktId = " + produktId + " order by v.verleihId desc",
+				Verleih.class).setMaxResults(5).getResultList();
 	}
 }
