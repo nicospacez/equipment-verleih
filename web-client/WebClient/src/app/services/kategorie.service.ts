@@ -11,7 +11,7 @@ export class KategorieService {
 
   constructor(private http: HttpClient) { }
 
-  getAllProdukte(): Promise<any> {
+  getAllKategorien(): Promise<any> {
     return new Promise((resolve, reject) => {
       this.http.get(this.baseUrl).subscribe(data => {
         resolve(data);

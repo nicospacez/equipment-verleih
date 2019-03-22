@@ -12,33 +12,28 @@ export class ProductsComponent implements OnInit {
 
   private productList;
   viewChanger = false;
-  
+  productFilter:any;
+
+  originList;
+
   constructor(private http: HttpClient, private router: Router, private productService: ProductService) {
     
    }
 
   ngOnInit() {
-    this.http.get('http://192.168.99.100:8080/jee/app/produkt').subscribe(data =>{
+    this.productService.getAllProducts().then(data =>{
+      console.log(data)
       this.productList = data;
-
-      /*
-      this.productList.forEach(element => {
-
-        var imageBase64 = element.foto;
-        var blob = new Blob([imageBase64], {type: 'image/png'});
-        element.foto = new File([blob], 'imageFileName.png');
-
-      })
-      */
-
-
-
-
+      this.originList = data.produktDtoList;
     })
   }
 
-  changeView(){
-    this.viewChanger = !this.viewChanger;
+  changeView(mode){
+    if(mode == "list"){
+      this.viewChanger = true;
+    }else{
+      this.viewChanger = false;
+    }
   }
 
   goToDetailView(product) {
@@ -46,6 +41,14 @@ export class ProductsComponent implements OnInit {
     this.productService.product = product;
     this.router.navigate(['productsDetailView/'+product.produktId]);
 
+  }
+
+  filterProducts(event){
+    this.productList.produktDtoList = this.originList.filter(data=> data.langbezeichnung.toLowerCase().includes(event.toLowerCase()) || data.kategorie.kurzbezeichnung.toLowerCase().includes(event.toLowerCase()));
+    if(event == ""){
+      this.productList.produktDtoList = this.originList;
+    }
+    console.log(this.productList);
   }
 
 

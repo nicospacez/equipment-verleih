@@ -7,44 +7,12 @@
     z-index: 0;
     overflow: auto;
 }
-
-
-.rounded.float-left{
-
-background-color: white;
-
-margin:2%;
-
-width: 20%;
-height: 250px;
-box-shadow: 0px 0px 9px 0px rgba(0,0,0,0.2);
-
-}
-
-.floatingImages{
-    width: 50%; 
-    margin-left:25%;
-    margin-top: 25%;
-    cursor: pointer;
-}
-
-.productName{
-    margin-top: 50px;
-    margin-left: 80px;
-    color: #5360c6;
-}
-
-.productShort{
-    margin-left: 100px;
-    color: #5360c6;
-}
-
 ::placeholder { 
     color:  white;
  }
 
 .container{
-
+    display: table;
     width: 100%;
     background-color: #F5F6Fa!important;
 
@@ -66,43 +34,17 @@ box-shadow: 0px 0px 9px 0px rgba(0,0,0,0.2);
 }
 
 .title{
-
-font-size: 3em;
-margin-top:5%;
-margin-left:41%;
-
-}
-
-
-/*Tets*/
-
-.sidenav a {
-    padding: 5pt;
-    text-decoration: none;
-    font-size: 15pt;
-    color: #ffffff;
-    display: block;
-}
-
-.sidenav a:hover {
-    color: black;
-}
-
-.sidenav{
+    margin-top: 5%;
+    font-size: 3em;
+    width: 100%;
     text-align: center;
-    display:table-cell;
-    vertical-align:middle;
-    height: 100%;
 }
-html, body { height: 100%; width: 100%; margin: 0; }
 
-.leftBox{
-    float:left; 
-    background-color: #608aed;
-    height: 1000px;
-    padding: 5px;
-    padding-top: 10%;
+.cardWrapper{
+    margin: auto;
+    width: 86%;
 }
+
 
 .listImage{
     width: 50px;
@@ -113,10 +55,83 @@ table {
     width: 100%;
   }
   
-  th, td {
+th{
+    background-color: #333F65;
+    color:white;
+    font-size: 1.2em;
+    transition: none;
+}
+
+th, td {
     text-align: left;
     padding: 8px;
-  }
-  
-  tr:nth-child(even) {background-color: #f1f1f1e7;}
+    text-align: center;
+}
 
+tr{
+    transition: all .2s ease-in-out;
+}
+
+tr:hover{
+      cursor: pointer;
+      transform: translateX(10px);
+}
+
+
+tr:nth-child(even) {background-color: #e4e4e4;}
+
+
+.myCard{
+    width:200px auto;
+    min-width: 200px;
+    height: 230px;
+    float: left;
+    margin: 2%;
+    text-align: center;
+    transition: all .2s ease-in-out;
+}
+
+.myCard:hover{
+    cursor: pointer;
+    transform: scale(1.1);
+}
+
+.myImage{
+    width:100px;
+    height: 100px;
+    display: table;
+    margin: 0 auto;
+}
+
+.productName{
+    display: inline-block;
+    margin: 0 auto;
+    color: #5360c6;
+}
+
+.circle{
+    border-radius: 50%;
+    width: 30px;
+    height: 30px; 
+    margin: auto;
+}
+
+.statusbar{
+    width: 100%;
+    height: 2%; 
+    margin: auto;
+}
+
+.statusGreen{
+    background-color: #7deb81;
+}
+
+.statusRed{
+    background-color: #FC5C65;
+}
+
+.allShadow{
+    -moz-box-shadow: 0 0 4px #ccc;
+    -webkit-box-shadow: 0 0 4px #ccc;
+    box-shadow: 0 0 4px #ccc;
+}

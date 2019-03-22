@@ -40,8 +40,7 @@ export class NavComponent implements OnInit {
   }
 
   public logoutUser() {
-    localStorage.removeItem('token');
-    window.location.reload();
+    this.authService.logoutUser();
   }
 
 

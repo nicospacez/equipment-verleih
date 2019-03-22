@@ -10,16 +10,19 @@
           <th scope="col">Name</th>
           <th scope="col">Kurzbezeichnung</th>
           <th scope="col">Marke</th>
-          <th scope="col">Inventurnummer</th>
+          <th scope="col">Von</th>
+          <th scope="col">Bis</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let product of products?.verleihDtoList">
-          <td><img class="myImage" *ngIf="product.produkt.foto" src="data:image/png;base64,{{product.produkt.foto}}" alt="..."></td>
+        <tr *ngFor="let product of products?.verleihDtoList" (click)="goToDetailView(product.produkt)">
+          <td *ngIf="product.produkt.foto"><img class="myImage"  src="data:image/png;base64,{{product.produkt.foto}}" alt="..."></td>
+          <td *ngIf="!product.produkt.foto"><img class="myImage" src="../../assets/default_camera.png" alt="..."></td>
           <td>{{product.produkt.bezeichnung}}</td>
           <td>{{product.produkt.kurzbezeichnung}}</td>
           <td>{{product.produkt.marke}}</td>
-          <td>{{product.produkt.inventurnummer}}</td>
+          <td>{{product.startDate}}</td>
+          <td>{{product.endDate}}</td>
         </tr>
       </tbody>
     </table>

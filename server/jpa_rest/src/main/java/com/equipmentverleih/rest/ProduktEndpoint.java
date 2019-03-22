@@ -37,7 +37,6 @@ import com.equipmentverleih.response.ProduktResponse;
 
 @Path("/produkt")
 @Produces({ MediaType.APPLICATION_JSON })
-@Consumes({ MediaType.APPLICATION_JSON, MediaType.MULTIPART_FORM_DATA})
 
 @Transactional
 public class ProduktEndpoint {

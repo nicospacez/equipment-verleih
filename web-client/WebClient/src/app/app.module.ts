@@ -21,10 +21,23 @@ import { ProduktListComponent } from './admin/produkt-list/produkt-list.componen
 import { KategorieService } from './services/kategorie.service';
 import { ProductService } from "./services/product.service";
 import { VerleihService} from './services/verleih.service';
+import {UserService} from './services/user.service';
 import { TokenInterceptor } from './services/token.interceptor';
 import { AuthGuard} from './services/auth.guard.service';
 import { LoginService } from './services/login.service';
 import { IsAdmin} from './services/auth.guard.service';
+
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import {MatCardModule} from '@angular/material/card';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material';
+import {MatInputModule} from '@angular/material';
+import {MatDialogModule} from '@angular/material/dialog';
+import{MatButtonModule} from '@angular/material/button';
+
+import{MyDialog} from './products/products-detail-view/products-detail-view.component';
+
 export function tokenGetter() {
   return localStorage.getItem('token');
 }
@@ -63,7 +76,8 @@ const appRoutes: Routes = [
     NavComponent,
     ProductsDetailViewComponent,
     CreateProduktComponent,
-    ProduktListComponent
+    ProduktListComponent,
+    MyDialog
   ],
   imports: [
     BrowserModule,
@@ -76,7 +90,15 @@ const appRoutes: Routes = [
       }
     }),
     RouterModule.forRoot(appRoutes),
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatButtonToggleModule,
+    MatCardModule,
+    MatDatepickerModule,
+    MatFormFieldModule,
+    MatNativeDateModule,
+    MatInputModule,
+    MatDialogModule,
+    MatButtonModule
   ],
   providers: [
     ProductService,
@@ -89,8 +111,12 @@ const appRoutes: Routes = [
     AuthGuard,
     IsAdmin,
     LoginService,
-    VerleihService
+    VerleihService,
+    UserService,
+    MatDatepickerModule,
+    {provide: MAT_DATE_LOCALE, useValue: 'en-GB'}
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [MyDialog]
 })
 export class AppModule { }

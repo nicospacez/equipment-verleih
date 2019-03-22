@@ -224,7 +224,11 @@ public class Produkt implements Serializable {
 	public boolean isVerliehen(Verleih lastVerleih) {
 		Date date = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
-
+		
+		if(lastVerleih.getZurueckgenommenVon() != null) {
+			return false;
+		}
+		
 		try {
 			Date currentDate = sdf.parse(sdf.format(new Date()));
 			Date startDate = sdf.parse(sdf.format(lastVerleih.getStartDate()));

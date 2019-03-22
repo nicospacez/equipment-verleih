@@ -3,28 +3,39 @@
   <div class="container">
 
     <label class="title">Equipment</label>
+    <br><br><br>
+    <input class="searchBar" type="text" placeholder="suche nach Bezeichnung oder Kategorie..." [ngModel]="productFilter" (ngModelChange)="filterProducts($event)"> 
 
-  
-    <input class="searchBar" type="text" placeholder="nach Equipment suchen ...">
-
-    Listenanzeige <input type="checkbox" name="viewChanger" value="viewChanger" (click)=changeView()>
+    <mat-button-toggle-group name="fontStyle" aria-label="Font Style" value="card" *ngIf="originList?.length > 0">
+      <mat-button-toggle value="card" (click)="changeView('card')" selected><i
+          class="material-icons">check_box_outline_blank</i></mat-button-toggle>
+      <mat-button-toggle value="list" (click)="changeView('list')"><i class="material-icons">list</i>
+      </mat-button-toggle>
+    </mat-button-toggle-group>
 
     <div *ngIf="!viewChanger">
-      <div class="rounded float-left" *ngFor="let product of productList?.produktDtoList" (click)="goToDetailView(product)">
-        <img class="floatingImages" *ngIf="!product.foto" src="../../assets/product_gh4.png" alt="...">
-        <img class="floatingImages" *ngIf="product.foto" src="data:image/png;base64,{{product.foto}}" alt="...">
-        <label class="productName">{{ product.marke }} {{ product.bezeichnung }}</label>
-        <br>
-        <label class="productShort">{{ product.kurzbezeichnung }}</label>
+      <div class="cardWrapper" *ngFor="let product of productList?.produktDtoList" (click)="goToDetailView(product)">
+        <mat-card class="myCard">
+          <img class="myImage" *ngIf="!product.foto" src="../../assets/product_gh4.png" alt="...">
+          <img class="myImage" *ngIf="product.foto" src="data:image/png;base64,{{product.foto}}" alt="...">
+          <br><br>
+          <label class="productName">{{ product.langbezeichnung }}</label><br>
+          <div class="statusbar statusGreen" *ngIf="product.status == 'FREI'"></div>
+          <div class="statusbar statusRed" *ngIf="product.status != 'FREI'"></div>
+        </mat-card>
       </div>
     </div>
-    <div class="container" *ngIf="viewChanger">
-      <table cellspacing="0" cellpadding="0" class="table-hover">
+
+    <div class="cardWrapper" *ngIf="viewChanger">
+      <br>
+      <table cellspacing="0" cellpadding="0" class="table-hover allShadow" *ngIf="productList">
         <thead>
           <tr>
-            <th scope="col">Vorschau</th>
+            <th scope="col"></th>
             <th scope="col">Modell</th>
             <th scope="col">Kurzberzeichnung</th>
+            <th scope="col">Kategorie</th>
+            <th scope="status">Status</th>
           </tr>
         </thead>
         <tbody>
@@ -35,6 +46,11 @@
             </td>
             <td>{{ product.marke }} {{ product.bezeichnung }}</td>
             <td>{{ product.kurzbezeichnung}}</td>
+            <td>{{ product.kategorie.kurzbezeichnung}}</td>
+            <td>
+                <div class="circle statusGreen" *ngIf="product.status == 'FREI'"></div>
+                <div class="circle statusRed" *ngIf="product.status != 'FREI'"></div>
+            </td>
           </tr>
         </tbody>
       </table>

@@ -140,8 +140,14 @@ public class Verleih implements Serializable {
 	}
 
 	public VerleihDto toDto() {
-		return new VerleihDto(this.verleihId, this.endDate, this.startDate, this.user.toDto(),
-				this.hergeborgtVon.toDto(), this.zurueckgenommenVon.toDto(), this.produkt.toDto());
+		if (this.zurueckgenommenVon != null) {
+			return new VerleihDto(this.verleihId, this.endDate, this.startDate, this.user.toDto(),
+					this.hergeborgtVon.toDto(), this.zurueckgenommenVon.toDto(), this.produkt.toDto());
+		} else {
+			return new VerleihDto(this.verleihId, this.endDate, this.startDate, this.user.toDto(),
+					this.hergeborgtVon.toDto(), null, this.produkt.toDto());
+		}
+
 	}
 
 }
