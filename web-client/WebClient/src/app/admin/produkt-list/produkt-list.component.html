@@ -1,36 +1,46 @@
-<div class="container">
+<div class="myContainer">
 
   <div class="filterMenu">
-      <div class="btn-group btn-group-toggle fullWidth" data-toggle="buttons">
-          <label id="buttonGreen" class="btn btn-green divide" (click)="changeFilter('FREI')">
-            <input type="radio" name="options" id="option1" autocomplete="off" checked> Frei
-          </label>
-          <label id="buttonOrange" class="btn btn-orange divide" (click)="changeFilter('RESERVIERT')">
-            <input type="radio" name="options" id="option2" autocomplete="off"> Reserviert
-          </label>
-          <label id="buttonRed" class="btn btn-red divide" (click)="changeFilter('VERLIEHEN')">
-            <input type="radio" name="options" id="option3" autocomplete="off"> Verliehen
-          </label>
-        </div>
+    <div class="btn-group btn-group-toggle fullWidth" data-toggle="buttons">
+      <label id="buttonGreen" class="btn btn-green divide" (click)="changeFilter('FREI')">
+        <input type="radio" name="options" id="option1" autocomplete="off" checked> Frei
+      </label>
+      <label id="buttonOrange" class="btn btn-orange divide" (click)="changeFilter('RESERVIERT')">
+        <input type="radio" name="options" id="option2" autocomplete="off"> Reserviert
+      </label>
+      <label id="buttonRed" class="btn btn-red divide" (click)="changeFilter('VERLIEHEN')">
+        <input type="radio" name="options" id="option3" autocomplete="off"> Verliehen
+      </label>
+    </div>
   </div>
 
+  <input class="searchBar" type="text" placeholder="suche nach Bezeichnung oder Kategorie..." [ngModel]="productFilter" (ngModelChange)="filterProducts($event)"> 
 
   <table cellspacing="0" cellpadding="0" class="table-hover">
     <thead>
       <tr>
+        <th></th>
         <th scope="col">Name</th>
+        <th scope="col">Marke</th>
         <th scope="col">Kurzbezeichnung</th>
+        <th scope="col">Inventurnummer</th>
+        <th scope="col">Kategorie</th>
         <th scope="col" width="1%">Status</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let product of products">
+      <tr *ngFor="let product of products" (click)="goToDetailView(product)">
+        <td *ngIf="product.foto"><img class="myImage" src="{{product.foto}}" alt="..."></td>
+        <td *ngIf="!product.foto"><img class="myImage" src="../../assets/default_camera.png" alt="..."></td>
         <td>{{product.bezeichnung}}</td>
+        <td>{{product.marke}}</td>
         <td>{{product.kurzbezeichnung}}</td>
+        <td>{{product.inventurnummer}}</td>
+        <td>{{product.kategorie.kurzbezeichnung}}</td>
         <td>
-            <div class="circle statusGreen" *ngIf="product.status == 'FREI'"></div>
-            <div class="circle statusRed" *ngIf="product.status != 'FREI'"></div>
-          </td>
+          <div class="circle statusGreen" *ngIf="product.status == 'FREI'"></div>
+          <div class="circle statusRed" *ngIf="product.status != 'FREI'"></div>
+        </td>
       </tr>
     </tbody>
   </table>

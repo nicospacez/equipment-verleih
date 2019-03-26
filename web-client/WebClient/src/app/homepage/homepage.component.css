@@ -1,25 +1,24 @@
-.title{
+.titleBox{
+  width: 100%;
+  margin-top:5%;
+  text-align: center;
+}
 
+.title{
     font-size: 3em;
-    margin-top:5%;
-    margin-left:41%;
     color: #333333;
-    font-family: 'Karla', sans-serif;
-    
-    }
+    font-family: 'Karla', sans-serif;    
+}
 
 
 .over{
     background-color: #F5F6Fa;
- 
-
-        position: absolute;
-        top:0;
-        right: 0;
-        width: 90%;
-        z-index: 0;
-        font-family: 'Karla', sans-serif;
-
+    position: absolute;
+    top:0;
+    right: 0;
+    width: 90%;
+    z-index: 0;
+    font-family: 'Karla', sans-serif;
 }
 
 .container{
