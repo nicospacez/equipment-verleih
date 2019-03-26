@@ -163,3 +163,33 @@
   .secondForm{
     margin-top: 5%;
   }
+
+:host /deep/ .prodImageUpload {
+  background-color: white;
+  border-radius: 5px;
+  border-color: #555;
+  border-style: dotted;
+  border-width: 2px;
+  margin:2% auto;
+  width: 100%;
+}
+
+:host /deep/ .prodImageUpload .img-ul-upload {
+  background-color: #333F65  !important;
+}
+
+:host /deep/ .prodImageUpload .img-ul-clear {
+  background-color: #DE5959 !important;
+}
+
+:host /deep/ .prodImageUpload .img-ul-drag-box-msg {
+  color: black !important;
+}
+
+:host /deep/ .prodImageUpload .img-ul-container {
+  background-color: white !important;
+}
+
+.dangerInfo{
+  color: #DE5959;
+}
