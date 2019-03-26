@@ -2,10 +2,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { JwtModule } from '@auth0/angular-jwt';
+import { ImageUploadModule } from "angular2-image-upload";
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -37,6 +38,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import{MatButtonModule} from '@angular/material/button';
 
 import{MyDialog} from './products/products-detail-view/products-detail-view.component';
+import{MyDialog2} from './admin/create-produkt/create-produkt.component';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -77,11 +79,13 @@ const appRoutes: Routes = [
     ProductsDetailViewComponent,
     CreateProduktComponent,
     ProduktListComponent,
-    MyDialog
+    MyDialog,
+    MyDialog2
   ],
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     JwtModule.forRoot({
       config: {
@@ -89,6 +93,7 @@ const appRoutes: Routes = [
         whitelistedDomains: ['http://192.168.99.100:8080', 'localhost']
       }
     }),
+    ImageUploadModule.forRoot(),
     RouterModule.forRoot(appRoutes),
     BrowserAnimationsModule,
     MatButtonToggleModule,
@@ -117,6 +122,6 @@ const appRoutes: Routes = [
     {provide: MAT_DATE_LOCALE, useValue: 'en-GB'}
   ],
   bootstrap: [AppComponent],
-  entryComponents: [MyDialog]
+  entryComponents: [MyDialog,MyDialog2]
 })
 export class AppModule { }

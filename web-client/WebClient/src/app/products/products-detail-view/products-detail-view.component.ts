@@ -23,6 +23,7 @@ export class ProductsDetailViewComponent implements OnInit {
   selectedUser;
   selectedEndDate: any;
   showError = false;
+  showDateError = false;
   latestVerleihs;
   isAdmin = false;
 
@@ -30,7 +31,7 @@ export class ProductsDetailViewComponent implements OnInit {
     private authService: AuthService,
     private userService: UserService,
     private activatedRoute: ActivatedRoute,
-    private router : Router,
+    private router: Router,
     private verleihService: VerleihService,
     public dialog: MatDialog
   ) { }
@@ -50,7 +51,7 @@ export class ProductsDetailViewComponent implements OnInit {
       this.product = data;
     })
 
-    this.verleihService.getLatestVerleih(this.id).then(data =>{
+    this.verleihService.getLatestVerleih(this.id).then(data => {
       console.log(data);
       this.latestVerleihs = data;
     })
@@ -87,7 +88,7 @@ export class ProductsDetailViewComponent implements OnInit {
       };
 
       console.log(sendJSON)
-      this.verleihService.ausleihen(sendJSON).then(data =>{
+      this.verleihService.ausleihen(sendJSON).then(data => {
         this.router.navigate(['/products']);
       });
     }
@@ -122,8 +123,12 @@ export class ProductsDetailViewComponent implements OnInit {
 
   changeRuecknahmeDate(event) {
     if (event.value != null) {
-      let test = this.formatDate(event.value)
-      this.selectedEndDate = event.value;
+      if (event.value <= new Date()) {
+        this.showDateError = true;
+      } else {
+        this.showDateError = false;
+        this.selectedEndDate = event.value;
+      }
     }
   }
 
@@ -135,10 +140,10 @@ export class ProductsDetailViewComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
       console.log(result);
-      if(result){
-        this.verleihService.doZuruecknahme(this.latestVerleihs.verleihDtoList[0].verleihId, this.authService.getUser().userId).then(data =>{
+      if (result) {
+        this.verleihService.doZuruecknahme(this.latestVerleihs.verleihDtoList[0].verleihId, this.authService.getUser().userId).then(data => {
           console.log(data)
-          window.location.reload();
+          this.ngOnInit();
         });
       }
     });
@@ -161,7 +166,7 @@ export class MyDialog {
     this.dialogRef.close();
   }
 
-  onYesClick(){
+  onYesClick() {
     this.dialogRef.close(true);
   }
 

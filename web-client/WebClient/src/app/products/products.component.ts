@@ -44,7 +44,7 @@ export class ProductsComponent implements OnInit {
   }
 
   filterProducts(event){
-    this.productList.produktDtoList = this.originList.filter(data=> data.langbezeichnung.toLowerCase().includes(event.toLowerCase()) || data.kategorie.kurzbezeichnung.toLowerCase().includes(event.toLowerCase()));
+    this.productList.produktDtoList = this.originList.filter(data=> data.langbezeichnung.toLowerCase().replace(/ /g, '').includes(event.toLowerCase().replace(/ /g, '')) || data.marke.toLowerCase().replace(/ /g, '').includes(event.toLowerCase().replace(/ /g, '')) || data.bezeichnung.toLowerCase().replace(/ /g, '').includes(event.toLowerCase().replace(/ /g, '')) || data.kategorie.kurzbezeichnung.toLowerCase().replace(/ /g, '').includes(event.toLowerCase().replace(/ /g, '')));
     if(event == ""){
       this.productList.produktDtoList = this.originList;
     }

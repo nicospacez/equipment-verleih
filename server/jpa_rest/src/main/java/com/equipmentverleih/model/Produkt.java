@@ -49,10 +49,10 @@ public class Produkt implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "kategorieId")
 	private Kategorie kategorie;
-	
+
 	@ManyToOne
 	private Produkt produkt;
-	
+
 	public Produkt() {
 	}
 
@@ -67,7 +67,7 @@ public class Produkt implements Serializable {
 		this.kategorie = kategorie;
 		this.foto = foto;
 	}
-	
+
 	public Produkt(String kurzbezeichnung, String inventurnummer, String seriennummer, String marke, String bezeichnung,
 			String langbezeichnung, String foto, Kategorie kategorie, List<Verleih> verleih) {
 		this.kurzbezeichnung = kurzbezeichnung;
@@ -81,7 +81,6 @@ public class Produkt implements Serializable {
 		this.foto = foto;
 	}
 
-	
 	public Produkt getProdukt() {
 		return produkt;
 	}
@@ -154,8 +153,6 @@ public class Produkt implements Serializable {
 		this.langbezeichnung = langbezeichnung;
 	}
 
-
-
 	public String getFoto() {
 		return foto;
 	}
@@ -197,8 +194,8 @@ public class Produkt implements Serializable {
 	public String toString() {
 		return "Produkt [produktId=" + produktId + ", kurzbezeichnung=" + kurzbezeichnung + ", inventurnummer="
 				+ inventurnummer + ", seriennummer=" + seriennummer + ", marke=" + marke + ", bezeichnung="
-				+ bezeichnung + ", langbezeichnung=" + langbezeichnung + ", foto=" + foto
-				+ ", verleih=" + verleih + ", kategorie=" + kategorie + "]";
+				+ bezeichnung + ", langbezeichnung=" + langbezeichnung + ", foto=" + foto + ", verleih=" + verleih
+				+ ", kategorie=" + kategorie + "]";
 	}
 
 	public ProduktDto toDto() {
@@ -206,29 +203,33 @@ public class Produkt implements Serializable {
 		ProduktStatus status = ProduktStatus.FREI;
 		DateFormat sdff = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 
+		int verleihIdMax = 0;
+		Verleih toCheckVerleih = new Verleih();
+		
 		if (!this.verleih.isEmpty()) {
-			if (isVerliehen(this.verleih.get(this.verleih.size() - 1))) {
+			for (Verleih verleih : this.verleih) {
+				if (verleih.getVerleihId() > verleihIdMax) {
+					verleihIdMax = Math.toIntExact(verleih.getVerleihId());
+					toCheckVerleih = verleih;
+				}
+			}
+			if (isVerliehen(toCheckVerleih)) {
 				status = ProduktStatus.VERLIEHEN;
 			}
 		}
 
-		String verleihId = "";
-		for (Verleih v : this.verleih) {
-			verleihId = v.getVerleihId().toString();
-		}
-
 		return new ProduktDto(produktId, bezeichnung, inventurnummer, kurzbezeichnung, langbezeichnung, marke,
-				seriennummer, foto,kategorie.toDto(), verleihId, produkt, status);
+				seriennummer, foto, kategorie.toDto(), "" + verleihIdMax, produkt, status);
 	}
 
 	public boolean isVerliehen(Verleih lastVerleih) {
 		Date date = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
 		
-		if(lastVerleih.getZurueckgenommenVon() != null) {
+		if (lastVerleih.getZurueckgenommenVon() != null) {
 			return false;
 		}
-		
+
 		try {
 			Date currentDate = sdf.parse(sdf.format(new Date()));
 			Date startDate = sdf.parse(sdf.format(lastVerleih.getStartDate()));

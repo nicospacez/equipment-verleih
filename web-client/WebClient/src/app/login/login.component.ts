@@ -21,13 +21,11 @@ export class LoginComponent implements OnInit {
   }
 
   public loginUser() {
-    this.ls.getTokenWithCredentials(this.inputUser, this.inputPassword).subscribe(success => {
+    this.ls.getTokenWithCredentials(this.inputUser, this.inputPassword).then(success => {
 
       console.log(success)
 
       if (success) {
-
-        //localStorage.setItem("User", this.loggedIn.username);
         this.navigateToAccount();
       } else {
         this.loginFailed = true;
@@ -37,5 +35,9 @@ export class LoginComponent implements OnInit {
 
   public navigateToAccount() {
     this.router.navigate(['home']);
+  }
+
+  enterPressed() {
+    this.loginUser();
   }
 }

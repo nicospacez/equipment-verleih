@@ -16,8 +16,8 @@
     <div *ngIf="!viewChanger">
       <div class="cardWrapper" *ngFor="let product of productList?.produktDtoList" (click)="goToDetailView(product)">
         <mat-card class="myCard">
-          <img class="myImage" *ngIf="!product.foto" src="../../assets/product_gh4.png" alt="...">
-          <img class="myImage" *ngIf="product.foto" src="data:image/png;base64,{{product.foto}}" alt="...">
+          <img class="myImage" *ngIf="!product.foto" src="../../assets/default_camera.png" alt="...">
+          <img class="myImage" *ngIf="product.foto" src="{{product.foto}}" alt="...">
           <br><br>
           <label class="productName">{{ product.langbezeichnung }}</label><br>
           <div class="statusbar statusGreen" *ngIf="product.status == 'FREI'"></div>
@@ -42,7 +42,7 @@
           <tr *ngFor="let product of productList?.produktDtoList" (click)="goToDetailView(product)">
             <td>
               <img class="listImage" *ngIf="!product.foto" src="../../assets/default_camera.png" alt="...">
-              <img class="listImage" *ngIf="product.foto" src="data:image/png;base64,{{product.foto}}" alt="...">
+              <img class="listImage" *ngIf="product.foto" src="{{product.foto}}" alt="...">
             </td>
             <td>{{ product.marke }} {{ product.bezeichnung }}</td>
             <td>{{ product.kurzbezeichnung}}</td>

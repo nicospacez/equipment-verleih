@@ -8,7 +8,7 @@
       <input class="inputForm" placeholder="Username" type="text" [(ngModel)]="inputUser">
     </div>
     <div class="form-group">
-      <input class="inputForm" placeholder="Password" type="password" [(ngModel)]="inputPassword" style="margin-left: 5px;">
+      <input class="inputForm" placeholder="Password" type="password" [(ngModel)]="inputPassword" style="margin-left: 5px;" (keyup.enter)="enterPressed()">
     </div>
     <div style="color: red" *ngIf="loginFailed">Bitte überprüfen Sie den Usernamen und das Passwort!</div>
     <br>

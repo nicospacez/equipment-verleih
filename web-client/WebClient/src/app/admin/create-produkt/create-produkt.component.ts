@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { ProductService } from '../../services/product.service';
 import { KategorieService } from 'src/app/services/kategorie.service';
 import { Router } from '@angular/router';
+import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material';
 
 @Component({
   selector: 'app-create-produkt',
@@ -18,7 +19,7 @@ export class CreateProduktComponent implements OnInit {
 
   fileToUpload: File = null;
 
-  constructor(private productService: ProductService, private kategorieService: KategorieService, private router: Router) { }
+  constructor(private productService: ProductService, private kategorieService: KategorieService, private router: Router, public dialog: MatDialog) { }
 
   ngOnInit() {
     this.kategorieService.getAllKategorien().then(data => {
@@ -52,7 +53,8 @@ export class CreateProduktComponent implements OnInit {
     this.selectedUeberkategorie = shape.value;
   }
 
-  createProdukt(bez, inv, kbz, lbz, marke, ser) {
+  createProdukt(bez, inv, kbz, lbz, marke, ser, img) {
+
     let bsp = {
       "bezeichnung": bez,
       "inventurnummer": inv,
@@ -62,14 +64,20 @@ export class CreateProduktComponent implements OnInit {
       "seriennummer": ser,
       "kategorie": {
         "kategorieId": this.selectedKategorie
-      }
+      },
+      "foto": ""
     };
+
+    if (img.files[0]) {
+      bsp.foto = img.files[0].src;
+    }
     console.log(bsp)
-    this.productService.createProdukt(bsp);
-    alert("Produkt hinzugefügt");
-    location.reload();
+    this.productService.createProdukt(bsp).then(data =>{
+      this.router.navigate(['/products']);
+    });
   }
   createKategorie(bezeichnung) {
+    if(bezeichnung.length == 0) return;
     let arr = {};
     if (this.selectedUeberkategorie != null) {
       arr = {
@@ -85,8 +93,17 @@ export class CreateProduktComponent implements OnInit {
     }
     console.log(arr)
     this.kategorieService.createKategorie(arr);
-    alert("Kategorie   hinzugefügt");
-    location.reload();
+
+    const dialogRef = this.dialog.open(MyDialog2, {
+      data: { product: bezeichnung }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      console.log(result);
+      this.ngOnInit();
+    });
+
   }
 
   flinput() {
@@ -113,4 +130,23 @@ export class CreateProduktComponent implements OnInit {
 }
 
 
+
+@Component({
+  selector: 'myDialog',
+  templateUrl: 'myDialog2.html',
+})
+export class MyDialog2 {
+
+  constructor(
+    public dialogRef: MatDialogRef<MyDialog2>, @Inject(MAT_DIALOG_DATA) public data: any) { console.log(data) }
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+
+  onYesClick(){
+    this.dialogRef.close(true);
+  }
+
+}
 

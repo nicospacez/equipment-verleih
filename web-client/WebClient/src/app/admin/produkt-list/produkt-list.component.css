@@ -1,8 +1,7 @@
-.container{
-    padding-top: 5%;
-
-
-
+.myContainer{
+    width:90%;
+    margin: auto;
+    margin-top: 70px;
 }
 
 table {
@@ -85,4 +84,39 @@ th {
 
 .notActive{
     background-color: #7deb81 !important;
+}
+
+.myImage{
+    height: 50px;
+    width: 50px;
+  }
+
+tr:hover{
+    cursor: pointer;
+}
+
+.searchBar{
+
+    width: 100%;
+    height: 30px;
+    background-color: #333F65;
+    border: none;
+    border-radius: 2px;
+    padding: 10px;
+    display: inline-block;
+    color: white !important;
+    margin-bottom: 2%;
+}
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: white;
+    opacity: 1; /* Firefox */
+  }
+  
+  :-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: white;
+  }
+  
+  ::-ms-input-placeholder { /* Microsoft Edge */
+    color: white;
 }

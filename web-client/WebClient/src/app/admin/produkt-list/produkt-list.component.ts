@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from 'src/app/services/product.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-produkt-list',
@@ -15,7 +16,7 @@ export class ProduktListComponent implements OnInit {
 
 
 
-  constructor(private productService: ProductService) { }
+  constructor(private productService: ProductService, private router:Router) { }
 
   ngOnInit() {
 
@@ -54,4 +55,21 @@ export class ProduktListComponent implements OnInit {
     }
 
   }
+
+  goToDetailView(product) {
+
+    this.productService.product = product;
+    this.router.navigate(['productsDetailView/' + product.produktId]);
+
+  }
+
+  filterProducts(event){
+    this.products = this.originProducts.filter(data=> data.langbezeichnung.toLowerCase().replace(/ /g, '').includes(event.toLowerCase().replace(/ /g, '')) || data.marke.toLowerCase().replace(/ /g, '').includes(event.toLowerCase().replace(/ /g, '')) || data.bezeichnung.toLowerCase().replace(/ /g, '').includes(event.toLowerCase().replace(/ /g, '')) || data.kategorie.kurzbezeichnung.toLowerCase().replace(/ /g, '').includes(event.toLowerCase().replace(/ /g, '')));
+    if(event == ""){
+      this.products = this.originProducts;
+    }
+    console.log(this.products);
+  }
+
+
 }

@@ -29,10 +29,12 @@ export class ProductService {
     });
   }
 
-  createProdukt(data) {
-    this.http.post(this.baseUrl, data).subscribe(data => {
-      console.log(data)
-    })
+  createProdukt(data): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.http.post(this.baseUrl, data).subscribe(data => {
+        resolve(data);
+      })
+    });
   }
 
 
@@ -41,7 +43,7 @@ export class ProductService {
     formData.append('file', file, file.name);
     const _headers = new HttpHeaders();
     const headers = _headers.append('Content-Type', 'multipart/form-data; boundary=--xxxxSEPARATIONxxxx--');
-    this.http.post(this.baseUrl + '/csvUpload/1', formData, {headers: headers }).subscribe(data => {
+    this.http.post(this.baseUrl + '/csvUpload/1', formData, { headers: headers }).subscribe(data => {
       console.log(data)
     })
   }

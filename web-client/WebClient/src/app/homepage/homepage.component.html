@@ -1,8 +1,9 @@
 <div class="over">
 
   <div class="container">
-    <label class="title">Verliehen</label>
-
+    <div class="titleBox">
+      <label class="title">Dein Equipment</label>
+    </div>
     <table cellspacing="0" cellpadding="0" class="table-hover">
       <thead>
         <tr>
@@ -16,7 +17,7 @@
       </thead>
       <tbody>
         <tr *ngFor="let product of products?.verleihDtoList" (click)="goToDetailView(product.produkt)">
-          <td *ngIf="product.produkt.foto"><img class="myImage"  src="data:image/png;base64,{{product.produkt.foto}}" alt="..."></td>
+          <td *ngIf="product.produkt.foto"><img class="myImage" src="{{product.produkt.foto}}" alt="..."></td>
           <td *ngIf="!product.produkt.foto"><img class="myImage" src="../../assets/default_camera.png" alt="..."></td>
           <td>{{product.produkt.bezeichnung}}</td>
           <td>{{product.produkt.kurzbezeichnung}}</td>
