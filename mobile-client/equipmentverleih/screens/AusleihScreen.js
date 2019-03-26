@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, View, Picker, Alert, TouchableOpacity, Image, ScrollView } from 'react-native';
 import { colors, gstyles } from '../theme';
 import Button from '../components/button';
-import { postVerleih, getKlassen, getUser } from '../services/RentalService';
+import { postVerleih, getKlassen, getUsers } from '../services/RentalService';
+import DateTimePicker from 'react-native-modal-datetime-picker';
+import PubSub from 'pubsub-js';
 
 export class AusleihScreen extends Component {
 
@@ -10,13 +12,7 @@ export class AusleihScreen extends Component {
         title: 'Verleihen',
     };
 
-    state = {
-        klassen: [""],
-        user: [""],
-        selectedklasse: "",
-        klasse: "",
-        selecteduser:""
-    }
+
 
 
     navdata = this.props.navigation.getParam("navdata");
@@ -24,12 +20,31 @@ export class AusleihScreen extends Component {
     constructor(props) {
         super(props)
         console.log(this.navdata);
+        this.state = {
+            klassen: [""],
+            user: [""],
+            selectedklasse: "",
+            klasse: "",
+            selecteduser: "",
+            isDateTimePickerVisible: false,
+            zdate: new Date()
+        }
+
+        d = this.state.zdate;
+        d.setDate(d.getDate() + 7);
+        this.setState({
+            zdate: d
+        });
 
     }
 
     onAusleihenPressed() {
         console.log(this.navdata.produktId)
-         postVerleih(this.navdata.produktId);
+        postVerleih(this.navdata.produktId, this.state.selecteduser, this.state.zdate).then(res => {
+            
+        })
+
+        this.props.navigation.navigate("AdminScreen");
     }
 
     componentDidMount() {
@@ -39,13 +54,30 @@ export class AusleihScreen extends Component {
 
             })
         })
-        getUser().then((res) => {
+        let user = getUsers().then(res => {
             this.setState({
                 user: res
             })
         })
+
+
+
     }
 
+    showDateTimePicker = () => this.setState({ isDateTimePickerVisible: true });
+
+    _hideDateTimePicker = () => this.setState({ isDateTimePickerVisible: false });
+
+    _handleDatePicked = (date) => {
+        this.setState({
+            zdate: date
+        });
+        this._hideDateTimePicker();
+    };
+
+    formatDate(date) {
+        return date.getDate() + "." + date.getMonth() + "." + date.getFullYear();
+    }
 
 
     render() {
@@ -53,36 +85,49 @@ export class AusleihScreen extends Component {
 
 
         return (
-            <View style={styles.box}>
-                <View >
-                    <Text style={gstyles.title}>Equipment</Text>
-                    <Text style={{ marginLeft: 25 }}>{this.navdata.marke} {this.navdata.bezeichnung}</Text>
+            <View style={gstyles.container}>
+                <View style={gstyles.box}>
+                    <View >
+                        <Text style={gstyles.title}>Equipment</Text>
+                        <Text style={{ marginLeft: 25 }}>{this.navdata.marke} {this.navdata.bezeichnung}</Text>
 
-                    <Text style={gstyles.title}>Klasse</Text>
-                    <Picker
-                        selectedValue={this.state.selectedklasse}
-                        style={{ height: 50, width: 300 }}
-                        onValueChange={(itemValue, itemIndex) => this.setState({ selectedklasse: itemValue })}>
+                        <Text style={gstyles.title}>Klasse</Text>
+                        <Picker
+                            selectedValue={this.state.selectedklasse}
+                            style={{ height: 50, width: 300 }}
+                            onValueChange={(itemValue, itemIndex) => this.setState({ selectedklasse: itemValue })}>
 
-                        <Picker.Item label="Klasse wählen" value="x" />
-                        {this.state.klassen.map(klasse => {
-                            return <Picker.Item label={klasse} value={klasse} />
-                        })}
-                    </Picker>
+                            <Picker.Item label="Klasse wählen" value="x" />
+                            {this.state.klassen.map(klasse => {
+                                return <Picker.Item label={klasse} value={klasse} />
+                            })}
+                        </Picker>
 
-                    <Text style={gstyles.title}>Schüler</Text>
-                    <Picker
-                        selectedValue={this.state.selecteduser}
-                        style={{ height: 50, width: 300 }}
-                        onValueChange={(itemValue, itemIndex) => this.setState({ selecteduser: itemValue })}>
+                        <Text style={gstyles.title}>Schüler</Text>
+                        <Picker
+                            selectedValue={this.state.selecteduser}
+                            style={{ height: 50, width: 300 }}
+                            onValueChange={(itemValue, itemIndex) => this.setState({ selecteduser: itemValue })}>
 
-                        <Picker.Item label="Benutzer wählen" value="x" />
-                        {this.state.user.map(u => {
-                            return <Picker.Item label={u.vorname+" "+u.nachname} value={u.userId} />
-                        })}
-                    </Picker>
+                            <Picker.Item label="Benutzer wählen" value="x" />
+                            {this.state.user.map(u => {
+                                return <Picker.Item label={u.vorname + " " + u.nachname} value={u.userId} />
+                            })}
+                        </Picker>
 
-                    <Button style={styles.submitbutton} onPress={() => this.onAusleihenPressed()} title="Verleihen" textcolor={colors.white} bgcolor={colors.green} />
+                        <Text style={gstyles.title}>Verleihen bis:</Text>
+                        <TouchableOpacity style={{ marginBottom: 20 }} onPress={this.showDateTimePicker}>
+                            <Text style={{ fontSize: 20, textAlign: 'center' }}>{this.formatDate(this.state.zdate)}</Text>
+                        </TouchableOpacity>
+
+                        <DateTimePicker
+                            isVisible={this.state.isDateTimePickerVisible}
+                            onConfirm={this._handleDatePicked}
+                            onCancel={this._hideDateTimePicker}
+                        />
+
+                        <Button style={styles.submitbutton} onPress={() => this.onAusleihenPressed()} title="Verleihen" textcolor={colors.white} bgcolor={colors.green} />
+                    </View>
                 </View>
             </View>
 

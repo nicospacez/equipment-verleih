@@ -27,8 +27,6 @@ export class DetailLabel extends Component {
 const styles = StyleSheet.create({
     label: {
         padding:10,
-        borderBottomWidth: 3,
-        borderColor: colors.grey1,
         flexDirection: 'row'
     },
     text: {

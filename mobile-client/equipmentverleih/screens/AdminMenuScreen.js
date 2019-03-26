@@ -6,28 +6,30 @@ import { postVerleih } from '../services/RentalService';
 import { FormLabel, FormInput, FormValidationMessage } from 'react-native-elements';
 import { AddProductForm } from '../components/addProductForm';
 
+
 export class AdminMenuScreen extends Component {
 
     static navigationOptions = {
-        title: 'Menü'
+        title: 'Menü',
+        
     };
-
-
-
-
 
     constructor(props) {
         super(props)
 
-
+       
     }
 
     componentDidMount() {
 
     }
 
-    launchAddProductScreen(){
+    launchAddProductScreen() {
         this.props.navigation.push('AddProductScreen');
+    }
+
+    launchAddCategoryScreen() {
+        this.props.navigation.push('AddCategoryScreen');
     }
 
     render() {
@@ -36,13 +38,13 @@ export class AdminMenuScreen extends Component {
 
         return (
             <View style={gstyles.container}>
-            <View style={gstyles.box}>
-                <View  style={styles.btn1}><Button bgcolor={colors.primary} textcolor={colors.white} onPress={()=>this.launchAddProductScreen()} title="Produkt hinzufügen"/></View>
-                <View  style={styles.btn1}><Button style={styles.btn} bgcolor={colors.primary} textcolor={colors.white} title="Kategorie hinzufügen"/></View>
-                <View  style={styles.btn1}><Button style={styles.btn} bgcolor={colors.primary} textcolor={colors.white} title="Produkt löschen"/></View>
-                <View  style={styles.btn1}><Button style={styles.btn} bgcolor={colors.primary} textcolor={colors.white} title="Kategorie löschen"/></View>
-                
-            </View>
+                <View style={gstyles.box}>
+                    <View style={styles.btn1}><Button bgcolor={colors.primary} textcolor={colors.white} onPress={() => this.launchAddProductScreen()} title="Produkt hinzufügen" /></View>
+                    <View style={styles.btn1}><Button style={styles.btn} bgcolor={colors.primary} textcolor={colors.white} onPress={() => this.launchAddCategoryScreen()} title="Kategorie hinzufügen" /></View>
+                    <View style={styles.btn1}><Button style={styles.btn} bgcolor={colors.primary} textcolor={colors.white} title="Produkt löschen" /></View>
+                    <View style={styles.btn1}><Button style={styles.btn} bgcolor={colors.primary} textcolor={colors.white} title="Kategorie löschen" /></View>
+
+                </View>
             </View>
 
         );
@@ -57,9 +59,9 @@ const styles = StyleSheet.create({
         height: '100%',
         width: '100%'
     },
-    btn1:{
-        marginVertical:10,
-        width:'100%'
+    btn1: {
+        marginVertical: 10,
+        width: '100%'
     }
 
 });

@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { View, TextInput, Text, StyleSheet, ScrollView, TouchableOpacity, Picker } from 'react-native';
+import { View, TextInput, Text, StyleSheet, ActivityIndicator, ScrollView, TouchableOpacity, Picker } from 'react-native';
 import { colors, gstyles } from '../theme';
 import { getKategorien,postProdukt } from '../services/RentalService';
 import Button from '../components/button';
+import PubSub from 'pubsub-js'
 
 
 export class AddProductForm extends Component {
@@ -18,6 +19,8 @@ export class AddProductForm extends Component {
         langbezeichnung: null,
         seriennummer: null,
         kategorie: null,
+
+        loading:false
     }
 
     constructor(props) {
@@ -32,10 +35,42 @@ export class AddProductForm extends Component {
 
     fetchKategorien() {
         getKategorien().then((res) => {
+            console.log(res);
             this.setState({
                 kategorien: res
             })
         })
+    }
+
+    addProdukt() {
+        this.setState({
+            loading:true
+        });
+        data = {
+            bezeichnung: this.state.bezeichnung,
+            inventurnummer: this.state.inventurnummer,
+            kurzbezeichnung: this.state.kurzbezeichnung,
+            langbezeichnung: this.state.langbezeichnung,
+            marke: this.state.marke,
+            seriennummer: this.state.seriennummer,
+            kategorie: {
+                kategorieId: this.state.selectedKategorie
+            }
+        }
+
+        console.log("Produkt:", data);
+        postProdukt(data).then(res => {
+            console.log("postproduct",res);
+            if(res.ok){
+                this.setState({
+                    loading:false
+                });
+                PubSub.publish("reload_adminscreen", "");
+                this.props.nav.goBack();
+            }
+        });
+        
+
     }
 
     render() {
@@ -112,37 +147,29 @@ export class AddProductForm extends Component {
                     onValueChange={(itemValue, itemIndex) => this.setState({ selectedKategorie: itemValue })}>
 
                     <Picker.Item label="Kategorie wählen" value="x" />
-                    {this.state.kategorien.map(k => {
-                        return <Picker.Item label={k.kurzbezeichnung} value={k.kategorieId} />
+                    {this.state.kategorien.map((k,i) => {
+                        return <Picker.Item key={i} label={k.kurzbezeichnung} value={k.kategorieId} />
                     })}
                 </Picker>
 
                 <View style={styles.hline}></View>
                 <View style={{ width: '100%' }}>
-                    <Button style={styles.submitbutton} onPress={() => this.addProdukt()} title="Produkt erstellen" textcolor={colors.white} bgcolor={colors.green} />
+                   {this.renderButton()}
                 </View>
             </View>
 
         );
     }
 
-    addProdukt() {
-        data = {
-            bezeichnung: this.state.bezeichnung,
-            inventurnummer: this.state.inventurnummer,
-            kurzbezeichnung: this.state.kurzbezeichnung,
-            langbezeichnung: this.state.langbezeichnung,
-            marke: this.state.marke,
-            seriennummer: this.state.seriennummer,
-            kategorie: {
-                kategorieId: this.state.selectedKategorie
-            }
+    renderButton(){
+        if(this.state.loading){
+            return <ActivityIndicator size="large" color={colors.primary} />
+        }else{
+            return <Button style={styles.submitbutton} onPress={() => this.addProdukt()} title="Produkt erstellen" textcolor={colors.white} bgcolor={colors.primary} />
         }
-
-        console.log("Produkt:", data);
-        postProdukt(data);
-
     }
+
+    
 }
 
 const styles = StyleSheet.create({

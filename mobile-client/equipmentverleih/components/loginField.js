@@ -4,15 +4,24 @@ import Input from './input';
 import Button from './button';
 import { colors } from '../theme';
 
+import {login} from '../services/RentalService';
+
 
 export class LoginField extends Component{
     
     constructor(){
         super();
         this.state = {
-            username:"",
-            password:""
+            username:"admin",
+            password:"admin"
         }
+    }
+
+    onPressLogin = () => {
+        console.log(this.state.username);
+        login(this.state.username, this.state.password).then(res => {
+            this.props.loginReturn(res);
+        })
     }
 
     render(){
@@ -34,7 +43,7 @@ export class LoginField extends Component{
                 value={this.state.password}
                 secureTextEntry
                 />
-                <Button  title="Login" textcolor={colors.grey1} bgcolor={colors.primary}/>
+                <Button onPress={()=>this.onPressLogin()} title="Login" textcolor={colors.grey1} bgcolor={colors.primary}/>
             </View>
             
         );
