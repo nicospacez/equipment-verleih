@@ -1,7 +1,86 @@
 import React, { Component } from 'react';
 import PubSub from 'pubsub-js';
+import { AsyncStorage } from 'react-native';
 
-export const baseUrl = "http://192.168.99.100:8080/jee/app/";
+const data = {
+  server: {
+    base_url: "http://192.168.99.100:8080/jee/app/",
+    authheader: null
+  },
+  user: null
+}
+
+export const saveLoginDataLocal = async (username, password) => {
+  await AsyncStorage.setItem('login', JSON.stringify({ username: username, password: password }));
+  // await AsyncStorage.setItem('login_data', { username: username, password: password });
+}
+
+export const retrieveLoginDataLocal = async () => {
+
+  try {
+    const value = await AsyncStorage.getItem('login');
+    if (value) {
+      let json = JSON.parse(value);
+      return json;
+
+    } else {
+      return "nd";
+    }
+  } catch (error) {
+    console.log("Retrieve Data",error);
+  }
+  return "nd";
+}
+
+export const login = (username, password) => {
+
+
+
+  return fetch(data.server.base_url + 'jwt', {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(
+      {
+        "username": username,
+        "password": password
+      }
+    ),
+  }).then(res => res.json())
+    .then(r => {
+
+      console.log("data:", r);
+      if (r.state == "SUCCESS") {
+        data.server.authheader = new Headers({
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + r.token
+        });
+        data.user = r.userDto;
+        saveLoginDataLocal(username, password);
+
+      }
+      return r;
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+
+
+}
+
+export const getUser = () => {
+  return data.user;
+}
+
+export const getUsers = () => {
+  const url = data.server.base_url + "user";
+  return fetch(url, {
+    headers: data.server.authheader
+  })
+    .then((res) => res.json());
+}
 
 export const getCartList = () => {
   cartlist = {
@@ -10,61 +89,6 @@ export const getCartList = () => {
       {
         name: "Lumix GH4",
         kuerzel: "Nico",
-        status: "25.01.2018"
-      },
-      {
-        name: "Lumix GH4",
-        kuerzel: "Aistleitner",
-        status: "25.01.2018"
-      },
-      {
-        name: "Lumix GH4",
-        kuerzel: "Pascal",
-        status: "25.01.2018"
-      },
-      {
-        name: "Lumix GH4",
-        kuerzel: "Jonas",
-        status: "25.01.2018"
-      },
-      {
-        name: "Lumix GH4",
-        kuerzel: "Mösner",
-        status: "25.01.2018"
-      },
-      {
-        name: "Lumix GH4",
-        kuerzel: "hubert",
-        status: "25.01.2018"
-      },
-      {
-        name: "Lumix GH4",
-        kuerzel: "Nico",
-        status: "25.01.2018"
-      },
-      {
-        name: "Lumix GH4",
-        kuerzel: "Aistleitner",
-        status: "25.01.2018"
-      },
-      {
-        name: "Lumix GH4",
-        kuerzel: "Pascal",
-        status: "25.01.2018"
-      },
-      {
-        name: "Lumix GH4",
-        kuerzel: "Jonas",
-        status: "25.01.2018"
-      },
-      {
-        name: "Lumix GH4",
-        kuerzel: "Mösner",
-        status: "25.01.2018"
-      },
-      {
-        name: "Lumix GH4",
-        kuerzel: "hubert",
         status: "25.01.2018"
       }
     ]
@@ -78,185 +102,125 @@ export const getCartList = () => {
 
 export const getWarenkorbList = () => {
 
-  data = {
+  mdata = {
     body: [
-      {
-        bild: "asdf",
-        name: "asdf"
-      },
-      {
-        bild: "asdf",
-        name: "asdf"
-      },
-      {
-        bild: "asdf",
-        name: "asdf"
-      }
+
     ]
   }
-  return data;
-
-}
-
-export const getGeliehenList = () => {
-  data = {
-    head: ["Name", "Kürzel", "Status"],
-    body: [
-      {
-        name: "Lumix GH4",
-        kuerzel: "K01",
-        status: "25.01.2018"
-      },
-      {
-        name: "Lumix GH4",
-        kuerzel: "K01",
-        status: "25.01.2018"
-      },
-      {
-        name: "Lumix GH4",
-        kuerzel: "K01",
-        status: "25.01.2018"
-      },
-      {
-        name: "Lumix GH4",
-        kuerzel: "K01",
-        status: "25.01.2018"
-      },
-      {
-        name: "Lumix GH4",
-        kuerzel: "K01",
-        status: "25.01.2018"
-      },
-      {
-        name: "Lumix GH4",
-        kuerzel: "K01",
-        status: "25.01.2018"
-      }
-    ]
-  }
-  return data;
+  return mdata;
 
 }
 
 export const getReserviertList = () => {
 
-  data = {
+  let mdata = {
     head: ["Name", "Kürzel", "Status"],
     body: [
-      {
-        name: "Lumix GH4",
-        kuerzel: "K01",
-        status: "25.01.2018"
-      },
-      {
-        name: "Lumix GH4",
-        kuerzel: "K01",
-        status: "25.01.2018"
-      },
-      {
-        name: "Lumix GH4",
-        kuerzel: "K01",
-        status: "25.01.2018"
-      },
-      {
-        name: "Lumix GH4",
-        kuerzel: "K01",
-        status: "25.01.2018"
-      },
-      {
-        name: "Lumix GH4",
-        kuerzel: "K01",
-        status: "25.01.2018"
-      },
-      {
-        name: "Lumix GH4",
-        kuerzel: "K01",
-        status: "25.01.2018"
-      }
+
     ]
   }
-  return data;
+  return mdata;
+
+}
+
+export const getGeliehenList = () => {
+
+  let mdata = {
+    head: ["Name", "Kürzel", "Status"],
+    body: [
+
+    ]
+  }
+  return mdata;
 
 }
 
 export const getAdminList = () => {
-  const url = baseUrl + "produkt/";
-  return fetch(url)
+  const url = data.server.base_url + "produkt/";
+  return fetch(url, {
+    headers: data.server.authheader
+  })
     .then((res) => res.json());
 }
 
-export const postVerleih = (produktId) => {
-
+export const postVerleih = (produktId, userID, endDate) => {
+  console.log("USERID", userID)
   sday = new Date().getDate();
   smMonth = new Date().getMonth() + 1;
   syear = new Date().getFullYear();
   smonth = ("0" + smMonth).slice(-2);
   sDate = sday + "-" + smonth + "-" + syear;
 
-  ed = new Date();
-  ed.setDate(ed.getDate() + 7);
-
-  eday = ed.getDate();
-  emMonth = ed.getMonth() + 1;
-  eyear = ed.getFullYear();
+  eday = endDate.getDate();
+  emMonth = endDate.getMonth() + 1;
+  eyear = endDate.getFullYear();
   emonth = ("0" + emMonth).slice(-2);
   eDate = eday + "-" + emonth + "-" + eyear;
 
   console.log("service " + produktId);
-  fetch(baseUrl + 'verleih/', {
+  return fetch(data.server.base_url + 'verleih/', {
     method: 'POST',
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
-    },
+    headers: data.server.authheader,
     body: JSON.stringify({
       "startDate": sDate,
       "endDate": eDate,
-      "hergeborgtVon": { "userId": 1 },
-      "zurueckgenommenVon": { "userId": 1 },
+      "hergeborgtVon": { "userId": data.user.userId },
       "produkt": { "produktId": produktId },
-      "user": { "userId": 1 }
+      "user": { "userId": userID }
     }),
   }).then((res) => {
     console.log(res);
+    return res;
   }).catch((error) => {
     console.error(error);
   });
 }
 
-export const postProdukt = (data) => {
+export const postProdukt = (product) => {
 
-  fetch(baseUrl + 'produkt/', {
+  return fetch(data.server.base_url + 'produkt/', {
     method: 'POST',
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(data),
+    headers: data.server.authheader,
+    body: JSON.stringify(product),
   }).then((res) => {
-    console.log(res);
+    return res;
   }).catch((error) => {
     console.error(error);
   });
+}
+
+export const postCategory = (cat) => {
+
+  return fetch(data.server.base_url + 'kategorie/', {
+    method: 'POST',
+    headers: data.server.authheader,
+    body: JSON.stringify(cat),
+  }).then(res => {
+    console.log(res);
+    return res;
+  });
+    
 }
 
 export const getKlassen = () => {
 
-  return getUser().then(data => data.filter((el, i, a) => i === a.indexOf(el)).map(v => v.klasse).sort());
-}
-
-export const getUser = () => {
-  const url = baseUrl + "user/";
-  return fetch(url)
+  const url = data.server.base_url + "user/getAllKlassen";
+  return fetch(url, {
+    headers: data.server.authheader
+  })
     .then((res) => res.json());
 }
+
+
 
 export const dataStore = {
   allProducts: null
 }
 
 export const getKategorien = () => {
-  const url = baseUrl + "kategorie";
-  return fetch(url)
+  const url = data.server.base_url + "kategorie";
+  return fetch(url, {
+    headers: data.server.authheader
+  })
     .then((res) => res.json());
 }

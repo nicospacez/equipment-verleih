@@ -17,6 +17,7 @@ import { AdminScreen } from '../screens/AdminScreen';
 import { AusleihScreen } from '../screens/AusleihScreen';
 import { AddProductScreen } from '../screens/AddProductScreen';
 import { AdminMenuScreen } from '../screens/AdminMenuScreen';
+import { AddCategoryScreen } from '../screens/AddCategoryScreen';
 
 
 
@@ -98,6 +99,9 @@ export const AdminNavigator = createStackNavigator({
   AddProductScreen: {
     screen: AddProductScreen
   },
+  AddCategoryScreen:{
+    screen: AddCategoryScreen
+  },
   AdminMenuScreen: {
     screen: AdminMenuScreen
   }
@@ -149,10 +153,10 @@ export const TabNav = createBottomTabNavigator({
   }
 }, {
     tabBarOptions: {
-      activeTintColor: colors.primary,
-      inactiveTintColor: colors.font,
+      activeTintColor: colors.white,
+      inactiveTintColor: colors.primary2,
       style: {
-        backgroundColor: colors.white
+        backgroundColor: colors.primary
       }
     }
   }

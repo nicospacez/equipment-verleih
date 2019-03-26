@@ -8,11 +8,13 @@ import { ToggleButton } from '../components/togglebutton';
 import DateTimePicker from 'react-native-modal-datetime-picker';
 import Icon from 'react-native-vector-icons/Ionicons';
 
+
+
 export class AdminScreen extends Component {
 
   static navigationOptions = ({ navigation }) => ({
     headerRight: (
-      <Icon color={colors.headerbartext} name="md-menu" size={24} style={{ marginRight: 15 }} onPress={() => navigation.push('AdminMenuScreen')} />
+      <Icon color={colors.headerbartext} name="md-menu" size={24} style={{ marginRight: 15 }} onPress={() => navigation.navigate('AdminMenuScreen')} />
     )
   });
 
@@ -31,31 +33,43 @@ export class AdminScreen extends Component {
 
   constructor(props) {
     super(props);
-   
+
 
     this.state = {
       data: null,
       pickedStartDate: new Date(),
       pickedEndDate: new Date(),
       isLoading: true,
-      activatedStatusFilter: []
+      activatedStatusFilter: [],
+      
 
     }
 
+    let reloadSub = PubSub.subscribe("reload_adminscreen", this.reload);
+    
+
+  }
+
+  test = () => {
+    console.log("test");
   }
 
   componentDidMount() {
+   
+    this.props.navigation.setParams({ refresh: this.fetchAdminList });
 
-    
+    this.fetchAdminList();
+  }
 
+  reload = (msg,data) => {
     this.fetchAdminList();
   }
 
 
   //DATA FETCHING
-  fetchAdminList() {
+  fetchAdminList = () => {
     getAdminList().then((res) => {
-      console.log(res);
+      console.log("adminscreen", res);
       this.setState({
 
         isLoading: false,
@@ -179,6 +193,7 @@ export class AdminScreen extends Component {
 
 
         <View style={gstyles.box}>
+        
           <View style={{ flexDirection: 'row' }}>
             <TouchableOpacity onPress={this._showDateTimePickerStart}>
               <Text >{this.formatDate(this.state.pickedStartDate)}</Text>

@@ -2,47 +2,61 @@ import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, View, Button, Alert, Image } from 'react-native';
 
 import { TabNav, LoginNavigator, AdminNav } from '../navigation/router';
+import { retrieveLoginDataLocal, login } from '../services/RentalService';
 
-import LoginService from '../services/AuthService';
+
+
+
 import { colors } from '../theme';
 
 export class StartupScreen extends Component {
 
     nav = null;
     constructor() {
-      super();
-     
-      ls = new LoginService();
-      ls.checkLogin();
+        super();
+
+
+
     }
-   
-    
 
-    loginSubscriber = function (msg, data) {
-      console.log(data);
-  
-      setTimeout(() => {
-        
-        if(data.isLoggedIn){
-            if(data.isAdmin){
-                console.log("admin navigator");
-                this.props.navigation.navigate("AdminNav");
-            }else{
-                console.log("normal navigator")
-                this.props.navigation.navigate("TabNav");
-            }
-            
-        }else{
-            this.props.navigation.navigate("LoginScreen");
-        }
-        PubSub.unsubscribe(this.token);
-      }, 0);
-    }.bind(this);
-  
-    token = PubSub.subscribe('checkLogin', this.loginSubscriber);
-    
+    componentDidMount() {
+        this.login();
+    }
 
-    
+
+
+    login = () => {
+
+        setTimeout(() => {
+
+            retrieveLoginDataLocal().then(res => {
+                if(res == "nd"){
+                    console.log("nd");
+                    this.props.navigation.navigate("LoginScreen");
+                }else{
+                    console.log("d");
+                    login(res.username, res.password).then(data => {
+                        if(data.state == "SUCCESS"){
+                            if(data.userDto.admin){
+                                this.props.navigation.navigate("AdminNav");
+                            }else{
+                                this.props.navigation.navigate("TabNav");
+                            }
+                        }else{
+                            this.props.navigation.navigate("LoginScreen");
+                        }
+                        console.log(data);
+                    })
+                }
+            })
+
+        }, 0);
+    }
+
+
+
+
+
 
     render() {
 
@@ -61,8 +75,8 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: colors.grey2,
-        width:'100%',
-        height:'100%'
+        width: '100%',
+        height: '100%'
     },
     image: {
 
