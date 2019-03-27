@@ -5,11 +5,13 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
+import org.apache.commons.codec.binary.Base64;
 
 import javax.inject.Inject;
 import javax.transaction.Transactional;
@@ -32,6 +34,7 @@ import com.equipmentverleih.enums.ErrorNumber;
 import com.equipmentverleih.enums.SuccessState;
 import com.equipmentverleih.model.Kategorie;
 import com.equipmentverleih.model.Produkt;
+import com.equipmentverleih.repository.KategorieRepository;
 import com.equipmentverleih.repository.ProduktRepository;
 import com.equipmentverleih.response.ProduktResponse;
 
@@ -49,7 +52,9 @@ public class ProduktEndpoint {
 	KategorieDao katDao;
 
 	@Inject
-	ProduktRepository repo; // = new UserRepository();
+	ProduktRepository repo;
+	@Inject
+	KategorieRepository katRepo;
 
 	@GET
 	public ProduktResponse findAll() {
@@ -122,6 +127,30 @@ public class ProduktEndpoint {
 
 	@POST
 	@Path("/csvUpload/{kategorie}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public void uploadFile(@PathParam("kategorie") Long kategorie, String body) throws UnsupportedEncodingException {
+		Kategorie kat = katRepo.find(kategorie);
+
+		byte[] valueDecoded = Base64.decodeBase64(body);
+		String str = new String(valueDecoded, "UTF8");
+		System.out.println(str);
+		boolean isFirst = true;
+		for (String arr : str.split("\\r?\\n")) {
+			if (!isFirst) {
+				System.out.println(arr);
+				String[] data = arr.split(";", -1);
+				for (String out : data) {
+					System.out.println("AYY: " + out);
+				}
+				Produkt p = new Produkt(data[0], data[5], data[3], data[2], data[1], data[1] + data[2], null, kat);
+				repo.create(p);
+			}
+			isFirst = false;
+		}
+	}
+
+	@POST
+	@Path("/OLDcsvUpload/{kategorie}")
 	@Consumes(MediaType.MULTIPART_FORM_DATA)
 	public String uploadFile(@FormDataParam("file") InputStream uploadedInputStream,
 			@FormDataParam("file") FormDataContentDisposition fileDetail, @FormDataParam("path") String path,

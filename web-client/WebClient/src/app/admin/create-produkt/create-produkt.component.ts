@@ -19,6 +19,8 @@ export class CreateProduktComponent implements OnInit {
 
   fileToUpload: File = null;
 
+  private base64textString: String = "";
+
   constructor(private productService: ProductService, private kategorieService: KategorieService, private router: Router, public dialog: MatDialog) { }
 
   ngOnInit() {
@@ -29,13 +31,27 @@ export class CreateProduktComponent implements OnInit {
     })
   }
 
-  handleFileInput(files: FileList) {
-    this.fileToUpload = files.item(0);
-    console.log(this.fileToUpload)
+  handleFileSelect(evt) {
+    var files = evt.target.files;
+    var file = files[0];
+
+    if (files && file) {
+      var reader = new FileReader();
+
+      reader.onload = this._handleReaderLoaded.bind(this);
+
+      reader.readAsBinaryString(file);
+    }
+  }
+
+  _handleReaderLoaded(readerEvt) {
+    var binaryString = readerEvt.target.result;
+    this.base64textString = btoa(binaryString);
+    console.log(btoa(binaryString));
   }
 
   uploadFileToActivity() {
-    this.productService.uploadCSV(this.fileToUpload, this.selectedKategorieCSV);
+    this.productService.uploadCSV(this.base64textString, this.selectedKategorieCSV);
   }
 
   changeShape(shape) {
@@ -72,12 +88,12 @@ export class CreateProduktComponent implements OnInit {
       bsp.foto = img.files[0].src;
     }
     console.log(bsp)
-    this.productService.createProdukt(bsp).then(data =>{
+    this.productService.createProdukt(bsp).then(data => {
       this.router.navigate(['/products']);
     });
   }
   createKategorie(bezeichnung) {
-    if(bezeichnung.length == 0) return;
+    if (bezeichnung.length == 0) return;
     let arr = {};
     if (this.selectedUeberkategorie != null) {
       arr = {
@@ -144,7 +160,7 @@ export class MyDialog2 {
     this.dialogRef.close();
   }
 
-  onYesClick(){
+  onYesClick() {
     this.dialogRef.close(true);
   }
 
