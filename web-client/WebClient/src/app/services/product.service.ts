@@ -37,16 +37,11 @@ export class ProductService {
     });
   }
 
+  uploadCSV(fileBASE64, kategorieId) {
 
-  uploadCSV(file, kategorieId) {
-    const formData: FormData = new FormData();
-    formData.append('file', file, file.name);
-    const _headers = new HttpHeaders();
-    const headers = _headers.append('Content-Type', 'multipart/form-data; boundary=--xxxxSEPARATIONxxxx--');
-    this.http.post(this.baseUrl + '/csvUpload/1', formData, { headers: headers }).subscribe(data => {
+    this.http.post(this.baseUrl + '/csvUpload/' + kategorieId, fileBASE64, {}).subscribe(data => {
       console.log(data)
     })
+
   }
-
-
 }

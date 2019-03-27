@@ -25,6 +25,7 @@
     "@auth0/angular-jwt": "^2.1.0",
     "angular2-image-upload": "^1.0.0-rc.2",
     "bootstrap": "^3.3.7",
+    "convert-csv-to-json": "0.0.14",
     "core-js": "^2.5.4",
     "hammerjs": "^2.0.8",
     "jquery": "^3.3.1",
