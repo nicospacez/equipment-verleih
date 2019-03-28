@@ -32,12 +32,11 @@ export class AddProductScreen extends Component {
 
         return (
             <View style={gstyles.container}>
-                <View style={gstyles.box}>
+                
                     <ScrollView style={styles.scrollview}>
                         <AddProductForm nav={this.props.navigation}  style={styles.form}></AddProductForm>
                     </ScrollView>
 
-                </View>
             </View>
 
         );

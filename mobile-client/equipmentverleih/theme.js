@@ -1,5 +1,5 @@
 const colors = {
-  primary: '#4b7bec',
+  primary: '#333F65',
   primary2: '#d1d8e0',
   secondary: '#706fd3',
   lightblue: '#3b86ff',
@@ -7,8 +7,8 @@ const colors = {
   grey1: '#d1d8e0',
   grey2: '#f5f6fa',
   white: '#fff',
-  green: '#26de81',
-  red: '#fc5c65',
+  green: '#7deb81',
+  red: '#DE5959',
   yellow: '#fed330',
   font: '#b0b2bf',
   headerbartext: "#fff",
@@ -24,19 +24,20 @@ const fonts = {
 
 const gstyles = {
   box: {
-    marginVertical:10,
+    
     padding:5,
-    width: '98%',
+    width: '90%',
+    marginVertical:10,
     position: 'relative',
     backgroundColor: colors.white,
     alignItems: 'center',
-    elevation: 2,
-    borderRadius: 15
+    elevation: 14,
+    borderRadius: 5
 
 
   },
   container: {
-
+    
     alignItems: 'center',
     justifyContent: 'center',
     height: '100%',

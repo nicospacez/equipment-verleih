@@ -41,12 +41,12 @@ export class AdminScreen extends Component {
       pickedEndDate: new Date(),
       isLoading: true,
       activatedStatusFilter: [],
-      
+
 
     }
 
     let reloadSub = PubSub.subscribe("reload_adminscreen", this.reload);
-    
+
 
   }
 
@@ -55,13 +55,13 @@ export class AdminScreen extends Component {
   }
 
   componentDidMount() {
-   
+
     this.props.navigation.setParams({ refresh: this.fetchAdminList });
 
     this.fetchAdminList();
   }
 
-  reload = (msg,data) => {
+  reload = (msg, data) => {
     this.fetchAdminList();
   }
 
@@ -193,7 +193,7 @@ export class AdminScreen extends Component {
 
 
         <View style={gstyles.box}>
-        
+
           <View style={{ flexDirection: 'row' }}>
             <TouchableOpacity onPress={this._showDateTimePickerStart}>
               <Text >{this.formatDate(this.state.pickedStartDate)}</Text>

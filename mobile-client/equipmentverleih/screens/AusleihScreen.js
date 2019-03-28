@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, View, Picker, Alert, TouchableOpacity, Image, ScrollView } from 'react-native';
 import { colors, gstyles } from '../theme';
 import Button from '../components/button';
-import { postVerleih, getKlassen, getUsers } from '../services/RentalService';
+import { postVerleih, getKlassen, getUsers, getUsersByClass } from '../services/RentalService';
 import DateTimePicker from 'react-native-modal-datetime-picker';
 import PubSub from 'pubsub-js';
 
@@ -27,7 +27,8 @@ export class AusleihScreen extends Component {
             klasse: "",
             selecteduser: "",
             isDateTimePickerVisible: false,
-            zdate: new Date()
+            zdate: new Date(),
+            secondPickerEnabled: false
         }
 
         d = this.state.zdate;
@@ -41,10 +42,14 @@ export class AusleihScreen extends Component {
     onAusleihenPressed() {
         console.log(this.navdata.produktId)
         postVerleih(this.navdata.produktId, this.state.selecteduser, this.state.zdate).then(res => {
-            
+            if (res.status >= 200) {
+                console.log("Verleih", res);
+                PubSub.publish("reload_adminscreen", "");
+                this.props.navigation.goBack();
+            }
         })
 
-        this.props.navigation.navigate("AdminScreen");
+
     }
 
     componentDidMount() {
@@ -54,13 +59,22 @@ export class AusleihScreen extends Component {
 
             })
         })
-        let user = getUsers().then(res => {
-            this.setState({
-                user: res
+
+    }
+
+    firstPickerChanged(value, index) {
+        this.setState({
+            selectedklasse: value
+        });
+        if (index > 0) {
+            this.setState({ secondPickerEnabled: true });
+            getUsersByClass(value).then(res => {
+                console.log("USERBYCLASS", res);
+                this.setState({
+                    user: res.userDtoList
+                });
             })
-        })
-
-
+        }
 
     }
 
@@ -87,35 +101,40 @@ export class AusleihScreen extends Component {
         return (
             <View style={gstyles.container}>
                 <View style={gstyles.box}>
-                    <View >
-                        <Text style={gstyles.title}>Equipment</Text>
-                        <Text style={{ marginLeft: 25 }}>{this.navdata.marke} {this.navdata.bezeichnung}</Text>
 
-                        <Text style={gstyles.title}>Klasse</Text>
+                    <View style={styles.formborder}>
+                        <Text style={styles.formtitle}>Equipment</Text>
+                        <Text style={styles.formtext}>{this.navdata.marke} {this.navdata.bezeichnung}</Text>
+                    </View>
+                    <View style={styles.formborder}>
+                        <Text style={styles.formtitle}>Klasse</Text>
                         <Picker
                             selectedValue={this.state.selectedklasse}
                             style={{ height: 50, width: 300 }}
-                            onValueChange={(itemValue, itemIndex) => this.setState({ selectedklasse: itemValue })}>
+                            onValueChange={(itemValue, itemIndex) => { this.firstPickerChanged(itemValue, itemIndex) }}>
 
                             <Picker.Item label="Klasse wählen" value="x" />
-                            {this.state.klassen.map(klasse => {
-                                return <Picker.Item label={klasse} value={klasse} />
+                            {this.state.klassen.map((klasse, i) => {
+                                return <Picker.Item key={i} label={klasse} value={klasse} />
                             })}
                         </Picker>
-
-                        <Text style={gstyles.title}>Schüler</Text>
+                    </View>
+                    <View style={styles.formborder}>
+                        <Text style={styles.formtitle}>Schüler</Text>
                         <Picker
                             selectedValue={this.state.selecteduser}
+                            enabled={this.state.secondPickerEnabled}
                             style={{ height: 50, width: 300 }}
                             onValueChange={(itemValue, itemIndex) => this.setState({ selecteduser: itemValue })}>
 
                             <Picker.Item label="Benutzer wählen" value="x" />
-                            {this.state.user.map(u => {
-                                return <Picker.Item label={u.vorname + " " + u.nachname} value={u.userId} />
+                            {this.state.user.map((u, i) => {
+                                return <Picker.Item key={i} label={u.vorname + " " + u.nachname} value={u.userId} />
                             })}
                         </Picker>
-
-                        <Text style={gstyles.title}>Verleihen bis:</Text>
+                    </View>
+                    <View style={styles.formborder}>
+                        <Text style={styles.formtitle}>Verleihen bis</Text>
                         <TouchableOpacity style={{ marginBottom: 20 }} onPress={this.showDateTimePicker}>
                             <Text style={{ fontSize: 20, textAlign: 'center' }}>{this.formatDate(this.state.zdate)}</Text>
                         </TouchableOpacity>
@@ -125,11 +144,14 @@ export class AusleihScreen extends Component {
                             onConfirm={this._handleDatePicked}
                             onCancel={this._hideDateTimePicker}
                         />
-
-                        <Button style={styles.submitbutton} onPress={() => this.onAusleihenPressed()} title="Verleihen" textcolor={colors.white} bgcolor={colors.green} />
                     </View>
                 </View>
-            </View>
+                
+
+                    <Button style={styles.submitbutton} onPress={() => this.onAusleihenPressed()} title="Verleihen" textcolor={colors.white} bgcolor={colors.primary} />
+
+                
+            </View >
 
         );
     }
@@ -147,6 +169,22 @@ const styles = StyleSheet.create({
 
         elevation: 2
 
+    },
+    formborder: {
+        borderWidth: 1,
+        borderColor: colors.grey,
+        borderRadius:5,
+        width: '90%',
+
+        marginVertical: 5,
+        padding: 10
+    },
+    formtitle: {
+        color: colors.primary,
+        fontSize: 15
+    },
+    formtext: {
+        fontSize: 20
     }
 
 });

@@ -31,18 +31,19 @@ export class StartupScreen extends Component {
 
             retrieveLoginDataLocal().then(res => {
                 if(res == "nd"){
+                // if (true) {
                     console.log("nd");
                     this.props.navigation.navigate("LoginScreen");
-                }else{
+                } else {
                     console.log("d");
                     login(res.username, res.password).then(data => {
-                        if(data.state == "SUCCESS"){
-                            if(data.userDto.admin){
+                        if (data.state == "SUCCESS") {
+                            if (data.userDto.admin) {
                                 this.props.navigation.navigate("AdminNav");
-                            }else{
+                            } else {
                                 this.props.navigation.navigate("TabNav");
                             }
-                        }else{
+                        } else {
                             this.props.navigation.navigate("LoginScreen");
                         }
                         console.log(data);
@@ -50,7 +51,7 @@ export class StartupScreen extends Component {
                 }
             })
 
-        }, 0);
+        }, 1000);
     }
 
 

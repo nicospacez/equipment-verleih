@@ -31,10 +31,10 @@ export class AdminList extends Component {
 
         return (
             <View>
-                <View style={styles.headerrow}>
-                    <Text style={styles.text} >Gerätename</Text>
-                    <Text style={styles.text} >Kategorie</Text>
-                    <Text style={styles.text} >Kürzel</Text>
+                <View style={[styles.headerrow]}>
+                    <Text style={[styles.text,{color:colors.white,fontWeight:'bold'}]} >Gerätename</Text>
+                    <Text style={[styles.text,{color:colors.white,fontWeight:'bold'}]} >Kategorie</Text>
+                    <Text style={[styles.text,{color:colors.white,fontWeight:'bold'}]} >Kürzel</Text>
                 </View>
                 <ScrollView horizontal={false}>
                     {this.props.data.map((value, i) => {
@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
         height: 45,
         flexDirection: 'row',
         alignItems: 'center',
-        backgroundColor: colors.grey1
+        backgroundColor: colors.primary
     },
     row: {
         width: '100%',

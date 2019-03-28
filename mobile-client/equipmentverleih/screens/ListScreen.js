@@ -22,12 +22,17 @@ export class ListScreen extends Component {
 
   }
 
+  pushDetailScreen = (value) => {
+    
+    this.props.navigation.navigate("DetailScreen", { navdata: value });
+  }
+
   render() {
     return (
       <View style={gstyles.container}>
         <View style={gstyles.box}>
           <ScrollView>
-            <ListView data={this.data} limit={400000} />
+            <ListView data={this.data} detail={this.pushDetailScreen} limit={400000} />
           </ScrollView>
         </View>
       </View>

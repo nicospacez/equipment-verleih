@@ -27,14 +27,12 @@ export const retrieveLoginDataLocal = async () => {
       return "nd";
     }
   } catch (error) {
-    console.log("Retrieve Data",error);
+    console.log("Retrieve Data", error);
   }
   return "nd";
 }
 
 export const login = (username, password) => {
-
-
 
   return fetch(data.server.base_url + 'jwt', {
     method: 'POST',
@@ -76,6 +74,14 @@ export const getUser = () => {
 
 export const getUsers = () => {
   const url = data.server.base_url + "user";
+  return fetch(url, {
+    headers: data.server.authheader
+  })
+    .then((res) => res.json());
+}
+
+export const getUsersByClass = (klasse) => {
+  const url = data.server.base_url + "user/getUserToKlasse/" + klasse;
   return fetch(url, {
     headers: data.server.authheader
   })
@@ -125,13 +131,13 @@ export const getReserviertList = () => {
 
 export const getGeliehenList = () => {
 
-  let mdata = {
-    head: ["Name", "Kürzel", "Status"],
-    body: [
 
-    ]
-  }
-  return mdata;
+    const url = data.server.base_url + "verleih/getUsersVerleih/" + data.user.userId;
+    return fetch(url, {
+      headers: data.server.authheader
+    })
+      .then((res) => res.json());
+  
 
 }
 
@@ -199,7 +205,35 @@ export const postCategory = (cat) => {
     console.log(res);
     return res;
   });
-    
+
+}
+
+export const getLatestVerleih = (produkt_id) => {
+
+  const url = data.server.base_url + "verleih/getLatestVerleih/" + produkt_id;
+  return fetch(url, {
+    headers: data.server.authheader
+  })
+    .then((res) => res.json());
+}
+
+
+export const takeBackProduct = (verleih_id, user_id) => {
+  put = {
+    verleihId: verleih_id,
+    zurueckgenommenVon: {
+      userId: user_id
+    }
+  }
+  return fetch(data.server.base_url + 'verleih/', {
+    method: 'PUT',
+    headers: data.server.authheader,
+    body: JSON.stringify(put),
+  }).then(res => {
+    console.log(res);
+    return res;
+  });
+
 }
 
 export const getKlassen = () => {

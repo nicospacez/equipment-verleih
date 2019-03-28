@@ -3,7 +3,9 @@ import { Platform, StyleSheet, Text, View, Button, Alert, TouchableOpacity, Acti
 import { colors, fonts, gstyles } from '../theme';
 import { ListView } from '../components/listView';
 import Icon from 'react-native-vector-icons/Ionicons';
-import {getGeliehenList, getReserviertList} from '../services/RentalService';
+import { getGeliehenList, getReserviertList } from '../services/RentalService';
+import PubSub from 'pubsub-js';
+import { NavigationEvents } from 'react-navigation';
 
 
 
@@ -16,28 +18,33 @@ export class HomeScreen extends Component {
     )
   })
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
-      geliehenData: null,
+      geliehenData: [],
       reserviertData: null
     }
 
 
   }
 
-  componentDidMount(){
-    this.fetchData();
+  componentDidMount() {
+    // this.fetchData();
   }
 
-  fetchData(){
-    gData = getGeliehenList();
-    rData = getReserviertList();
-    console.log(gData);
-    this.setState({
-      geliehenData: gData,
-      reserviertData: rData
+  fetchData() {
+    getGeliehenList().then(res => {
+      console.log("gelihen1");
+      console.log("geliehen", res);
+      this.setState({
+        geliehenData: res.verleihDtoList,
+      })
     })
+  }
+
+  pushDetailScreen = (value) => {
+    console.log("zwei",value);
+    this.props.navigation.navigate("DetailScreen", { navdata: value });
   }
 
 
@@ -55,7 +62,7 @@ export class HomeScreen extends Component {
     return (
       <View>
         <Text style={gstyles.title}>Geliehen</Text>
-        <ListView data={this.state.geliehenData} limit={3} style={styles.listview} />
+        <ListView data={this.state.geliehenData} limit={3} style={styles.listview} detail={this.pushDetailScreen} />
         <TouchableOpacity onPress={() => this.pushGeliehenListScreen()}><Text style={styles.mehranzeigen}>Mehr anzeigen</Text></TouchableOpacity>
       </View>
     );
@@ -77,13 +84,13 @@ export class HomeScreen extends Component {
     return (
 
       <View style={gstyles.container}>
-
+        <NavigationEvents onDidFocus={() => this.fetchData()} />
         <View style={gstyles.box}>
           {this.renderGeliehen()}
         </View>
-        <View style={gstyles.box}>
+        {/* <View style={gstyles.box}>
           {this.renderReserviert()}
-        </View>
+        </View> */}
       </View>
     );
   }
@@ -92,7 +99,7 @@ export class HomeScreen extends Component {
 const styles = StyleSheet.create({
 
   container: {
-    
+
     alignItems: 'center',
     justifyContent: 'center',
     height: '100%',

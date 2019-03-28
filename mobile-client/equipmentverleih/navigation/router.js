@@ -38,7 +38,7 @@ export const DetailNavigator = createStackNavigator({
       title: 'Equipment',
       initialRouteName: 'EquipmentScreen',
       headerStyle: {
-        backgroundColor: colors.headerbarbg,
+        backgroundColor: colors.primary,
       },
       headerTintColor: colors.headerbartext
     }
@@ -54,6 +54,9 @@ export const HomeNavigator = createStackNavigator({
   },
   ProfileScreen:{
     screen: ProfileScreen
+  },
+  DetailScreen:{
+    screen: DetailScreen
   }
 },
   {
@@ -61,7 +64,7 @@ export const HomeNavigator = createStackNavigator({
       title: 'Home',
       initialRouteName: 'HomeScreen',
       headerStyle: {
-        backgroundColor: colors.headerbarbg,
+        backgroundColor: colors.primary,
       },
       headerTintColor: colors.headerbartext
     }
@@ -78,7 +81,7 @@ export const WarenkorbNavigator = createStackNavigator({
       title: 'Warenkorb',
       initialRouteName: 'WarenkorbScreen',
       headerStyle: {
-        backgroundColor: colors.headerbarbg,
+        backgroundColor: colors.primary,
       },
       headerTintColor: colors.headerbartext
     }
@@ -111,7 +114,7 @@ export const AdminNavigator = createStackNavigator({
       title: 'Adminbereich',
       initialRouteName: 'AdminScreen',
       headerStyle: {
-        backgroundColor: colors.headerbarbg
+        backgroundColor: colors.primary
       },
       headerTintColor: colors.headerbartext
     }
@@ -142,15 +145,15 @@ export const TabNav = createBottomTabNavigator({
       )
     }
   },
-  WarenkorbScreen: {
-    screen: WarenkorbNavigator,
-    navigationOptions: {
-      tabBarLabel: "Warenkorb",
-      tabBarIcon: ({ tintColor }) => (
-        <Icon name="md-cart" size={24} color={tintColor} />
-      )
-    }
-  }
+  // WarenkorbScreen: {
+  //   screen: WarenkorbNavigator,
+  //   navigationOptions: {
+  //     tabBarLabel: "Warenkorb",
+  //     tabBarIcon: ({ tintColor }) => (
+  //       <Icon name="md-cart" size={24} color={tintColor} />
+  //     )
+  //   }
+  // }
 }, {
     tabBarOptions: {
       activeTintColor: colors.white,
@@ -183,15 +186,15 @@ export const AdminNav = createBottomTabNavigator({
       )
     }
   },
-  WarenkorbScreen: {
-    screen: WarenkorbNavigator,
-    navigationOptions: {
-      tabBarLabel: "Warenkorb",
-      tabBarIcon: ({ tintColor }) => (
-        <Icon name="md-cart" size={20} color={tintColor} />
-      )
-    }
-  },
+  // WarenkorbScreen: {
+  //   screen: WarenkorbNavigator,
+  //   navigationOptions: {
+  //     tabBarLabel: "Warenkorb",
+  //     tabBarIcon: ({ tintColor }) => (
+  //       <Icon name="md-cart" size={20} color={tintColor} />
+  //     )
+  //   }
+  // },
   AdminScreen: {
     screen: AdminNavigator,
     navigationOptions: {

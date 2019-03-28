@@ -46,17 +46,17 @@ export class AddCategoryScreen extends Component {
             loading: true
         });
         let cat = null;
-        if(this.state.selectedKategorie){
+        if (this.state.selectedKategorie) {
             cat = {
                 kurzbezeichnung: this.state.kurzbezeichnung,
                 kategorie: {
                     kategorieId: this.state.selectedKategorie
                 }
-            }  
-        }else{
+            }
+        } else {
             cat = {
                 kurzbezeichnung: this.state.kurzbezeichnung
-            } 
+            }
         }
 
         console.log(cat);
@@ -84,34 +84,36 @@ export class AddCategoryScreen extends Component {
                 <View style={gstyles.box}>
                     <ScrollView style={styles.scrollview}>
                         <View style={styles.container}>
-                            <Text style={[gstyles.title, { marginBottom: 0 }]}>Kurzbezeichnung</Text>
-                            <TextInput
-                                style={styles.input}
-                                placeholder="Kurzbezeichnung"
-                                onChangeText={(text) => {
-                                    this.setState({ kurzbezeichnung: text })
-                                }}
-                            />
-                            <View style={styles.hline}></View>
-
-                            <Picker
-                                selectedValue={this.state.selectedKategorie}
-                                style={{ height: 40, width: 200 }}
-                                onValueChange={(itemValue, itemIndex) => this.setState({ selectedKategorie: itemValue })}>
-
-                                <Picker.Item label="Überkategorie wählen" value={null} />
-                                {this.state.kategorien.map((k, i) => {
-                                    return <Picker.Item key={i} label={k.kurzbezeichnung} value={k.kategorieId} />
-                                })}
-                            </Picker>
-
-                            <View style={{ width: '100%', marginTop: 20 }}>
-                                {this.renderButton()}
+                            <View style={styles.formborder}>
+                                <Text style={[styles.formtitle, { marginBottom: 0 }]}>Kurzbezeichnung</Text>
+                                <TextInput
+                                    style={styles.input}
+                                    placeholder="Kurzbezeichnung"
+                                    onChangeText={(text) => {
+                                        this.setState({ kurzbezeichnung: text })
+                                    }}
+                                />
                             </View>
+                            <View style={styles.formborder}>
+                            <Text style={[styles.formtitle, { marginBottom: 0 }]}>Überkategorie</Text>
+                                <Picker
+                                    selectedValue={this.state.selectedKategorie}
+                                    style={{ height: 40, width: 200 }}
+                                    onValueChange={(itemValue, itemIndex) => this.setState({ selectedKategorie: itemValue })}>
+
+                                    <Picker.Item label="Überkategorie wählen" value={null} />
+                                    {this.state.kategorien.map((k, i) => {
+                                        return <Picker.Item key={i} label={k.kurzbezeichnung} value={k.kategorieId} />
+                                    })}
+                                </Picker>
+                            </View>
+
+                            
                         </View>
                     </ScrollView>
 
                 </View>
+                {this.renderButton()}
             </View>
 
         );
@@ -153,12 +155,27 @@ const styles = StyleSheet.create({
         height: 40,
         // borderBottomColor:colors.grey,
         // borderBottomWidth:1,
-        width: 200,
-        textAlign: 'center'
+        width: 200
     },
     submitbutton: {
         width: '100%',
         marginTop: 40
+    },
+    formborder: {
+        borderWidth: 1,
+        borderColor: colors.grey,
+        borderRadius: 5,
+        width: '90%',
+
+        marginVertical: 5,
+        padding: 10
+    },
+    formtitle: {
+        color: colors.primary,
+        fontSize: 15
+    },
+    formtext: {
+        fontSize: 20
     }
 
 });
