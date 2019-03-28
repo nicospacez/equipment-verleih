@@ -70,12 +70,6 @@ button {
     float: right;
   }
 
-
-.verleihButton{
-    width: 100%;
-    margin-bottom: 1%;
-}
-
 .errorMessage{
     color: rgb(216, 94, 94);
 }
@@ -119,4 +113,133 @@ th {
 
 .statusRed{
     background-color: #FC5C65;
+}
+
+.wrap-right{
+    width: 100%;
+    text-align: right;
+}
+
+.mat-button-toggle-button {
+    outline: none !important;
+}
+
+
+.contentform {
+    padding: 40px 30px;
+}
+
+
+.dangerInfo{
+    color: #DE5959;
+}
+
+:host /deep/ .prodImageUpload {
+    background-color: white;
+    border-radius: 5px;
+    border-color: #555;
+    border-style: dotted;
+    border-width: 2px;
+    margin:2% auto;
+    width: 100%;
+  }
+  
+  :host /deep/ .prodImageUpload .img-ul-upload {
+    background-color: #333F65  !important;
+  }
+  
+  :host /deep/ .prodImageUpload .img-ul-clear {
+    background-color: #DE5959 !important;
+  }
+  
+  :host /deep/ .prodImageUpload .img-ul-drag-box-msg {
+    color: black !important;
+  }
+  
+  :host /deep/ .prodImageUpload .img-ul-container {
+    background-color: white !important;
+  }
+
+  .leftcontact {
+    width:49.5%; 
+    float:left;
+    border-right: 1px dotted #CCC;
+    box-sizing: border-box;
+    padding: 0px 15px 0px 0px;
+  }
+
+  .rightcontact {
+    width:49.5%;
+    float:right;
+    box-sizing: border-box;
+    padding: 0px 0px 0px 15px;
+  }
+
+  .validation {
+    display:none;
+    margin: 0 0 10px;
+    font-weight:400;
+    font-size:13px;
+    color: #DE5959;
+  }
+
+    
+  .form-group {
+    overflow: hidden;
+    clear: both;
+  }
+
+    
+  input {
+    border-radius: 0px 5px 5px 0px;
+    border: 1px solid #eee;
+    margin-bottom: 15px;
+    width: 75%;
+    height: 40px;
+    float: left;
+    padding: 0px 15px;
+  }
+
+  textarea {
+    border-radius: 0px 5px 5px 0px;
+    border: 1px solid #EEE;
+    margin: 0;
+    width: 75%;
+    height: 130px; 
+    float: left;
+    padding: 0px 15px;
+  }
+
+  .bouton-contact{
+    background-color: #7deb81;
+    color: #FFF;
+    text-align: center;
+    width: 100%;
+    border:0;
+    padding: 17px 25px;
+    border-radius: 0px 0px 5px 5px;
+    cursor: pointer;
+    margin-top: 40px;
+    font-size: 18px;
+  }
+
+.verleihButton{
+    width: 100%;
+    margin-bottom: 1%;
+} 
+
+.buttons{
+    width: 49%;
+    margin-bottom: 1%;
+    border: none;
+}
+
+.lockButton{
+    background-color: rgb(255, 170, 58);
+}
+
+.deleteButton{
+    background-color: #DE5959;
+    margin-left: 2%;
+
 }

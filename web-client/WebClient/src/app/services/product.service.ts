@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { reject } from 'q';
 
 @Injectable({
   providedIn: 'root'
@@ -31,17 +32,41 @@ export class ProductService {
 
   createProdukt(data): Promise<any> {
     return new Promise((resolve, reject) => {
-      this.http.post(this.baseUrl, data).subscribe(data => {
+      this.http.post(this.baseUrl, data).subscribe(result => {
+        resolve(true)
+      }, (err) => resolve(false));
+    });
+  }
+
+  editProdukt(data): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.http.put(this.baseUrl, data).subscribe(data => {
         resolve(data);
       })
     });
   }
 
-  uploadCSV(fileBASE64, kategorieId) {
-
-    this.http.post(this.baseUrl + '/csvUpload/' + kategorieId, fileBASE64, {}).subscribe(data => {
-      console.log(data)
+  lockProduct(productId): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.http.get(this.baseUrl + "/toggleLocked/" + productId).subscribe(data => {
+        resolve(data);
+      })
     })
+  }
 
+  disableProduct(productId): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.http.get(this.baseUrl + "/disable/" + productId).subscribe(data => {
+        resolve(data);
+      })
+    })
+  }
+
+  uploadCSV(fileBASE64, kategorieId): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.http.post(this.baseUrl + '/csvUpload/' + kategorieId, fileBASE64, {}).subscribe(result => {
+        resolve(true)
+      }, (err) => resolve(false));
+    });
   }
 }

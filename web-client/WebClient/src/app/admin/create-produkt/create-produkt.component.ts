@@ -51,7 +51,27 @@ export class CreateProduktComponent implements OnInit {
   }
 
   uploadFileToActivity() {
-    this.productService.uploadCSV(this.base64textString, this.selectedKategorieCSV);
+    this.productService.uploadCSV(this.base64textString, this.selectedKategorieCSV).then(data => {
+
+
+      let json = { product: null, fail: !data };
+
+
+      const dialogRef = this.dialog.open(MyProduktDialog, {
+        data: json
+      });
+
+      dialogRef.afterClosed().subscribe(result => {
+        console.log('The dialog was closed');
+        console.log(result);
+        if (!json.fail) {
+          this.router.navigate(['/products']);
+        }
+
+      });
+
+    });
+
   }
 
   changeShape(shape) {
@@ -87,9 +107,29 @@ export class CreateProduktComponent implements OnInit {
     if (img.files[0]) {
       bsp.foto = img.files[0].src;
     }
+
+
+
+
+
     console.log(bsp)
     this.productService.createProdukt(bsp).then(data => {
-      this.router.navigate(['/products']);
+      console.log(data)
+
+      let json = { product: bez, fail: !data };
+
+
+      const dialogRef = this.dialog.open(MyProduktDialog, {
+        data: json
+      });
+
+      dialogRef.afterClosed().subscribe(result => {
+        console.log('The dialog was closed');
+        console.log(result);
+        if (!json.fail) {
+          this.router.navigate(['/products']);
+        }
+      });
     });
   }
   createKategorie(bezeichnung) {
@@ -166,3 +206,21 @@ export class MyDialog2 {
 
 }
 
+@Component({
+  selector: 'MyProduktDialog',
+  templateUrl: 'MyProduktDialog.html',
+})
+export class MyProduktDialog {
+
+  constructor(
+    public dialogRef: MatDialogRef<MyProduktDialog>, @Inject(MAT_DIALOG_DATA) public data: any) { console.log(data) }
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+
+  onYesClick() {
+    this.dialogRef.close(true);
+  }
+
+}

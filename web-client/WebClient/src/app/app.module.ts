@@ -37,8 +37,8 @@ import {MatInputModule} from '@angular/material';
 import {MatDialogModule} from '@angular/material/dialog';
 import{MatButtonModule} from '@angular/material/button';
 
-import{MyDialog} from './products/products-detail-view/products-detail-view.component';
-import{MyDialog2} from './admin/create-produkt/create-produkt.component';
+import{MyDialog, MyDeleteDialog} from './products/products-detail-view/products-detail-view.component';
+import{MyDialog2, MyProduktDialog} from './admin/create-produkt/create-produkt.component';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -80,7 +80,9 @@ const appRoutes: Routes = [
     CreateProduktComponent,
     ProduktListComponent,
     MyDialog,
-    MyDialog2
+    MyDialog2,
+    MyDeleteDialog,
+    MyProduktDialog
   ],
   imports: [
     BrowserModule,
@@ -122,6 +124,6 @@ const appRoutes: Routes = [
     {provide: MAT_DATE_LOCALE, useValue: 'en-GB'}
   ],
   bootstrap: [AppComponent],
-  entryComponents: [MyDialog,MyDialog2]
+  entryComponents: [MyDialog,MyDialog2,MyDeleteDialog, MyProduktDialog]
 })
 export class AppModule { }

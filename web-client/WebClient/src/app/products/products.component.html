@@ -4,7 +4,8 @@
 
     <label class="title">Equipment</label>
     <br><br><br>
-    <input class="searchBar" type="text" placeholder="suche nach Bezeichnung oder Kategorie..." [ngModel]="productFilter" (ngModelChange)="filterProducts($event)"> 
+    <input class="searchBar" type="text" placeholder="suche nach Bezeichnung oder Kategorie..."
+      [ngModel]="productFilter" (ngModelChange)="filterProducts($event)">
 
     <mat-button-toggle-group name="fontStyle" aria-label="Font Style" value="card" *ngIf="originList?.length > 0">
       <mat-button-toggle value="card" (click)="changeView('card')" selected><i
@@ -19,7 +20,11 @@
           <img class="myImage" *ngIf="!product.foto" src="../../assets/default_camera.png" alt="...">
           <img class="myImage" *ngIf="product.foto" src="{{product.foto}}" alt="...">
           <br><br>
-          <label class="productName">{{ product.langbezeichnung }}</label><br>
+          <div></div>
+          <label class="productName" *ngIf="(product.marke.length+product.bezeichnung.length) < 25">{{product.marke}}
+            {{ (product.bezeichnung.length > 20)? (product.bezeichnung | slice:0:20)+'..':(product.bezeichnung) }}</label>
+          <label class="productName"
+            *ngIf="product.marke.length+product.bezeichnung.length > 25">{{ (product.bezeichnung.length > 20)? (product.bezeichnung | slice:0:20)+'..':(product.bezeichnung) }}</label><br>
           <div class="statusbar statusGreen" *ngIf="product.status == 'FREI'"></div>
           <div class="statusbar statusRed" *ngIf="product.status != 'FREI'"></div>
         </mat-card>
@@ -45,11 +50,11 @@
               <img class="listImage" *ngIf="product.foto" src="{{product.foto}}" alt="...">
             </td>
             <td>{{ product.marke }} {{ product.bezeichnung }}</td>
-            <td>{{ product.kurzbezeichnung}}</td>
-            <td>{{ product.kategorie.kurzbezeichnung}}</td>
-            <td>
-                <div class="circle statusGreen" *ngIf="product.status == 'FREI'"></div>
-                <div class="circle statusRed" *ngIf="product.status != 'FREI'"></div>
+            <td style="text-align: center !important">{{ product.kurzbezeichnung}}</td>
+            <td style="text-align: center !important">{{ product.kategorie.kurzbezeichnung}}</td>
+            <td style="text-align: center !important">
+              <div class="circle statusGreen" *ngIf="product.status == 'FREI'"></div>
+              <div class="circle statusRed" *ngIf="product.status != 'FREI'"></div>
             </td>
           </tr>
         </tbody>

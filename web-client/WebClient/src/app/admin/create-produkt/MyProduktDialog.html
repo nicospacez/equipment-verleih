@@ -1,0 +1,13 @@
+<div *ngIf="data.product == null">
+        <div *ngIf="data.fail">Es konnten keine Produkte eingelesen werden. Die CSV Datei enthält Fehler oder es wurde keine Kategorie gewählt.</div>
+        <div *ngIf="!data.fail">Der CSV upload war erfolgreich.</div>
+    </div>
+
+<div *ngIf="data.product != null ">
+    <div *ngIf="data.fail">Das Produkt konnte NICHT erstellt. Überprüfen Sie Ihre eingabe.</div>
+    <div *ngIf="!data.fail">Das Produkt {{data?.product}} wurde erstellt</div>
+</div>
+
+<div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()" cdkFocusInitial>Ok</button>
+</div>
