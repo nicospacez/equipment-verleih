@@ -21,6 +21,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Where;
+
 import com.equipmentverleih.dto.ProduktDto;
 import com.equipmentverleih.enums.ProduktStatus;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -31,6 +33,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  */
 @Table(name = "eqv_produkt")
 @Entity
+@Where(clause = "disabled = false")
 public class Produkt implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -53,6 +56,10 @@ public class Produkt implements Serializable {
 	@ManyToOne
 	private Produkt produkt;
 
+	private Boolean disabled;
+
+	private Boolean locked;
+
 	public Produkt() {
 	}
 
@@ -66,6 +73,8 @@ public class Produkt implements Serializable {
 		this.langbezeichnung = langbezeichnung;
 		this.kategorie = kategorie;
 		this.foto = foto;
+		this.disabled = false;
+		this.locked = false;
 	}
 
 	public Produkt(String kurzbezeichnung, String inventurnummer, String seriennummer, String marke, String bezeichnung,
@@ -79,6 +88,8 @@ public class Produkt implements Serializable {
 		this.kategorie = kategorie;
 		this.verleih = verleih;
 		this.foto = foto;
+		this.disabled = false;
+		this.locked = false;
 	}
 
 	public Produkt getProdukt() {
@@ -87,6 +98,22 @@ public class Produkt implements Serializable {
 
 	public void setProdukt(Produkt produkt) {
 		this.produkt = produkt;
+	}
+
+	public Boolean getLocked() {
+		return locked;
+	}
+
+	public void setLocked(Boolean locked) {
+		this.locked = locked;
+	}
+
+	public Boolean getDisabled() {
+		return disabled;
+	}
+
+	public void setDisabled(Boolean disabled) {
+		this.disabled = disabled;
 	}
 
 	public Kategorie getKategorie() {
@@ -205,7 +232,7 @@ public class Produkt implements Serializable {
 
 		int verleihIdMax = 0;
 		Verleih toCheckVerleih = new Verleih();
-		
+
 		if (!this.verleih.isEmpty()) {
 			for (Verleih verleih : this.verleih) {
 				if (verleih.getVerleihId() > verleihIdMax) {
@@ -218,6 +245,10 @@ public class Produkt implements Serializable {
 			}
 		}
 
+		if (getLocked()) {
+			status = ProduktStatus.GESPERRT;
+		}
+
 		return new ProduktDto(produktId, bezeichnung, inventurnummer, kurzbezeichnung, langbezeichnung, marke,
 				seriennummer, foto, kategorie.toDto(), "" + verleihIdMax, produkt, status);
 	}
@@ -225,11 +256,12 @@ public class Produkt implements Serializable {
 	public boolean isVerliehen(Verleih lastVerleih) {
 		Date date = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
-		
+
 		if (lastVerleih.getZurueckgenommenVon() != null) {
 			return false;
 		}
 
+		// should not be necessary / was old checking system
 		try {
 			Date currentDate = sdf.parse(sdf.format(new Date()));
 			Date startDate = sdf.parse(sdf.format(lastVerleih.getStartDate()));

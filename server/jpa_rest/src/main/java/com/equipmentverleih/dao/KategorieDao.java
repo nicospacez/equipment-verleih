@@ -23,7 +23,7 @@ public class KategorieDao {
 		
 	}
 	
-	public List<Kategorie> findById(Long id){
-		return em.createQuery("select k from Kategorie k where k.kategorieId = "+id, Kategorie.class).getResultList();
+	public Kategorie findById(Long id){
+		return em.createQuery("select k from Kategorie k where k.kategorieId = "+id, Kategorie.class).getResultList().get(0);
 	}
 }

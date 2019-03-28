@@ -40,6 +40,10 @@ th {
     background-color: #FC5C65;
 }
 
+.statusOrange{
+    background-color: rgb(255, 170, 58) !important;
+}
+
 .filterMenu{
     width: 100%;
     background-color: #3D4A73;

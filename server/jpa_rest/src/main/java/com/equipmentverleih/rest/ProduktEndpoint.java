@@ -18,6 +18,7 @@ import javax.transaction.Transactional;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -118,10 +119,32 @@ public class ProduktEndpoint {
 		return response;
 	}
 
+	@GET
+	@Path("/disable/{id}")
+	public void disableProduct(@PathParam("id") Long id) {
+		Produkt produkt = repo.find(id);
+		produkt.setDisabled(true);
+		repo.edit(produkt);
+	}
+
+	@GET
+	@Path("/toggleLocked/{id}")
+	public void lockProduct(@PathParam("id") Long id) {
+		Produkt produkt = repo.find(id);
+		if (produkt.getLocked()) {
+			produkt.setLocked(false);
+		} else {
+			produkt.setLocked(true);
+		}
+		repo.edit(produkt);
+	}
+
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void create(Produkt entity) {
 		log.debug("creating produkt: " + entity.toString());
+		entity.setLocked(false);
+		entity.setDisabled(false);
 		repo.create(entity);
 	}
 
@@ -142,11 +165,33 @@ public class ProduktEndpoint {
 				for (String out : data) {
 					System.out.println("AYY: " + out);
 				}
-				Produkt p = new Produkt(data[0], data[5], data[3], data[2], data[1], data[1] + data[2], null, kat);
+				Produkt p = new Produkt(data[0], data[5], data[3], data[2], data[1], data[1] + " " + data[2], null,
+						kat);
 				repo.create(p);
 			}
 			isFirst = false;
 		}
+	}
+
+	@PUT
+	@Consumes(MediaType.APPLICATION_JSON)
+	public void update(Produkt entity) {
+		log.debug("editing produkt: " + entity.toString());
+
+		Produkt produkt = repo.find(entity.getProduktId());
+
+		produkt.setBezeichnung(entity.getBezeichnung());
+		produkt.setLangbezeichnung(entity.getLangbezeichnung());
+		produkt.setKurzbezeichnung(entity.getKurzbezeichnung());
+		produkt.setInventurnummer(entity.getInventurnummer());
+		produkt.setMarke(entity.getMarke());
+		produkt.setSeriennummer(entity.getSeriennummer());
+		produkt.setFoto(entity.getFoto());
+
+		Kategorie kategorie = katDao.findById(entity.getKategorie().getKategorieId());
+		produkt.setKategorie(kategorie);
+
+		repo.edit(produkt);
 	}
 
 	@POST
@@ -161,9 +206,9 @@ public class ProduktEndpoint {
 		try {
 			Files.lines(Paths.get(uploadedFileLocation)).skip(1).forEach(line -> {
 				String[] data = line.split(";");
-				List<Kategorie> kategories = katDao.findById(kategorie);
-				Produkt p = new Produkt(data[0], data[5], data[3], data[2], data[1], data[1] + data[2], null,
-						kategories.get(0));
+				Kategorie kategories = katDao.findById(kategorie);
+				Produkt p = new Produkt(data[0], data[5], data[3], data[2], data[1], data[1] + " " + data[2], null,
+						kategories);
 				repo.create(p);
 			});
 		} catch (IOException ex) {

@@ -26,6 +26,10 @@ export class ProductsDetailViewComponent implements OnInit {
   showDateError = false;
   latestVerleihs;
   isAdmin = false;
+  toggleEdit = false;
+  kategorien;
+  selectedKategorie;
+  selectedButton = "detail";
 
   constructor(private productService: ProductService,
     private authService: AuthService,
@@ -33,7 +37,8 @@ export class ProductsDetailViewComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private verleihService: VerleihService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private kategorieService: KategorieService
   ) { }
 
   ngOnInit() {
@@ -49,6 +54,7 @@ export class ProductsDetailViewComponent implements OnInit {
     this.productService.getProductById(this.id).then(data => {
       console.log(data);
       this.product = data;
+      this.getKategorie();
     })
 
     this.verleihService.getLatestVerleih(this.id).then(data => {
@@ -57,6 +63,19 @@ export class ProductsDetailViewComponent implements OnInit {
     })
   }
 
+  getKategorie() {
+    this.kategorieService.getAllKategorien().then(data => {
+      console.log(data);
+      this.kategorien = data;
+      this.kategorien.sort((a, b) => (a.kategorieId > this.product.produktDto.kategorie.kategorieId) ? 1 : -1);
+      this.selectedKategorie = this.kategorien[0].kategorieId;
+    })
+  }
+
+  changeShape(shape) {
+    console.log(shape.value);
+    this.selectedKategorie = shape.value;
+  }
   ausleihen() {
     this.ausleihenClicked = true;
   }
@@ -149,7 +168,66 @@ export class ProductsDetailViewComponent implements OnInit {
     });
   }
 
+  changeView(bol) {
+    this.toggleEdit = bol;
+  }
 
+  editProdukt(bez, inv, kbz, lbz, marke, ser, img, action) {
+
+    let bsp = {
+      "produktId": this.product.produktDto.produktId,
+      "bezeichnung": bez,
+      "inventurnummer": inv,
+      "kurzbezeichnung": kbz,
+      "langbezeichnung": lbz,
+      "marke": marke,
+      "seriennummer": ser,
+      "kategorie": {
+        "kategorieId": this.selectedKategorie
+      },
+      "foto": this.product.produktDto.foto
+    };
+
+    if (img.files[0]) {
+      bsp.foto = img.files[0].src;
+    }
+    console.log(bsp)
+
+    if (action == 'save') {
+      this.productService.editProdukt(bsp).then(data => {
+        this.getProduct();
+        this.toggleEdit = false;
+        this.selectedButton = "detail";
+      });
+    } else if (action == 'lock') {
+      this.productService.lockProduct(this.product.produktDto.produktId).then(data => {
+        this.getProduct();
+        this.toggleEdit = false;
+        this.selectedButton = "detail";
+      });
+    } else if (action == 'delete') {
+
+      const dialogRef = this.dialog.open(MyDeleteDialog, {
+        data: { product: this.product }
+      });
+
+      dialogRef.afterClosed().subscribe(result => {
+        console.log('The dialog was closed');
+        console.log(result);
+        if (result) {
+          this.productService.disableProduct(this.product.produktDto.produktId).then(data => this.router.navigate(['/products']));
+        }
+      });
+
+
+    }
+
+
+  }
+
+  public onValChange(val: string) {
+    this.selectedButton = val;
+  }
 }
 
 
@@ -161,6 +239,25 @@ export class MyDialog {
 
   constructor(
     public dialogRef: MatDialogRef<MyDialog>, @Inject(MAT_DIALOG_DATA) public data: any) { console.log(data) }
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+
+  onYesClick() {
+    this.dialogRef.close(true);
+  }
+
+}
+
+@Component({
+  selector: 'myDeleteDialog',
+  templateUrl: 'MyDeleteDialog.html',
+})
+export class MyDeleteDialog {
+
+  constructor(
+    public dialogRef: MatDialogRef<MyDeleteDialog>, @Inject(MAT_DIALOG_DATA) public data: any) { console.log(data) }
 
   onNoClick(): void {
     this.dialogRef.close();

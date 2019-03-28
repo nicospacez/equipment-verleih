@@ -2,109 +2,203 @@
 
     <div class="container">
 
-        <img class="centeredImage" *ngIf="!product?.produktDto?.foto" src="../../assets/default_camera.png" alt="...">
-        <img class="centeredImage" *ngIf="product?.produktDto?.foto" src="{{product?.produktDto?.foto}}" alt="...">
-
-        <div class="statusBar statusGreen" *ngIf="product?.produktDto.status != 'VERLIEHEN'">
-            {{product?.produktDto.status}}</div>
-        <div class="statusBar statusRed" *ngIf="product?.produktDto.status == 'VERLIEHEN'">
-            {{product?.produktDto.status}}</div>
-
-
-        <br>
-        <div class="over">
-            <div class="productInfo" style="display:inline-block">Kurzbezeichnung</div>
-            <div class="info" style="display:inline-block">{{product?.produktDto.kurzbezeichnung}}</div>
+        <div class="wrap-right" *ngIf="isAdmin">
+            <mat-button-toggle-group name="fontStyle" [value]="selectedButton" aria-label="Font Style" value="card"
+                #group="matButtonToggleGroup" (change)="onValChange(group.value)">
+                <mat-button-toggle value="detail" (click)="changeView(false)"><i class="material-icons">view_agenda</i>
+                </mat-button-toggle>
+                <mat-button-toggle value="edit" (click)="changeView(true)"><i class="material-icons">edit</i>
+                </mat-button-toggle>
+            </mat-button-toggle-group>
         </div>
 
-        <br>
-        <div class="divider"></div>
+        <div *ngIf="toggleEdit">
+            <div class="contentform">
 
-        <div class="over">
-            <div class="productInfo" style="display:inline-block">Bezeichnung</div>
-            <div class="info" style="display:inline-block">{{product?.produktDto.bezeichnung}}</div>
-        </div>
+                <label class="dangerInfo">Wenn Sie kein Bild auswählen bleibt das bisherige Bild bestehen.</label><br>
+                <label class="dangerInfo">Bitte wählen Sie quadratische Bilder!!</label>
+                <image-upload [class]="'prodImageUpload'" [dropBoxMessage]="'oder Drag & Drop'"
+                    [extensions]="['jpg','jpeg','png']" [max]="1" [buttonCaption]="'Bild wählen'" #img>
 
-        <br>
-        <div class="divider"></div>
+                </image-upload>
+                <div class="leftcontact">
+                    <div class="form-group">
+                        <p>Bezeichnung<span>*</span></p>
+                        <input type="text" placeholder="bsp. GH4" value="{{product?.produktDto.bezeichnung}}" #bez />
+                        <!-- <div class="validation"></div> -->
+                    </div>
 
-        <div class="over">
-            <div class="productInfo" style="display:inline-block">Langbezeichung</div>
-            <div class="info" style="display:inline-block">{{product?.produktDto.langbezeichnung}}</div>
-        </div>
+                    <div class="form-group">
+                        <p>Langbezeichnung <span>*</span></p>
+                        <input type="text" placeholder="bsp. Videokamera01"
+                            value="{{product?.produktDto.langbezeichnung}}" #lbz />
+                        <!-- <div class="validation"></div> -->
+                    </div>
 
-        <br>
-        <div class="divider"></div><br>
+                    <div class="form-group">
+                        <p>Kurzbezeichnung <span>*</span></p>
+                        <input type="text" placeholder="bsp. VK01" value="{{product?.produktDto.kurzbezeichnung}}"
+                            #kbz />
+                        <!-- <div class="validation"></div> -->
+                    </div>
 
-        <div class="btn btn-danger verleihButton statusRed" (click)="zuruecknahme()"
-            *ngIf="product?.produktDto.status == 'VERLIEHEN' && isAdmin">
-            Zurücknehmen
-        </div>
-        <div class="btn btn-success verleihButton" data-toggle="collapse" data-target="#collapseExample"
-            aria-expanded="false" aria-controls="collapseExample"
-            *ngIf="product?.produktDto.status != 'VERLIEHEN' && isAdmin">
-            Verleihen
-        </div>
-        <div class="collapse" id="collapseExample">
-            <div class="card card-body">
+                </div>
 
-                <br>
+                <div class="rightcontact">
+
+                    <div class="form-group">
+                        <p> Inventurnummer<span>*</span></p>
+                        <input type="text" placeholder="bsp. htl-a1231" value="{{product?.produktDto.inventurnummer}}"
+                            #inv />
+                        <!-- <div class="validation"></div> -->
+                    </div>
+
+                    <div class="form-group">
+                        <p>Marke <span>*</span></p>
+                        <input type="text" placeholder="bsp. Lumix" value="{{product?.produktDto.marke}}" #marke />
+                        <!-- <div class="validation"></div> -->
+                    </div>
+                    <div class="form-group">
+                        <p>Seriennummer <span>*</span></p>
+                        <input type="text" placeholder="bsp. sada1-12asd-123a-asd12"
+                            value="{{product?.produktDto.seriennummer}}" #ser />
+                        <!-- <div class="validation"></div> -->
+                    </div>
+
+
+                </div>
                 <div class="form-group">
-                    <label>Klasse</label>
-                    <select class="form-control" (change)="changeKlasse($event.target)">
-                        <option disabled>--- Klasse wählen ---</option>
-                        <option value="{{class}}" *ngFor="let class of classes">{{class}}
+                    <p>Kategorie wählen <span>*</span></p>
+                    <select class="form-control" (change)="changeShape($event.target)">
+                        <option value="{{kategorie.kategorieId}}" *ngFor="let kategorie of kategorien">
+                            {{kategorie.kurzbezeichnung}}
                         </option>
                     </select>
                 </div>
-                <div class="form-group">
-                    <label>Schüler</label>
-                    <select class="form-control" (change)="changeUser($event.target)">
-                        <option disabled>--- Schüler wählen ---</option>
-                        <option value="{{user.userId}}" *ngFor="let user of users?.userDtoList">{{user.vorname}}
-                            {{user.nachname}}
-                        </option>
-                    </select>
-                </div>
-                <br>
-                <label>Rückgabedatum:</label>
-                <p class="hint">Wenn kein Rückgabedatum gesetzt wird, wird die Standardausleihedauer gewählt!</p>
-                <mat-form-field>
-                    <input matInput [matDatepicker]="picker" placeholder="Datum wählen"
-                        (dateChange)="changeRuecknahmeDate($event)" readonly>
-                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                    <mat-datepicker #picker></mat-datepicker>
-                </mat-form-field>
-                <p class="errorMessage" *ngIf="showDateError">Das Rückgabedatum muss min. einen Tag entfernt sein!</p>
-                <br>
-                <div class="errorMessage" *ngIf="showError">
-                    <p>Bitte Schüler wählen. <br></p>
-                </div>
-                <div class="btn btn-success" (click)="pushAusleihen()">
-                    Jetzt verleihen
-                </div>
-
+            </div>
+            <div class="btn btn-success verleihButton"
+                (click)="editProdukt(bez.value, inv.value, kbz.value, lbz.value, marke.value, ser.value, img, 'save')">
+                Speichern
+            </div>
+            <div class="btn btn-success buttons lockButton"
+                (click)="editProdukt(bez.value, inv.value, kbz.value, lbz.value, marke.value, ser.value, img, 'lock')">
+                <div *ngIf="product?.produktDto.status == 'GESPERRT'">Freigeben</div>
+                <div *ngIf="product?.produktDto.status != 'GESPERRT'">Sperren</div>
+            </div>
+            <div class="btn btn-success buttons deleteButton"
+                (click)="editProdukt(bez.value, inv.value, kbz.value, lbz.value, marke.value, ser.value, img, 'delete')">
+                Löschen
             </div>
         </div>
-        <hr>
 
-        <h4 *ngIf="latestVerleihs?.verleihDtoList.length > 0">Wo wars zuletzt?</h4>
-        <table cellspacing="0" cellpadding="0" class="table-hover" *ngIf="latestVerleihs?.verleihDtoList.length > 0">
-            <thead>
-                <tr>
-                    <th scope="col">Name</th>
-                    <th scope="col">Von</th>
-                    <th scope="col">Bis</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let product of latestVerleihs?.verleihDtoList">
-                    <td>{{product.user.vorname}} {{product.user.nachname}}</td>
-                    <td>{{product.startDate}}</td>
-                    <td>{{product.endDate}}</td>
-                </tr>
-            </tbody>
-        </table>
 
+        <div *ngIf="!toggleEdit">
+            <img class="centeredImage" *ngIf="!product?.produktDto?.foto" src="../../assets/default_camera.png"
+                alt="...">
+            <img class="centeredImage" *ngIf="product?.produktDto?.foto" src="{{product?.produktDto?.foto}}" alt="...">
+
+            <div class="statusBar statusGreen" *ngIf="product?.produktDto.status == 'FREI'">
+                {{product?.produktDto.status}}</div>
+            <div class="statusBar statusRed" *ngIf="product?.produktDto.status != 'FREI'">
+                {{product?.produktDto.status}}</div>
+
+            <br>
+            <div class="over">
+                <div class="productInfo" style="display:inline-block">Kurzbezeichnung</div>
+                <div class="info" style="display:inline-block">{{product?.produktDto.kurzbezeichnung}}</div>
+            </div>
+
+            <br>
+            <div class="divider"></div>
+
+            <div class="over">
+                <div class="productInfo" style="display:inline-block">Bezeichnung</div>
+                <div class="info" style="display:inline-block">{{product?.produktDto.bezeichnung}}</div>
+            </div>
+
+            <br>
+            <div class="divider"></div>
+
+            <div class="over">
+                <div class="productInfo" style="display:inline-block">Langbezeichung</div>
+                <div class="info" style="display:inline-block">{{product?.produktDto.langbezeichnung}}</div>
+            </div>
+
+            <br>
+            <div class="divider"></div><br>
+            <div *ngIf="product?.produktDto.status != 'GESPERRT' && isAdmin">
+                <div class="btn btn-danger verleihButton statusRed" (click)="zuruecknahme()"
+                    *ngIf="product?.produktDto.status == 'VERLIEHEN'">
+                    Zurücknehmen
+                </div>
+                <div class="btn btn-success verleihButton" data-toggle="collapse" data-target="#collapseExample"
+                    aria-expanded="false" aria-controls="collapseExample"
+                    *ngIf="product?.produktDto.status != 'VERLIEHEN'">
+                    Verleihen
+                </div>
+            </div>
+            <div class="collapse" id="collapseExample">
+                <div class="card card-body">
+
+                    <br>
+                    <div class="form-group">
+                        <label>Klasse</label>
+                        <select class="form-control" (change)="changeKlasse($event.target)">
+                            <option disabled>--- Klasse wählen ---</option>
+                            <option value="{{class}}" *ngFor="let class of classes">{{class}}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Schüler</label>
+                        <select class="form-control" (change)="changeUser($event.target)">
+                            <option disabled>--- Schüler wählen ---</option>
+                            <option value="{{user.userId}}" *ngFor="let user of users?.userDtoList">{{user.vorname}}
+                                {{user.nachname}}
+                            </option>
+                        </select>
+                    </div>
+                    <br>
+                    <label>Rückgabedatum:</label>
+                    <p class="hint">Wenn kein Rückgabedatum gesetzt wird, wird die Standardausleihedauer gewählt!</p>
+                    <mat-form-field>
+                        <input matInput [matDatepicker]="picker" placeholder="Datum wählen"
+                            (dateChange)="changeRuecknahmeDate($event)" readonly>
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+                    <p class="errorMessage" *ngIf="showDateError">Das Rückgabedatum muss min. einen Tag entfernt sein!
+                    </p>
+                    <br>
+                    <div class="errorMessage" *ngIf="showError">
+                        <p>Bitte Schüler wählen. <br></p>
+                    </div>
+                    <div class="btn btn-success" (click)="pushAusleihen()">
+                        Jetzt verleihen
+                    </div>
+
+                </div>
+            </div>
+            <hr>
+
+            <h4 *ngIf="latestVerleihs?.verleihDtoList.length > 0">Wo wars zuletzt?</h4>
+            <table cellspacing="0" cellpadding="0" class="table-hover"
+                *ngIf="latestVerleihs?.verleihDtoList.length > 0">
+                <thead>
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Von</th>
+                        <th scope="col">Bis</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let product of latestVerleihs?.verleihDtoList">
+                        <td>{{product.user.vorname}} {{product.user.nachname}}</td>
+                        <td>{{product.startDate}}</td>
+                        <td>{{product.endDate}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>

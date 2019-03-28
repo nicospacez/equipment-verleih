@@ -5,16 +5,17 @@
       <label id="buttonGreen" class="btn btn-green divide" (click)="changeFilter('FREI')">
         <input type="radio" name="options" id="option1" autocomplete="off" checked> Frei
       </label>
-      <label id="buttonOrange" class="btn btn-orange divide" (click)="changeFilter('RESERVIERT')">
-        <input type="radio" name="options" id="option2" autocomplete="off"> Reserviert
-      </label>
       <label id="buttonRed" class="btn btn-red divide" (click)="changeFilter('VERLIEHEN')">
         <input type="radio" name="options" id="option3" autocomplete="off"> Verliehen
+      </label>
+      <label id="buttonOrange" class="btn btn-orange divide" (click)="changeFilter('GESPERRT')">
+        <input type="radio" name="options" id="option2" autocomplete="off"> Gesperrt
       </label>
     </div>
   </div>
 
-  <input class="searchBar" type="text" placeholder="suche nach Bezeichnung oder Kategorie..." [ngModel]="productFilter" (ngModelChange)="filterProducts($event)"> 
+  <input class="searchBar" type="text" placeholder="suche nach Bezeichnung oder Kategorie..." [ngModel]="productFilter"
+    (ngModelChange)="filterProducts($event)">
 
   <table cellspacing="0" cellpadding="0" class="table-hover">
     <thead>
@@ -39,7 +40,8 @@
         <td>{{product.kategorie.kurzbezeichnung}}</td>
         <td>
           <div class="circle statusGreen" *ngIf="product.status == 'FREI'"></div>
-          <div class="circle statusRed" *ngIf="product.status != 'FREI'"></div>
+          <div class="circle statusRed" *ngIf="product.status == 'VERLIEHEN'"></div>
+          <div class="circle statusOrange" *ngIf="product.status == 'GESPERRT'"></div>
         </td>
       </tr>
     </tbody>

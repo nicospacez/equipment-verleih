@@ -16,7 +16,7 @@ export class ProduktListComponent implements OnInit {
 
 
 
-  constructor(private productService: ProductService, private router:Router) { }
+  constructor(private productService: ProductService, private router: Router) { }
 
   ngOnInit() {
 
@@ -63,9 +63,16 @@ export class ProduktListComponent implements OnInit {
 
   }
 
-  filterProducts(event){
-    this.products = this.originProducts.filter(data=> data.langbezeichnung.toLowerCase().replace(/ /g, '').includes(event.toLowerCase().replace(/ /g, '')) || data.marke.toLowerCase().replace(/ /g, '').includes(event.toLowerCase().replace(/ /g, '')) || data.bezeichnung.toLowerCase().replace(/ /g, '').includes(event.toLowerCase().replace(/ /g, '')) || data.kategorie.kurzbezeichnung.toLowerCase().replace(/ /g, '').includes(event.toLowerCase().replace(/ /g, '')));
-    if(event == ""){
+  filterProducts(event) {
+    this.products = this.originProducts.filter(data => data.status == this.lastStatus
+      && data.langbezeichnung.toLowerCase().replace(/ /g, '').includes(event.toLowerCase().replace(/ /g, ''))
+      || data.marke.toLowerCase().replace(/ /g, '').includes(event.toLowerCase().replace(/ /g, ''))
+      || data.bezeichnung.toLowerCase().replace(/ /g, '').includes(event.toLowerCase().replace(/ /g, ''))
+      || data.kategorie.kurzbezeichnung.toLowerCase().replace(/ /g, '').includes(event.toLowerCase().replace(/ /g, ''))
+      || data.kurzbezeichnung.toLowerCase().replace(/ /g, '').includes(event.toLowerCase().replace(/ /g, ''))
+      || data.inventurnummer.toLowerCase().replace(/ /g, '').includes(event.toLowerCase().replace(/ /g, ''))
+    );
+    if (event == "") {
       this.products = this.originProducts;
     }
     console.log(this.products);
