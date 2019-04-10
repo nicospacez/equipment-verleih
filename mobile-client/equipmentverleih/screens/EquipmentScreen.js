@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Platform, StyleSheet, Text, View, Button, Image, Alert, ScrollView, TouchableOpacity } from 'react-native';
+import { Platform, StyleSheet, Text, View, Button, Image, FlatList, Alert, ScrollView, TouchableOpacity } from 'react-native';
 import { EquipmentList } from '../components/equipmentlist';
 import { colors, gstyles } from '../theme';
 import { DetailNavigator } from '../navigation/router';
@@ -42,8 +42,8 @@ export class EquipmentScreen extends Component {
 
     return this.state.data.map((v, i) => {
       return (
-        <TouchableOpacity key={i} style={{height:200, width:150, marginVertical:10}}>
-          <View key={i} style={styles.ebox}>
+        <TouchableOpacity key={i}>
+          <View key={i} style={[gstyles.box, { minWidth: '49%' }]} >
             <Text style={{ fontSize: 15, color: colors.primary, textAlign: 'center', height: 20 }}>{v.langbezeichnung}</Text>
             <View style={{ width: 150, height: 150 }}>
               {this.renderImage(v)}
@@ -73,17 +73,16 @@ export class EquipmentScreen extends Component {
   render() {
 
     return (
-      <View style={gstyles.container}>
 
-        <View style={gstyles.box}>
-          <ScrollView horizontal={true}>
 
-            {this._renderItems()}
+      <ScrollView contentContainerstyle={{alignItems:'center', justifyContent:'center', alignContent:'center'}}>
+        <View style={[styles.container, {paddingLeft:'5%'}]}>
 
-          </ScrollView>
+          {this._renderItems()}
+
         </View>
+      </ScrollView>
 
-      </View>
     );
   }
 
@@ -107,7 +106,14 @@ const styles = StyleSheet.create({
     elevation: 2
   },
   container: {
-    backgroundColor: colors.lightgrey
+    flex: 1,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    alignItems: 'flex-start', // if you want to fill rows left to right,
+    width: '100%'
+  },
+  item: {
+    width: '50%' // is 50% of container width
   },
   ebox: {
     width: 100,
