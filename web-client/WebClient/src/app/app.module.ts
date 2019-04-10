@@ -22,6 +22,7 @@ import { ProduktListComponent } from './admin/produkt-list/produkt-list.componen
 import { KategorieService } from './services/kategorie.service';
 import { ProductService } from "./services/product.service";
 import { VerleihService} from './services/verleih.service';
+import { ReservierungService} from './services/reservierung.service';
 import {UserService} from './services/user.service';
 import { TokenInterceptor } from './services/token.interceptor';
 import { AuthGuard} from './services/auth.guard.service';
@@ -119,6 +120,7 @@ const appRoutes: Routes = [
     IsAdmin,
     LoginService,
     VerleihService,
+    ReservierungService,
     UserService,
     MatDatepickerModule,
     {provide: MAT_DATE_LOCALE, useValue: 'en-GB'}

@@ -236,10 +236,31 @@ th {
 
 .lockButton{
     background-color: rgb(255, 170, 58);
+    border-color: rgb(212, 141, 48);
 }
 
 .deleteButton{
     background-color: #DE5959;
     margin-left: 2%;
 
+}
+
+.wrapboxLeft{
+  width: 40%;
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.wrapboxRight{
+  width: 40%;
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.datePickerForm{
+  width: 90%;
+}
+
+.labelmargin{
+  margin-right: 4%;
 }

@@ -14,6 +14,9 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.equipmentverleih.dto.ReservierungDto;
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 /**
  *
  * @author nicoz
@@ -27,93 +30,85 @@ public class Reservierung implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long reservierungId;
 
-    @Temporal(TemporalType.DATE)
+    @JsonFormat(pattern = "dd-MM-yyyy")
     private Date startDate, endDate;
 
-    @ManyToOne
-    @JoinColumn(name = "userId")
-    private User user;
+	@ManyToOne
+	@JoinColumn(name = "userId")
+	private User user;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "produktId")
-    private Produkt produkt;
+	@ManyToOne
+	@JoinColumn(name = "produktId")
+	private Produkt produkt;
 
-    public Reservierung() {
-    }
+		
+	public Reservierung() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
-    public Reservierung(Date startDate, Date endDate, User user, Produkt produkt) {
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.user = user;
-        this.produkt = produkt;
-    }
+	public Reservierung(Date startDate, Date endDate, User user, Produkt produkt) {
+		super();
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.user = user;
+		this.produkt = produkt;
+	}
 
-    public Long getReservierungId() {
-        return reservierungId;
-    }
+	public Long getReservierungId() {
+		return reservierungId;
+	}
 
-    public void setReservierungId(Long reservierungId) {
-        this.reservierungId = reservierungId;
-    }
+	public void setReservierungId(Long reservierungId) {
+		this.reservierungId = reservierungId;
+	}
 
-    public Date getStartDate() {
-        return startDate;
-    }
+	public Date getStartDate() {
+		return startDate;
+	}
 
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
-    }
+	public void setStartDate(Date startDate) {
+		this.startDate = startDate;
+	}
 
-    public Date getEndDate() {
-        return endDate;
-    }
+	public Date getEndDate() {
+		return endDate;
+	}
 
-    public void setEndDate(Date endDate) {
-        this.endDate = endDate;
-    }
+	public void setEndDate(Date endDate) {
+		this.endDate = endDate;
+	}
 
-    public User getUser() {
-        return user;
-    }
+	public User getUser() {
+		return user;
+	}
 
-    public void setUser(User user) {
-        this.user = user;
-    }
+	public void setUser(User user) {
+		this.user = user;
+	}
 
-    public Produkt getProdukt() {
-        return produkt;
-    }
+	public Produkt getProdukt() {
+		return produkt;
+	}
 
-    public void setProdukt(Produkt produkt) {
-        this.produkt = produkt;
-    }
+	public void setProdukt(Produkt produkt) {
+		this.produkt = produkt;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	@Override
+	public String toString() {
+		return "Reservierung [reservierungId=" + reservierungId + ", startDate=" + startDate + ", endDate=" + endDate
+				+ ", user=" + user + ", produkt=" + produkt + "]";
+	}
 
 
-    
+	public ReservierungDto toDto() {
+		return new ReservierungDto(reservierungId, endDate, startDate, user.toDto(), produkt.toDto());
+	}
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (reservierungId != null ? reservierungId.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Reservierung)) {
-            return false;
-        }
-        Reservierung other = (Reservierung) object;
-        if ((this.reservierungId == null && other.reservierungId != null) || (this.reservierungId != null && !this.reservierungId.equals(other.reservierungId))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "com.eqv.entities.Reservierung[ id=" + reservierungId + " ]";
-    }
-
+	
 }

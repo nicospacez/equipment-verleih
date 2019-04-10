@@ -46,7 +46,7 @@ public class VerleihEndpoint {
 	@Inject
 	VerleihDao dao;
 	@Inject
-	VerleihRepository repo; // = new UserRepository();
+	VerleihRepository repo;
 
 	@GET
 	@Path("/findAll")

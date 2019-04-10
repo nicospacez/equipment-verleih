@@ -256,9 +256,9 @@ public class Produkt implements Serializable {
 	public boolean isVerliehen(Verleih lastVerleih) {
 		Date date = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
-
-		if (lastVerleih.getZurueckgenommenVon() != null) {
-			return false;
+System.out.println("LASTVERLEI: "+lastVerleih.getZurueckgenommenVon());
+		if (lastVerleih.getZurueckgenommenVon() == null) {
+			return true;
 		}
 
 		// should not be necessary / was old checking system

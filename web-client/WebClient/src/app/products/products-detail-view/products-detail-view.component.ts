@@ -6,6 +6,7 @@ import { KategorieService } from 'src/app/services/kategorie.service';
 import { UserService } from 'src/app/services/user.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material';
+import { ReservierungService } from 'src/app/services/reservierung.service';
 
 @Component({
   selector: 'app-products-detail-view',
@@ -22,9 +23,15 @@ export class ProductsDetailViewComponent implements OnInit {
   selectedClass;
   selectedUser;
   selectedEndDate: any;
+  selectedResDateStart: any;
+  selectedResDateEnd: any;
   showError = false;
   showDateError = false;
+  showDateError1 = false;
+  showDateError2 = false;
+  showDateError3 = false;
   latestVerleihs;
+  latestReservierung;
   isAdmin = false;
   toggleEdit = false;
   kategorien;
@@ -38,7 +45,8 @@ export class ProductsDetailViewComponent implements OnInit {
     private router: Router,
     private verleihService: VerleihService,
     public dialog: MatDialog,
-    private kategorieService: KategorieService
+    private kategorieService: KategorieService,
+    private reservierService: ReservierungService
   ) { }
 
   ngOnInit() {
@@ -61,6 +69,10 @@ export class ProductsDetailViewComponent implements OnInit {
       console.log(data);
       this.latestVerleihs = data;
     })
+
+    this.reservierService.getLatestReservierungenByProductId(this.id).then(data => {
+      this.latestReservierung = data;
+    })
   }
 
   getKategorie() {
@@ -78,6 +90,37 @@ export class ProductsDetailViewComponent implements OnInit {
   }
   ausleihen() {
     this.ausleihenClicked = true;
+  }
+
+  pushReservieren() {
+    console.log(this.selectedResDateStart)
+    console.log(this.latestReservierung)
+
+    let sendJSON = {
+      "startDate": this.formatDate(this.selectedResDateStart),
+      "endDate": this.formatDate(this.selectedResDateEnd),
+      "produkt": {
+        "produktId": this.id
+      },
+      "user": {
+        "userId": this.authService.getUser().userId
+      }
+    };
+
+    if (this.latestReservierung.reservierungDtoList.length > 0) {
+      if (this.latestReservierung.reservierungDtoList[0].endDate > this.formatDate(this.selectedResDateStart)) {
+        this.showDateError3 = true;
+        return;
+      } else {
+        this.reservierService.reservieren(sendJSON).then(data => {
+          this.router.navigate(['/products']);
+        });
+      }
+    } else {
+      this.reservierService.reservieren(sendJSON).then(data => {
+        this.router.navigate(['/products']);
+      });
+    }
   }
 
   pushAusleihen() {
@@ -148,6 +191,43 @@ export class ProductsDetailViewComponent implements OnInit {
         this.showDateError = false;
         this.selectedEndDate = event.value;
       }
+    }
+  }
+
+  changeRuecknahmeDate1(event) {
+    console.log(event.value)
+    console.log(this.selectedEndDate);
+    if (event.value >= new Date()) {
+      this.showDateError1 = false;
+      if (event.value != null) {
+        if (event.value < this.selectedResDateEnd || !this.selectedResDateEnd) {
+          this.selectedResDateStart = event.value;
+          this.showDateError2 = false;
+        } else {
+          this.showDateError2 = true;
+        }
+      }
+    } else {
+      this.showDateError1 = true;
+    }
+
+  }
+
+  changeRuecknahmeDate2(event) {
+    console.log(event.value)
+    console.log(this.selectedResDateStart);
+    if (event.value >= new Date()) {
+      this.showDateError1 = false;
+      if (event.value != null) {
+        if (event.value > this.selectedResDateStart || !this.selectedResDateStart) {
+          this.selectedResDateEnd = event.value;
+          this.showDateError2 = false;
+        } else {
+          this.showDateError2 = true;
+        }
+      }
+    } else {
+      this.showDateError1 = true;
     }
   }
 
